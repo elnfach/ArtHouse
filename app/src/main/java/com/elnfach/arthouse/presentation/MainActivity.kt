@@ -19,18 +19,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.domain.models.NewsArticle
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-    private lateinit var viewModel: MainViewModel
+    private val vm: MainViewModel by viewModel<MainViewModel>()
     private var newsArticlesList = listOf<NewsArticle>()
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this, MainViewModelFactory()).get(MainViewModel::class.java)
-        viewModel.newsArticles.observe(this, Observer{
+
+        vm.newsArticles.observe(this, Observer{
             newsArticlesList = it
         })
-        viewModel.loadNewsArticles()
+        vm.loadNewsArticles()
         setContent {
             ArtHouseTheme {
                 Surface(
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         LazyColumn(Modifier.padding(it).fillMaxSize())
                         {
                             itemsIndexed(newsArticlesList)
-                            {index, item ->
+                            { _, item ->
                                 Text(text = item.title)
                             }
                         }

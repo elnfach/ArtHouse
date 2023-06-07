@@ -1,6 +1,7 @@
 package com.elnfach.arthouse.presentation
 
 import android.util.Log
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,6 @@ class MainViewModel(
     private val newsArticlesMutableLiveData = MutableLiveData<List<NewsArticle>>()
     val newsArticles: LiveData<List<NewsArticle>> = newsArticlesMutableLiveData
     init {
-        Log.e("AAA", "VM created")
     }
 
     fun loadNewsArticles()
@@ -24,7 +24,6 @@ class MainViewModel(
     }
 
     override fun onCleared() {
-        Log.e("AAA", "VM cleared")
         super.onCleared()
     }
 }
