@@ -1,15 +1,24 @@
 package com.elnfach.arthouse.presentation
 
-import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.elnfach.data.repository.NewsArticleRepositoryImpl
-import com.elnfach.domain.domain.usecase.GetNewsArticlesUseCase
+import com.elnfach.domain.models.NewsArticle
+import com.elnfach.domain.usecase.GetNewsArticlesUseCase
 
-class MainViewModel : ViewModel()
+class MainViewModel(
+    private val getNewsArticlesUseCase: GetNewsArticlesUseCase
+) : ViewModel()
 {
+    val newsArticles = MutableLiveData<List<NewsArticle>>()
     init {
         Log.e("AAA", "VM created")
+    }
+
+    fun loadNewsArticles()
+    {
+        val newsArticle: List<NewsArticle> = getNewsArticlesUseCase.execute()
+        newsArticles.value = newsArticle
     }
 
     override fun onCleared() {

@@ -1,6 +1,6 @@
-package com.elnfach.domain.domain.repository
+package com.elnfach.domain.repository
 
-import com.elnfach.domain.domain.models.NewsArticle
+import com.elnfach.domain.models.NewsArticle
 
 interface NewsArticleRepository {
     fun saveNewsArticle()

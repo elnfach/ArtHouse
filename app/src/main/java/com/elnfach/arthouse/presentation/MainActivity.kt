@@ -1,11 +1,9 @@
 package com.elnfach.arthouse.presentation
 
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,19 +15,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
-import com.elnfach.data.repository.NewsArticleRepositoryImpl
-import com.elnfach.domain.domain.usecase.GetNewsArticlesUseCase
+import com.elnfach.domain.models.NewsArticle
 
 class MainActivity : ComponentActivity() {
     private lateinit var viewModel: MainViewModel
+    private var newsArticlesList = listOf<NewsArticle>()
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this, MainViewModelFactory()).get(MainViewModel::class.java)
+        viewModel.newsArticles.observe(this, Observer{
+            newsArticlesList = it
+        })
+        viewModel.loadNewsArticles()
         setContent {
             ArtHouseTheme {
                 Surface(
@@ -37,8 +38,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Scaffold {
-                        LazyColumn(Modifier.padding(it))
+                        LazyColumn(Modifier.padding(it).fillMaxSize())
                         {
+                            itemsIndexed(newsArticlesList)
+                            {index, item ->
+                                Text(text = item.title)
+                            }
                         }
                     }
                 }

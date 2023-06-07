@@ -1,7 +1,7 @@
-package com.elnfach.domain.domain.usecase
+package com.elnfach.domain.usecase
 
-import com.elnfach.domain.domain.models.NewsArticle
-import com.elnfach.domain.domain.repository.NewsArticleRepository
+import com.elnfach.domain.models.NewsArticle
+import com.elnfach.domain.repository.NewsArticleRepository
 
 class GetNewsArticlesUseCase(private val newsArticlesRepository : NewsArticleRepository) {
     fun execute(): List<NewsArticle>
