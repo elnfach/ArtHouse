@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.ui.theme
+package com.elnfach.arthouse.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

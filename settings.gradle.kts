@@ -15,4 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Art House"
 include(":app")
- 
+include(":core")
+include(":core:data")
+include(":core:database")
+include(":core:common")
+include(":core:domain")
