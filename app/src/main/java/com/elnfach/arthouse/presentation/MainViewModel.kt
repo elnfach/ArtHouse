@@ -1,6 +1,7 @@
 package com.elnfach.arthouse.presentation
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.elnfach.domain.models.NewsArticle
@@ -10,7 +11,8 @@ class MainViewModel(
     private val getNewsArticlesUseCase: GetNewsArticlesUseCase
 ) : ViewModel()
 {
-    val newsArticles = MutableLiveData<List<NewsArticle>>()
+    private val newsArticlesMutableLiveData = MutableLiveData<List<NewsArticle>>()
+    val newsArticles: LiveData<List<NewsArticle>> = newsArticlesMutableLiveData
     init {
         Log.e("AAA", "VM created")
     }
@@ -18,7 +20,7 @@ class MainViewModel(
     fun loadNewsArticles()
     {
         val newsArticle: List<NewsArticle> = getNewsArticlesUseCase.execute()
-        newsArticles.value = newsArticle
+        newsArticlesMutableLiveData.value = newsArticle
     }
 
     override fun onCleared() {
