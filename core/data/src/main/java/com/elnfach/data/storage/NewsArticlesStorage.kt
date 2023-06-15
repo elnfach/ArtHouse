@@ -1,6 +1,6 @@
 package com.elnfach.data.storage
 
-import android.content.SharedPreferences
+import com.elnfach.data.R
 import com.elnfach.data.storage.models.Article
 
 class NewsArticlesStorage() : NewsArticleStorage
@@ -10,48 +10,26 @@ class NewsArticlesStorage() : NewsArticleStorage
 
     override fun get(): List<Article> {
         return listOf(
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
-            Article(0,"Test", "Test context"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
+            Article(0, R.drawable.picture1,"Здесь должен быть заголовок статьи", "Содержание статьи"),
         )
     }
 

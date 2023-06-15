@@ -1,6 +1,5 @@
 package com.elnfach.data.repository
 
-import com.elnfach.data.storage.NewsArticleStorage
 import com.elnfach.data.storage.NewsArticlesStorage
 import com.elnfach.domain.models.NewsArticle
 import com.elnfach.domain.repository.NewsArticleRepository
@@ -20,7 +19,7 @@ class NewsArticleRepositoryImpl(private val newsArticlesStorage: NewsArticlesSto
         val newsArticleList = mutableListOf<NewsArticle>()
         for (item in newsArticleStorage)
         {
-            newsArticleList.add(NewsArticle(item.id, item.title, item.content))
+            newsArticleList.add(NewsArticle(item.id, item.image, item.title, item.content))
         }
         return newsArticleList
     }
