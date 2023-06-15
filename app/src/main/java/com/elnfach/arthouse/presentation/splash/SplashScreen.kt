@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.screens
+package com.elnfach.arthouse.presentation.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween
@@ -17,7 +17,7 @@ import com.elnfach.arthouse.R
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController)
+fun SplashScreen(navController: NavController, route: String)
 {
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
@@ -33,7 +33,7 @@ fun SplashScreen(navController: NavController)
         )
         delay(150L)
         navController.popBackStack()
-        navController.navigate("main_screen")
+        navController.navigate(route)
     }
 
     Box(contentAlignment = Alignment.Center,

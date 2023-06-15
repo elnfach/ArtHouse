@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Art House</string>
+    <string name="news">Новости</string>
+    <string name="schedule">Расписание</string>
+    <string name="menu">Меню</string>
+
+</resources>
