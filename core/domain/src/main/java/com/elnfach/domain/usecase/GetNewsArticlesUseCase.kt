@@ -6,6 +6,6 @@ import com.elnfach.domain.repository.NewsArticleRepository
 class GetNewsArticlesUseCase(private val newsArticlesRepository : NewsArticleRepository) {
     fun execute(): List<NewsArticle>
     {
-        return newsArticlesRepository.getNewsArticle()
+        return newsArticlesRepository.getNewsArticles()
     }
 }

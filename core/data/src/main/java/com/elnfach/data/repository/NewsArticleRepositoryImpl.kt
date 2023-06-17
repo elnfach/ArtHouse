@@ -13,7 +13,19 @@ class NewsArticleRepositoryImpl(private val newsArticlesStorage: NewsArticlesSto
         // sharedPreferences.edit()
     }
 
-    override fun getNewsArticle() : List<NewsArticle>
+    override fun getNewsArticleById(id: Int): NewsArticle {
+        val newsArticleStorage = newsArticlesStorage.get()
+        for (item in newsArticleStorage)
+        {
+            if(item.id == id)
+            {
+                return NewsArticle(item.id, item.image, item.title, item.content)
+            }
+        }
+        return NewsArticle(-1,-1,"Not found", "Not found")
+    }
+
+    override fun getNewsArticles() : List<NewsArticle>
     {
         val newsArticleStorage = newsArticlesStorage.get()
         val newsArticleList = mutableListOf<NewsArticle>()

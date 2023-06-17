@@ -4,5 +4,6 @@ import com.elnfach.domain.models.NewsArticle
 
 interface NewsArticleRepository {
     fun saveNewsArticle()
-    fun getNewsArticle() : List<NewsArticle>
+    fun getNewsArticles() : List<NewsArticle>
+    fun getNewsArticleById(id: Int) : NewsArticle
 }

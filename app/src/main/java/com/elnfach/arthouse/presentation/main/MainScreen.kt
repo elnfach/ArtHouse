@@ -13,16 +13,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.elnfach.arthouse.presentation.newsline.NewsContainer
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 
 @ExperimentalAnimationApi
 @Composable
-fun MainScreen(router: Router)
+fun MainScreen(lifecycleOwner: LifecycleOwner, router: Router)
 {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -58,7 +61,7 @@ fun MainScreen(router: Router)
             {
                 composable("news")
                 {
-                    Text(text = "News")
+                    NewsContainer(externalRouter = router, lifecycleOwner)
                 }
                 composable("schedule")
                 {

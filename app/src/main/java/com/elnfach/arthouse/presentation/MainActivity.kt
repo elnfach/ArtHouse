@@ -30,7 +30,6 @@ class MainActivity : ComponentActivity() {
         vm.newsArticles.observe(this) {
             newsArticlesList = it
         }
-        vm.loadNewsArticles()
         setContent {
             ArtHouseTheme {
                 Surface(
@@ -48,13 +47,10 @@ class MainActivity : ComponentActivity() {
                         composable(Screen.Main.route)
                         {
                             MainScreen(
+                                this@MainActivity,
                                 createExternalRouter { screen, params ->
                                 navController.navigate(screen, params)
                             })
-                        }
-                        composable(Screen.NewsArticle.route)
-                        {
-
                         }
                     }
                 }
