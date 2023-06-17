@@ -17,19 +17,11 @@ import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
-import com.elnfach.domain.models.NewsArticle
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-    private val vm: MainViewModel by viewModel<MainViewModel>()
-    private var newsArticlesList = listOf<NewsArticle>()
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        vm.newsArticles.observe(this) {
-            newsArticlesList = it
-        }
         setContent {
             ArtHouseTheme {
                 Surface(
