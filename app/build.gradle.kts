@@ -52,6 +52,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.calendar)
+
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.koin.core)

@@ -3,7 +3,9 @@ package com.elnfach.arthouse.presentation.schedule
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -43,8 +45,15 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.utils.navigation.Router
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.calendar.CalendarDialog
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import org.koin.androidx.compose.koinViewModel
+import java.time.LocalDate
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SchedulesScreen(
@@ -54,6 +63,13 @@ fun SchedulesScreen(
     viewModel: SchedulesScreenViewModel = koinViewModel()
 )
 {
+    val selectedDates = remember { mutableStateOf<List<LocalDate>>(listOf()) }
+    val disabledDates = listOf(
+        LocalDate.now().minusDays(7),
+        LocalDate.now().minusDays(12),
+        LocalDate.now().plusDays(3),
+    )
+
     val ctx = LocalContext.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     val text by remember { mutableStateOf("Some text")}
@@ -196,6 +212,18 @@ fun SchedulesScreen(
                                     color = MaterialTheme.colorScheme.secondary)
                             }
                         }
+                        CalendarDialog(
+                            state = rememberUseCaseState(),
+                            config = CalendarConfig(
+                                yearSelection = true,
+                                monthSelection = true,
+                                style = CalendarStyle.MONTH,
+                                disabledDates = disabledDates
+                            ),
+                            selection = CalendarSelection.Dates { newDates ->
+                                selectedDates.value = newDates
+                            }
+                        )
                     }
                 }
             }
