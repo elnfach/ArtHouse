@@ -13,10 +13,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.splash.SplashScreen
-import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
+import com.example.compose.ArtHouseTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
                         composable(Screen.Main.route)
                         {
                             MainScreen(
-                                this@MainActivity,
+                                this@MainActivity,this@MainActivity,
                                 createExternalRouter { screen, params ->
                                 navController.navigate(screen, params)
                             })

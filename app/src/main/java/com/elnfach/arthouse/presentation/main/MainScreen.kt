@@ -1,5 +1,6 @@
 package com.elnfach.arthouse.presentation.main
 
+import android.content.Context
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -13,19 +14,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.presentation.newsline.NewsContainer
+import com.elnfach.arthouse.presentation.schedule.SchedulesScreen
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 
 @ExperimentalAnimationApi
 @Composable
-fun MainScreen(lifecycleOwner: LifecycleOwner, router: Router)
+fun MainScreen(context: Context, lifecycleOwner: LifecycleOwner, router: Router)
 {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -65,7 +66,7 @@ fun MainScreen(lifecycleOwner: LifecycleOwner, router: Router)
                 }
                 composable("schedule")
                 {
-                    Text(text = "Schedule")
+                    SchedulesScreen(externalRouter = router, context, lifecycleOwner)
                 }
                 composable("menu")
                 {

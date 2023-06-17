@@ -3,4 +3,6 @@
     <string name="news">News</string>
     <string name="schedule">Schedule</string>
     <string name="menu">Menu</string>
+    <string name="id_copied">ID copied</string>
+    <string name="access_code_copied">Access code copied</string>
 </resources>
