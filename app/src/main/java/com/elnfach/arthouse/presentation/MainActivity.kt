@@ -16,7 +16,7 @@ import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
-import com.example.compose.ArtHouseTheme
+import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalAnimationApi::class)
