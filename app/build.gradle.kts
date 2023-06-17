@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.elnfach.arthouse"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.elnfach.arthouse"

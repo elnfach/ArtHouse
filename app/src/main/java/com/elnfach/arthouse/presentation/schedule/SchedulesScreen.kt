@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
@@ -36,6 +38,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -63,11 +66,20 @@ fun SchedulesScreen(
     viewModel: SchedulesScreenViewModel = koinViewModel()
 )
 {
-    val selectedDates = remember { mutableStateOf<List<LocalDate>>(listOf()) }
-    val disabledDates = listOf(
-        LocalDate.now().minusDays(7),
-        LocalDate.now().minusDays(12),
-        LocalDate.now().plusDays(3),
+    val calendarState = rememberUseCaseState()
+    val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now().minusDays(3)) }
+    CalendarDialog(
+        state = calendarState,
+        config = CalendarConfig(
+            yearSelection = true,
+            monthSelection = true,
+            style = CalendarStyle.MONTH
+        ),
+        selection = CalendarSelection.Date(
+            selectedDate = selectedDate.value
+        ) { newDate ->
+            selectedDate.value = newDate
+        }
     )
 
     val ctx = LocalContext.current
@@ -79,8 +91,13 @@ fun SchedulesScreen(
     Scaffold(
         topBar = { TopAppBar(
             title = {
-                Column {
+                Row {
                     Text(text = stringResource(id = R.string.schedule))
+                    Spacer(Modifier.weight(1f, true))
+                    IconButton(
+                        onClick = { calendarState.show() }) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_calendar_month_24), contentDescription = null)
+                    }
                 }
         })
         }
@@ -212,18 +229,6 @@ fun SchedulesScreen(
                                     color = MaterialTheme.colorScheme.secondary)
                             }
                         }
-                        CalendarDialog(
-                            state = rememberUseCaseState(),
-                            config = CalendarConfig(
-                                yearSelection = true,
-                                monthSelection = true,
-                                style = CalendarStyle.MONTH,
-                                disabledDates = disabledDates
-                            ),
-                            selection = CalendarSelection.Dates { newDates ->
-                                selectedDates.value = newDates
-                            }
-                        )
                     }
                 }
             }
