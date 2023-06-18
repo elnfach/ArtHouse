@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -89,7 +90,7 @@ fun SchedulesScreen(
 
     val ctx = LocalContext.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
-    var isClicked by remember { mutableStateOf(-1) }
+    var clickedItemId by remember { mutableIntStateOf(-1) }
     val toastIdCopied = Toast.makeText(context, stringResource(id = R.string.id_copied), Toast.LENGTH_SHORT)
     val toastACCopied = Toast.makeText(context, stringResource(id = R.string.access_code_copied), Toast.LENGTH_SHORT)
     Scaffold(
@@ -124,9 +125,9 @@ fun SchedulesScreen(
                         color = MaterialTheme.colorScheme.onSecondary
                     )
                     .clickable {
-                        isClicked = item.id
+                        clickedItemId = item.id
                     }) {
-                    if(isClicked == item.id)
+                    if(clickedItemId == item.id)
                     {
                         ModalBottomSheet(
                             schoolSchedule = item,
@@ -146,7 +147,7 @@ fun SchedulesScreen(
                                 ctx.startActivity(urlIntent)
                             }
                         ) {
-                            isClicked = -1
+                            clickedItemId = -1
                         }
                     }
                     Column(modifier = Modifier.padding(4.dp)) {
