@@ -14,19 +14,23 @@ import com.elnfach.domain.usecase.GetNewsArticlesUseCase
 class NewsLineViewModel (
     private val getNewsArticlesUseCase: GetNewsArticlesUseCase,
     private val getNewsArticleByIdUseCase: GetNewsArticleByIdUseCase
-) : ViewModel() {
+) : ViewModel()
+{
     private val newsArticlesMutableLiveData = MutableLiveData<List<NewsArticle>>()
     private var newsArticleMutableLiveData = MutableLiveData<NewsArticle>()
     val newsArticles: LiveData<List<NewsArticle>> = newsArticlesMutableLiveData
     val newsArticle: LiveData<NewsArticle> = newsArticleMutableLiveData
 
     private var state: MutableState<Int> = mutableIntStateOf(0)
+    init {
+        loadNewsArticles()
+    }
     @Composable
     fun SaveId(id: Int)
     {
         state = remember { mutableIntStateOf(id) }
     }
-    fun loadNewsArticles()
+    private fun loadNewsArticles()
     {
         val newsArticle: List<NewsArticle> = getNewsArticlesUseCase.execute()
         newsArticlesMutableLiveData.value = newsArticle

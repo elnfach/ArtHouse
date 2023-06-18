@@ -1,6 +1,8 @@
 package com.elnfach.arthouse.presentation.main
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -24,6 +26,7 @@ import com.elnfach.arthouse.presentation.schedule.SchedulesScreen
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 
+@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalAnimationApi
 @Composable
 fun MainScreen(context: Context, lifecycleOwner: LifecycleOwner, router: Router)

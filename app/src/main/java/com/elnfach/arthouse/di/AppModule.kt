@@ -14,6 +14,6 @@ val appModule = module {
 
     viewModel<SchedulesScreenViewModel>
     {
-        SchedulesScreenViewModel()
+        SchedulesScreenViewModel(get())
     }
 }

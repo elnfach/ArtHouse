@@ -58,7 +58,6 @@ fun NewsScreen(
     viewModel.newsArticles.observe(lifecycleOwner) {
         newsArticlesList = it
     }
-    viewModel.loadNewsArticles()
 
     Scaffold {
         LazyColumn(modifier = Modifier

@@ -5,4 +5,11 @@
     <string name="menu">Menu</string>
     <string name="id_copied">ID copied</string>
     <string name="access_code_copied">Access code copied</string>
+    <string name="task">Task</string>
+    <string name="homework">Homework</string>
+    <string name="grade"> grade</string>
+    <string name="teacher">Teacher</string>
+    <string name="id">Id:</string>
+    <string name="access_code">Access code:</string>
+    <string name="open">Open</string>
 </resources>
