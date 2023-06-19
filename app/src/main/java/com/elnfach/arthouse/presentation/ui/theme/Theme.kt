@@ -5,6 +5,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 
 
 private val LightColors = lightColorScheme(
@@ -72,15 +75,27 @@ private val DarkColors = darkColorScheme(
     scrim = md_theme_dark_scrim,
 )
 
+enum class Theme {
+    DARK, LIGHT, DEFAULT
+}
+
+object ThemeManager {
+    var artHouseTheme by mutableStateOf(Theme.DEFAULT)
+}
+
 @Composable
 fun ArtHouseTheme(
-  useDarkTheme: Boolean = isSystemInDarkTheme(),
+  theme: Theme = ThemeManager.artHouseTheme,
   content: @Composable() () -> Unit
 ) {
-  val colors = if (!useDarkTheme) {
-    LightColors
+  val colors = if (theme == Theme.DEFAULT) {
+      if(isSystemInDarkTheme()) DarkColors
+      else LightColors
   } else {
-    DarkColors
+    if (theme == Theme.LIGHT)
+    {
+        LightColors
+    } else DarkColors
   }
 
   MaterialTheme(

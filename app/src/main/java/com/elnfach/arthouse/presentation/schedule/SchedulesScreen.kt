@@ -71,9 +71,13 @@ fun SchedulesScreen(
     viewModel.schoolSchedule.observe(lifecycleOwner) {
         schoolScheduleList = it
     }
+    val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now()) }
+    viewModel.selectedDate.observe(lifecycleOwner) {
+        selectedDate.value = it
+    }
 
     val calendarState = rememberUseCaseState()
-    val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now().minusDays(3)) }
+
     CalendarDialog(
         state = calendarState,
         config = CalendarConfig(
@@ -84,7 +88,8 @@ fun SchedulesScreen(
         selection = CalendarSelection.Date(
             selectedDate = selectedDate.value
         ) { newDate ->
-            selectedDate.value = newDate
+            viewModel.saveDate(newDate)
+            viewModel.loadSchoolSchedule()
         }
     )
 

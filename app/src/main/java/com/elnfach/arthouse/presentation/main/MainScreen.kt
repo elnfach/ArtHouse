@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.elnfach.arthouse.presentation.menu.MenuScreen
 import com.elnfach.arthouse.presentation.newsline.NewsContainer
 import com.elnfach.arthouse.presentation.schedule.SchedulesScreen
 import com.elnfach.arthouse.presentation.utils.Screen
@@ -73,7 +74,7 @@ fun MainScreen(context: Context, lifecycleOwner: LifecycleOwner, router: Router)
                 }
                 composable("menu")
                 {
-                    Text(text = "Menu")
+                    MenuScreen(context,externalRouter = router, lifecycleOwner)
                 }
             }
         }
