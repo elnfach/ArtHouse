@@ -48,8 +48,7 @@ fun MainScreen(
     lifecycleOwner: LifecycleOwner,
     router: Router,
     viewModel: MainScreenViewModel = koinViewModel()
-)
-{
+) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -61,9 +60,12 @@ fun MainScreen(
                     NavigationBarItem(
                         selected = currentRoute == it.route,
                         onClick = {
-                            navController.navigate(it.route) {
-                                popUpTo = navController.graph.startDestinationId
-                                launchSingleTop = true
+                            if(currentRoute != it.route)
+                            {
+                                navController.navigate(it.route) {
+                                    popUpTo = navController.graph.startDestinationId
+                                    launchSingleTop = true
+                                }
                             }
                         },
                         label = { Text(text = stringResource(id = it.title)) },
@@ -90,11 +92,11 @@ fun MainScreen(
             {
                 composable(Screen.ForYou.route)
                 {
-                    ForYouContainer(externalRouter = router, lifecycleOwner)
+                    ForYouContainer(externalRouter = router, lifecycleOwner = lifecycleOwner)
                 }
                 composable(Screen.Schedule.route)
                 {
-                    ScheduleScreen(externalRouter = router, context, lifecycleOwner)
+                    ScheduleScreen(externalRouter = router, context = context, lifecycleOwner = lifecycleOwner)
                 }
                 composable(Screen.Profile.route)
                 {
