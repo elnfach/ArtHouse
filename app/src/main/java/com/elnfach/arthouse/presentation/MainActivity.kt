@@ -21,8 +21,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.profile.ProfileScreen
-import com.elnfach.arthouse.presentation.sign_in.SignInScreen
-import com.elnfach.arthouse.presentation.sign_in.SignInViewModel
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInScreen
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInViewModel
 import com.elnfach.arthouse.presentation.theme.ui.ArtHouseTheme
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter

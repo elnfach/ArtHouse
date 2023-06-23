@@ -1,58 +1,107 @@
 package com.elnfach.arthouse.presentation.profile
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import android.content.Context
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import com.elnfach.arthouse.presentation.sign_in.UserData
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInScreen
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInViewModel
+import com.elnfach.arthouse.presentation.profile.signed_in.SignedInScreen
+import com.elnfach.arthouse.presentation.utils.Screen
+import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProfileScreen(
-    userData: UserData?,
-    onSignOut: () -> Unit
+    context: Context,
+    lifecycleScope: LifecycleCoroutineScope,
+    viewModel: ProfileScreenViewModel = koinViewModel()
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        if(userData?.profilePictureUrl != null) {
-            AsyncImage(
-                model = userData.profilePictureUrl,
-                contentDescription = "Profile picture",
-                modifier = Modifier
-                    .size(150.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop
+    // TODO Fix: When changing route and returning back for a fraction of a second, the registration screen appears
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Screen.SignIn.route)
+    {
+        composable(Screen.SignIn.route)
+        {
+            LaunchedEffect(key1 = Unit) {
+                if(viewModel.googleAuthUiClient.getSignedInUser() != null) {
+                    navController.navigate(Screen.SignedIn.route)
+                }
+            }
+
+            val vm = viewModel<SignInViewModel>()
+            val state by vm.state.collectAsStateWithLifecycle()
+
+            val launcher = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.StartIntentSenderForResult(),
+                onResult = { result ->
+                    if (result.resultCode == ComponentActivity.RESULT_OK) {
+                        lifecycleScope.launch {
+                            val signInResult = viewModel.googleAuthUiClient.signInWithIntent(
+                                intent = result.data ?: return@launch
+                            )
+                            vm.onSignInResult(signInResult)
+                        }
+                    }
+                }
             )
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-        if(userData?.username != null) {
-            Text(
-                text = userData.username.toString(),
-                textAlign = TextAlign.Center,
-                fontSize = 36.sp,
-                fontWeight = FontWeight.SemiBold
+
+            LaunchedEffect(key1 = state.isSignInSuccessful) {
+                if (state.isSignInSuccessful) {
+                    Toast.makeText(
+                        context,
+                        "Sign in successful",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    navController.popBackStack()
+                    navController.navigate(Screen.SignedIn.route)
+                    vm.resetState()
+                }
+            }
+
+            SignInScreen(
+                state = state,
+                onSignInClick = {
+                    lifecycleScope.launch {
+                        val signInIntentSender = viewModel.googleAuthUiClient.signIn()
+                        launcher.launch(
+                            IntentSenderRequest.Builder(
+                                signInIntentSender ?: return@launch
+                            ).build()
+                        )
+                    }
+                }
             )
-            Spacer(modifier = Modifier.height(16.dp))
         }
-        Button(onClick = onSignOut) {
-            Text(text = "Sign out")
+        composable(Screen.SignedIn.route)
+        {
+            SignedInScreen(
+                userData = viewModel.googleAuthUiClient.getSignedInUser(),
+                onSignOut = {
+                    lifecycleScope.launch {
+                        viewModel.googleAuthUiClient.signOut()
+                        Toast.makeText(
+                            context,
+                            "Signed out",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        navController.popBackStack()
+                    }
+                }
+            )
         }
     }
 }

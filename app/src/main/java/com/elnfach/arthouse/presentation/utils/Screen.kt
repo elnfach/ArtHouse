@@ -14,6 +14,7 @@ sealed class Screen(
     object ForYou: Screen("news", R.drawable.baseline_upcoming_24, R.drawable.outline_upcoming_24,R.string.news)
     object Schedule: Screen("schedule", R.drawable.baseline_schedule_24, R.drawable.baseline_schedule_24, R.string.schedule)
     object SignIn: Screen("sign_in", -1, -1, -1)
+    object SignedIn: Screen("signed_in", -1, -1, -1)
     object Profile: Screen("profile", R.drawable.baseline_person_24, R.drawable.outline_person_24, R.string.profile)
     object Menu: Screen("menu", R.drawable.baseline_menu_24, R.drawable.baseline_menu_24, R.string.menu)
     object Settings: Screen("settings", -1, -1, R.string.settings)

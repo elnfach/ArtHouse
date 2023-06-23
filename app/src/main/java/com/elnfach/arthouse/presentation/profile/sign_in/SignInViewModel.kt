@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.sign_in
+package com.elnfach.arthouse.presentation.profile.sign_in
 
 import android.content.Intent
 import androidx.lifecycle.ViewModel

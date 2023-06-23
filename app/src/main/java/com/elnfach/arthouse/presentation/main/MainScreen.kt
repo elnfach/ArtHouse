@@ -33,8 +33,8 @@ import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.presentation.foryou.ForYouContainer
 import com.elnfach.arthouse.presentation.profile.ProfileScreen
 import com.elnfach.arthouse.presentation.schedule.ScheduleScreen
-import com.elnfach.arthouse.presentation.sign_in.SignInScreen
-import com.elnfach.arthouse.presentation.sign_in.SignInViewModel
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInScreen
+import com.elnfach.arthouse.presentation.profile.sign_in.SignInViewModel
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import kotlinx.coroutines.launch
@@ -98,73 +98,7 @@ fun MainScreen(
                 }
                 composable(Screen.Profile.route)
                 {
-                    LaunchedEffect(key1 = Unit) {
-                        if(viewModel.googleAuthUiClient.getSignedInUser() == null) {
-                            navController.navigate(Screen.SignIn.route)
-                        }
-                    }
-
-                    ProfileScreen(
-                        userData = viewModel.googleAuthUiClient.getSignedInUser(),
-                        onSignOut = {
-                            lifecycleScope.launch {
-                                viewModel.googleAuthUiClient.signOut()
-                                Toast.makeText(
-                                    context,
-                                    "Signed out",
-                                    Toast.LENGTH_LONG
-                                ).show()
-
-                                navController.navigate(Screen.SignIn.route)
-                            }
-                        }
-                    )
-                }
-                composable(Screen.SignIn.route)
-                {
-                    val vm = viewModel<SignInViewModel>()
-                    val state by vm.state.collectAsStateWithLifecycle()
-
-                    val launcher = rememberLauncherForActivityResult(
-                        contract = ActivityResultContracts.StartIntentSenderForResult(),
-                        onResult = { result ->
-                            if (result.resultCode == ComponentActivity.RESULT_OK) {
-                                lifecycleScope.launch {
-                                    val signInResult = viewModel.googleAuthUiClient.signInWithIntent(
-                                        intent = result.data ?: return@launch
-                                    )
-                                    vm.onSignInResult(signInResult)
-                                }
-                            }
-                        }
-                    )
-
-                    LaunchedEffect(key1 = state.isSignInSuccessful) {
-                        if (state.isSignInSuccessful) {
-                            Toast.makeText(
-                                context,
-                                "Sign in successful",
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                            navController.navigate(Screen.Profile.route)
-                            vm.resetState()
-                        }
-                    }
-
-                    SignInScreen(
-                        state = state,
-                        onSignInClick = {
-                            lifecycleScope.launch {
-                                val signInIntentSender = viewModel.googleAuthUiClient.signIn()
-                                launcher.launch(
-                                    IntentSenderRequest.Builder(
-                                        signInIntentSender ?: return@launch
-                                    ).build()
-                                )
-                            }
-                        }
-                    )
+                    ProfileScreen(context = context, lifecycleScope = lifecycleScope)
                 }
             }
         }
