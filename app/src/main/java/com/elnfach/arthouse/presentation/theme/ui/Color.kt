@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.ui.theme
+package com.elnfach.arthouse.presentation.theme.ui
 
 import androidx.compose.ui.graphics.Color
 

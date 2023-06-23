@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name">Art House</string>
-    <string name="web_client_id">721605908868-3pig30gbstega2ah5h2i2rir95hqqj5c.apps.googleusercontent.com</string>
+    <string name="about_app_desc">Mobile application developed with Android Studio in Kotlin language for art school</string>
+    <string name="news">News</string>
+    <string name="schedule">Schedule</string>
+    <string name="menu">Menu</string>
+    <string name="id_copied">ID copied</string>
+    <string name="access_code_copied">Access code copied</string>
+    <string name="task">Task</string>
+    <string name="homework">Homework</string>
+    <string name="grade"> grade</string>
+    <string name="teacher">Teacher</string>
+    <string name="id">Id:</string>
+    <string name="access_code">Access code:</string>
+    <string name="open">Open</string>
+    <string name="about_app">About app</string>
+    <string name="settings">Settings</string>
+    <string name="close">Close</string>
+    <string name="open_github">Open GitHub</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="choose_theme">Choose theme</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="system_default">System default</string>
+    <string name="cansel">Cansel</string>
+    <string name="profile">Profile</string>
 </resources>
