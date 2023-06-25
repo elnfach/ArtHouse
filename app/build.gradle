@@ -48,6 +48,9 @@ android {
 }
 
 dependencies {
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:2.6.1"
+
     // Coroutine
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
 

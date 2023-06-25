@@ -11,7 +11,7 @@ sealed class Screen(
 {
     object Splash: Screen("splash", -1, -1, -1)
     object Main: Screen("main", -1, -1, -1)
-    object ForYou: Screen("news", R.drawable.baseline_upcoming_24, R.drawable.outline_upcoming_24,R.string.news)
+    object ForYou: Screen("news", R.drawable.baseline_upcoming_24, R.drawable.outline_upcoming_24,R.string.for_you)
     object Schedule: Screen("schedule", R.drawable.baseline_schedule_24, R.drawable.baseline_schedule_24, R.string.schedule)
     object SignIn: Screen("sign_in", -1, -1, -1)
     object SignedIn: Screen("signed_in", -1, -1, -1)

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Art House</string>
     <string name="about_app_desc">Мобильное приложение, разработанное с помощью Android Studio на языке Kotlin для художественной школы</string>
-    <string name="news">Новости</string>
+    <string name="for_you">Для вас</string>
     <string name="schedule">Расписание</string>
     <string name="menu">Меню</string>
     <string name="id_copied">Идентификатор скопирован</string>
@@ -14,6 +14,7 @@
     <string name="access_code">Код доступа:</string>
     <string name="open">Открыть</string>
     <string name="about_app">О приложении</string>
+    <string name="whats_new">Что нового?</string>
     <string name="settings">Настройки</string>
     <string name="close">Закрыть</string>
     <string name="open_github">Открыть GitHub</string>
@@ -25,4 +26,6 @@
     <string name="system_default">По умолчанию</string>
     <string name="cansel">Отмена</string>
     <string name="profile">Профиль</string>
+    <string name="sign_up_with_google">Войти с помощью Google</string>
+    <string name="sign_out">Выйти</string>
 </resources>
