@@ -125,10 +125,14 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+            TopAppBar(
+                title = {
+                    Row {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(text = stringResource(id = R.string.settings))
+                    }
+                },
+                navigationIcon = {
                     Box(
                         modifier = Modifier
                             .clip(CircleShape)
@@ -137,12 +141,11 @@ fun SettingsScreen(
                             }) {
                         Icon(
                             modifier = Modifier.padding(4.dp),
-                            imageVector = Icons.Default.ArrowBack, contentDescription = null)
+                            imageVector = Icons.Default.ArrowBack, contentDescription = null
+                        )
                     }
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = stringResource(id = R.string.settings))
                 }
-            })
+            )
         }
     ) {
         LazyColumn(modifier = Modifier.padding(it))

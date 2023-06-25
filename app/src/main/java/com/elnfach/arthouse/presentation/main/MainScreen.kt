@@ -24,7 +24,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.elnfach.arthouse.presentation.foryou.ForYouContainer
+import com.elnfach.arthouse.presentation.foryou.ForYouScreen
 import com.elnfach.arthouse.presentation.profile.ProfileScreen
 import com.elnfach.arthouse.presentation.schedule.ScheduleScreen
 import com.elnfach.arthouse.presentation.utils.Screen
@@ -87,15 +87,16 @@ fun MainScreen(
             {
                 composable(Screen.ForYou.route)
                 {
-                    ForYouContainer(externalRouter = router, lifecycleOwner = lifecycleOwner)
+                    ForYouScreen(externalRouter = router, lifecycleOwner = lifecycleOwner)
                 }
                 composable(Screen.Schedule.route)
                 {
                     ScheduleScreen(externalRouter = router, context = context, lifecycleOwner = lifecycleOwner)
                 }
-                navigation(startDestination = Screen.SignIn.route, route = Screen.Profile.route)
+                //navigation(startDestination = Screen.SignIn.route, route = Screen.Profile.route)
+                composable(Screen.Profile.route)
                 {
-                    
+                    ProfileScreen(context = context, router = router,lifecycleScope = lifecycleScope)
                 }
             }
         }

@@ -1,11 +1,13 @@
 package com.elnfach.arthouse.di
 
 import com.elnfach.arthouse.data.repository.NewsRepository
+import com.elnfach.arthouse.data.repository.ScheduleRepository
 import com.elnfach.arthouse.data.repository.ThemeSettingRepository
 import com.elnfach.arthouse.data.repository.ThemeSettingRepositoryImpl
 import com.elnfach.arthouse.data.repository.storage.ThemeSettingStorage
 import com.elnfach.arthouse.data.repository.storage.ThemeSettingStorageImpl
 import com.elnfach.arthouse.datastore.repository.NewsRepositoryImpl
+import com.elnfach.arthouse.datastore.repository.ScheduleRepositoryImpl
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -18,5 +20,10 @@ val dataModule = module {
     }
     single<ThemeSettingStorage> {
         ThemeSettingStorageImpl(get())
+    }
+
+    single<ScheduleRepository>
+    {
+        ScheduleRepositoryImpl()
     }
 }
