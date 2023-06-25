@@ -107,14 +107,17 @@ fun ScheduleScreen(
         topBar = { TopAppBar(
             title = {
                 Row {
+                    Spacer(modifier = Modifier.width(8.dp))
                     Text(text = stringResource(id = R.string.schedule))
-                    Spacer(Modifier.weight(1f, true))
-                    IconButton(
-                        onClick = { calendarState.show() }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_calendar_month_24), contentDescription = null)
-                    }
                 }
-            })
+            },
+            actions = {
+                IconButton(
+                    onClick = { calendarState.show() }) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_calendar_month_24), contentDescription = null)
+                }
+            }
+        )
         }
     ) {
         LazyColumn(Modifier.padding(it))

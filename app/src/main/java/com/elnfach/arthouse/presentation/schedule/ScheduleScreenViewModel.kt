@@ -6,24 +6,30 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
+import com.elnfach.arthouse.domain.usecase.SaveScheduleStateUseCase
 import com.elnfach.arthouse.model.LocalDate
+import com.elnfach.arthouse.model.LocalDateManager
 import com.elnfach.arthouse.model.Schedule
 import com.elnfach.arthouse.presentation.utils.Resource
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class ScheduleScreenViewModel(
+    private val saveScheduleStateUseCase: SaveScheduleStateUseCase,
+    private val getScheduleStateUseCase: GetScheduleStateUseCase,
     private val getSchoolScheduleUseCase: GetScheduleUseCase
 ) : ViewModel() {
     private val _state = mutableStateOf(ScheduleState())
     val state: State<ScheduleState> = _state
 
-    private val selectedDateMutableState = MutableLiveData(LocalDate())
+    private val selectedDateMutableState = MutableLiveData(getScheduleStateUseCase.invoke())
     val selectedDate: MutableLiveData<LocalDate?> = selectedDateMutableState
     init {
         loadSchoolSchedule()
     }
+
     fun loadSchoolSchedule()
     {
         getSchoolScheduleUseCase().onEach { result ->
@@ -56,6 +62,7 @@ class ScheduleScreenViewModel(
 
     fun saveDate(date: LocalDate)
     {
+        saveScheduleStateUseCase.invoke(date)
         selectedDateMutableState.value = date
     }
 

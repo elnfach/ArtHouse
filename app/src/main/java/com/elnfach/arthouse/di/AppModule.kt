@@ -26,7 +26,7 @@ val appModule = module {
     }
 
     viewModel {
-        ScheduleScreenViewModel(get())
+        ScheduleScreenViewModel(get(), get(), get())
     }
    /* viewModel {
         ThemeViewModel(get(), get())
