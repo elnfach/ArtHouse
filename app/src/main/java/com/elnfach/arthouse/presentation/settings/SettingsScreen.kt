@@ -105,7 +105,8 @@ fun SettingsScreen(
         },
         SettingItem(title = R.string.about_app) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = stringResource(id = R.string.about_app_desc), textAlign = TextAlign.Center)
+                Text(text = stringResource(id = R.string.about_app_desc),
+                    textAlign = TextAlign.Center)
                 Spacer(modifier = Modifier.height(34.dp))
                 TextButton(onClick = {
                     val urlIntent = Intent(

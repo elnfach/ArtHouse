@@ -28,4 +28,6 @@
     <string name="profile">Profile</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="sign_out">Sign out</string>
+    <string name="signed_out">Signed out</string>
+    <string name="welcome">Welcome!</string>
 </resources>

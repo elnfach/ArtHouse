@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -94,7 +95,7 @@ fun ScheduleScreen(
                     newDate.dayOfMonth
                 )
             )
-            viewModel.loadSchoolSchedule()
+            viewModel.loadSchedule()
         }
     )
 
@@ -164,8 +165,13 @@ fun ScheduleScreen(
                         }
                     }
                     Column(modifier = Modifier.padding(4.dp)) {
-                        Row(modifier = Modifier.padding(12.dp)) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
                                 Text(text = item.start,
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold)

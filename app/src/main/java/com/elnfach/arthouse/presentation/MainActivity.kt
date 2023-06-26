@@ -2,10 +2,12 @@ package com.elnfach.arthouse.presentation
 
 import android.R
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -20,6 +22,7 @@ import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
 import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.settings.SettingsScreen
+import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
@@ -31,6 +34,7 @@ import com.elnfach.arthouse.presentation.utils.navigation.navigate
 
 class MainActivity : ComponentActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPreferences =
@@ -54,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = Screen.Splash.route) {
                         composable(Screen.Splash.route)
                         {
-                            navController.navigate(Screen.Main.route)
+                            SplashScreen(navController = navController, route = Screen.Main.route)
                         }
                         composable(Screen.Main.route)
                         {

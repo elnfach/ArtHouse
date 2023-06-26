@@ -27,10 +27,10 @@ class ScheduleScreenViewModel(
     private val selectedDateMutableState = MutableLiveData(getScheduleStateUseCase.invoke())
     val selectedDate: MutableLiveData<LocalDate?> = selectedDateMutableState
     init {
-        loadSchoolSchedule()
+        loadSchedule()
     }
 
-    fun loadSchoolSchedule()
+    fun loadSchedule()
     {
         getSchoolScheduleUseCase().onEach { result ->
             when(result){

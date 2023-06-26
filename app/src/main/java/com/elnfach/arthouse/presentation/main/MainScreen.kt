@@ -1,7 +1,9 @@
 package com.elnfach.arthouse.presentation.main
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -32,6 +34,7 @@ import com.elnfach.arthouse.presentation.utils.navigation.Router
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(

@@ -33,9 +33,7 @@ fun ForYouScreen(
     lifecycleOwner: LifecycleOwner,
     viewModel: ForYouScreenViewModel = koinViewModel()
 ) {
-    Log.e("TESTING", "Im here")
     val state = viewModel.state.value
-    Log.e("TESTING", state.isLoading.toString())
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -60,7 +58,6 @@ fun ForYouScreen(
         }
         if(state.isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            Log.e("TESTING", state.isLoading.toString())
         }
     }
 }
