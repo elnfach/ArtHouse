@@ -42,7 +42,7 @@ class ScheduleRepositoryImpl : ScheduleRepository {
             } catch (e: FirebaseFirestoreException) {
                 emit(Resource.Error(e.message.toString()))
             }
-            delay(Duration.ofSeconds(1))
+            delay(Duration.ofMillis(1500))
             temp = scheduleList
             emit(Resource.Success(temp))
         }

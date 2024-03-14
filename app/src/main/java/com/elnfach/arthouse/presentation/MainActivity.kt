@@ -20,6 +20,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
 import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
+import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.splash.SplashScreen
@@ -69,6 +70,15 @@ class MainActivity : ComponentActivity() {
                                 router = createExternalRouter { screen, params ->
                                     navController.navigate(screen, params)
                                 })
+                        }
+                        composable(Screen.CreateNewArticle.route)
+                        {
+                            PresentModal {
+                                CreateNewArticle(
+                                    router = createExternalRouter { screen, params ->
+                                        navController.navigate(screen, params) },
+                                    navController = navController)
+                            }
                         }
                         composable(Screen.Settings.route)
                         {

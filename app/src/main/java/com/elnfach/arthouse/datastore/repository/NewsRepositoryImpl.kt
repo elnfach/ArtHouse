@@ -39,7 +39,7 @@ class NewsRepositoryImpl : NewsRepository {
             } catch (e: FirebaseFirestoreException) {
                 emit(Resource.Error(e.message.toString()))
             }
-            delay(Duration.ofSeconds(3))
+            delay(Duration.ofMillis(2000))
             temp = newsList
             emit(Resource.Success(temp))
         }

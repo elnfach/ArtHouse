@@ -28,6 +28,7 @@
     <string name="profile">Профиль</string>
     <string name="sign_up_with_google">Войти с помощью Google</string>
     <string name="sign_out">Выйти</string>
-    <string name="signed_out">Signed out</string>
-    <string name="welcome">Welcome!</string>
+    <string name="signed_out">Вы вышли</string>
+    <string name="welcome">Добро пожаловать!</string>
+    <string name="create_new_article">Создать новую статью</string>
 </resources>

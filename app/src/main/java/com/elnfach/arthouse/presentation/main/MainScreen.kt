@@ -26,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.foryou.ForYouScreen
 import com.elnfach.arthouse.presentation.profile.ProfileScreen
 import com.elnfach.arthouse.presentation.schedule.ScheduleScreen

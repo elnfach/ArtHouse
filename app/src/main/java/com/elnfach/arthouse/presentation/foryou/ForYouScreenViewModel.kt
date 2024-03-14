@@ -42,4 +42,9 @@ class ForYouScreenViewModel(
             }
         }.launchIn(viewModelScope)
     }
+
+    fun pullToRefresh()
+    {
+        loadNewsArticles()
+    }
 }

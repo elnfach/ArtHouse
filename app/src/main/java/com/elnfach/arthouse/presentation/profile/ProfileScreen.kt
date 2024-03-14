@@ -64,7 +64,8 @@ fun ProfileScreen(
                 },
                 actions ={
                     IconButton(
-                        onClick = { router.routeTo(Screen.Settings.route) }) {
+                        //onClick = { router.routeTo(Screen.Settings.route) }) {
+                        onClick = { router.routeTo(Screen.CreateNewArticle.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_settings_24),
                             contentDescription = null
