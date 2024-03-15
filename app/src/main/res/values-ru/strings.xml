@@ -31,4 +31,5 @@
     <string name="signed_out">Вы вышли</string>
     <string name="welcome">Добро пожаловать!</string>
     <string name="create_new_article">Создать новую статью</string>
+    <string name="return_back">Вернуться</string>
 </resources>

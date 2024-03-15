@@ -31,4 +31,5 @@
     <string name="signed_out">Signed out</string>
     <string name="welcome">Welcome!</string>
     <string name="create_new_article">Create a new article</string>
+    <string name="return_back">Return back</string>
 </resources>

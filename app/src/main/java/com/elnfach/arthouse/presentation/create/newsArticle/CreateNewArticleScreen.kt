@@ -10,6 +10,7 @@ import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,19 +29,24 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -65,33 +71,32 @@ fun CreateNewArticle(
 )
 {
     val typography = MaterialTheme.typography
-    Scaffold(
+    //val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    Scaffold(//modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
+            MediumTopAppBar(
                 title = {
-                    Row {
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = stringResource(id = R.string.create_new_article))
-                    }
+                    Text(text = stringResource(id = R.string.create_new_article),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .clickable {
-                                navController.popBackStack()
-                            }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            modifier = Modifier.padding(4.dp),
-                            imageVector = Icons.Default.ArrowBack, contentDescription = null
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.return_back)
                         )
                     }
-                }
+                },
+                //scrollBehavior = scrollBehavior
             )
         }
     ) {
-        LazyColumn(Modifier.padding(it)) {
-
+        LazyColumn(modifier = Modifier.padding(it).fillMaxWidth()) {
+            items(130)
+            {
+                Text(text = "Hello world")
+            }
         }
     }
 }

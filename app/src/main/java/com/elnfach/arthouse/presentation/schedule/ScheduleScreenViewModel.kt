@@ -73,4 +73,9 @@ class ScheduleScreenViewModel(
     override fun onCleared() {
         super.onCleared()
     }
+
+    fun pullToRefresh()
+    {
+        loadSchedule()
+    }
 }

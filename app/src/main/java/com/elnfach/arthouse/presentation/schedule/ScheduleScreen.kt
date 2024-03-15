@@ -21,11 +21,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -46,6 +52,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
@@ -61,7 +68,7 @@ import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
 @RequiresApi(Build.VERSION_CODES.O)
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ScheduleScreen(
     externalRouter: Router,
@@ -104,18 +111,21 @@ fun ScheduleScreen(
     var clickedItemId by remember { mutableStateOf("") }
     val toastIdCopied = Toast.makeText(context, stringResource(id = R.string.id_copied), Toast.LENGTH_SHORT)
     val toastACCopied = Toast.makeText(context, stringResource(id = R.string.access_code_copied), Toast.LENGTH_SHORT)
+
     Scaffold(
-        topBar = { TopAppBar(
+        topBar = { MediumTopAppBar(
             title = {
-                Row {
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(id = R.string.schedule))
-                }
+                Text(text = stringResource(id = R.string.schedule),
+                    fontSize = 30.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis)
             },
             actions = {
-                IconButton(
-                    onClick = { calendarState.show() }) {
+                IconButton(onClick = { calendarState.show() }) {
                     Icon(painter = painterResource(id = R.drawable.baseline_calendar_month_24), contentDescription = null)
+                }
+                IconButton(onClick = {viewModel.pullToRefresh()}) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_refresh_24), contentDescription = null)
                 }
             }
         )

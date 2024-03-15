@@ -1,6 +1,7 @@
 package com.elnfach.arthouse.presentation.settings
 
 import android.content.Intent
+import android.graphics.fonts.Font
 import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,11 +22,15 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,8 +41,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.ui.theme.Theme
@@ -126,26 +135,21 @@ fun SettingsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar(
+            MediumTopAppBar(
                 title = {
-                    Row {
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = stringResource(id = R.string.settings))
-                    }
+                    Text(text = stringResource(id = R.string.settings),
+                        fontSize = 30.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .clickable {
-                                navController.popBackStack()
-                            }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
-                            modifier = Modifier.padding(4.dp),
-                            imageVector = Icons.Default.ArrowBack, contentDescription = null
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = stringResource(id = R.string.return_back)
                         )
                     }
-                }
+                },
             )
         }
     ) {
