@@ -62,7 +62,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ArtHouseTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -125,15 +124,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-inline fun <reified T: ViewModel> NavBackStackEntry.sharedViewModel(
-    navController: NavController
-) : T {
-    val navGraphRoute = destination.parent?.route ?: return viewModel()
-    val parentEntry = remember(this) {
-        navController.getBackStackEntry(navGraphRoute)
-    }
-    return viewModel(parentEntry)
-}
-
