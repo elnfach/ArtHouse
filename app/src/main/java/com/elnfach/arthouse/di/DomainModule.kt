@@ -1,5 +1,7 @@
 package com.elnfach.arthouse.di
 
+import com.elnfach.arthouse.domain.usecase.AddNewsArticleUseCase
+import com.elnfach.arthouse.domain.usecase.GetNewsArticleByIdUseCase
 import com.elnfach.arthouse.domain.usecase.GetNewsArticlesUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
@@ -9,6 +11,10 @@ import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
+    factory {
+        AddNewsArticleUseCase(get())
+    }
+
     factory {
         GetNewsArticlesUseCase(get())
     }
@@ -31,5 +37,8 @@ val domainModule = module {
 
     factory {
         SaveScheduleStateUseCase(get())
+    }
+    factory {
+        GetNewsArticleByIdUseCase(get())
     }
 }

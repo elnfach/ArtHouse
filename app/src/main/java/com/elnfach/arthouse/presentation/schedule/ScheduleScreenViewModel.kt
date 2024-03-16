@@ -10,7 +10,6 @@ import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
 import com.elnfach.arthouse.domain.usecase.SaveScheduleStateUseCase
 import com.elnfach.arthouse.model.LocalDate
-import com.elnfach.arthouse.model.LocalDateManager
 import com.elnfach.arthouse.model.Schedule
 import com.elnfach.arthouse.presentation.utils.Resource
 import kotlinx.coroutines.flow.launchIn

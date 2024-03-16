@@ -91,7 +91,7 @@ fun MainScreen(
             {
                 composable(Screen.ForYou.route)
                 {
-                    ForYouScreen(externalRouter = router, lifecycleOwner = lifecycleOwner)
+                    ForYouScreen(externalRouter = router, navController = navController, lifecycleOwner = lifecycleOwner)
                 }
                 composable(Screen.Schedule.route)
                 {
@@ -100,7 +100,7 @@ fun MainScreen(
                 //navigation(startDestination = Screen.SignIn.route, route = Screen.Profile.route)
                 composable(Screen.Profile.route)
                 {
-                    ProfileScreen(context = context, router = router,lifecycleScope = lifecycleScope)
+                    ProfileScreen(externalRouter = router, context = context, lifecycleScope = lifecycleScope)
                 }
             }
         }

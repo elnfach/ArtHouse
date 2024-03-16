@@ -132,6 +132,7 @@ fun SettingsScreen(
     )
 
     var isClicked by remember { mutableStateOf(0) }
+    var isReturned by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -143,7 +144,11 @@ fun SettingsScreen(
                         overflow = TextOverflow.Ellipsis)
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { if(!isReturned){
+                        isReturned = true
+                        navController.popBackStack()
+                    }
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.return_back)

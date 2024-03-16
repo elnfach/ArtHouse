@@ -30,6 +30,11 @@
     <string name="sign_out">Sign out</string>
     <string name="signed_out">Signed out</string>
     <string name="welcome">Welcome!</string>
-    <string name="create_new_article">Create a new article</string>
+    <string name="new_article">New article</string>
     <string name="return_back">Return back</string>
+    <string name="write_a_article">Write a article</string>
+    <string name="publish">Publish</string>
+    <string name="load_image">Load image</string>
+    <string name="enter_article_title">Enter article title</string>
+    <string name="enter_article_content">Enter content</string>
 </resources>

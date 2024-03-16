@@ -30,6 +30,11 @@
     <string name="sign_out">Выйти</string>
     <string name="signed_out">Вы вышли</string>
     <string name="welcome">Добро пожаловать!</string>
-    <string name="create_new_article">Создать новую статью</string>
+    <string name="new_article">Новая статья</string>
     <string name="return_back">Вернуться</string>
+    <string name="write_a_article">Написать статью</string>
+    <string name="publish">Опубликовать</string>
+    <string name="load_image">Загрузить изображение</string>
+    <string name="enter_article_title">Введите заголовок статьи</string>
+    <string name="enter_article_content">Введите содержимое статьи</string>
 </resources>

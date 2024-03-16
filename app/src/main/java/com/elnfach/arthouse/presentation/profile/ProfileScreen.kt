@@ -49,8 +49,8 @@ import java.time.LocalDate
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(
+    externalRouter: Router,
     context: Context,
-    router: Router,
     lifecycleScope: LifecycleCoroutineScope,
     viewModel: ProfileScreenViewModel = koinViewModel()
 ) {
@@ -67,7 +67,7 @@ fun ProfileScreen(
                 },
                 actions ={
                     IconButton(
-                        onClick = { router.routeTo(Screen.Settings.route) }) {
+                        onClick = { externalRouter.routeTo(Screen.Settings.route) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.baseline_settings_24),
                             contentDescription = null

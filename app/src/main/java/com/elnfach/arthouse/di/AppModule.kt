@@ -1,5 +1,6 @@
 package com.elnfach.arthouse.di
 
+import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewsArticleScreenViewModel
 import com.elnfach.arthouse.presentation.foryou.ForYouScreenViewModel
 import com.elnfach.arthouse.presentation.main.MainScreenViewModel
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
@@ -18,7 +19,7 @@ val appModule = module {
     }
 
     viewModel {
-        ForYouScreenViewModel(get())
+        ForYouScreenViewModel(get(), get())
     }
 
     viewModel {
@@ -28,6 +29,11 @@ val appModule = module {
     viewModel {
         ScheduleScreenViewModel(get(), get(), get())
     }
+
+    viewModel {
+        CreateNewsArticleScreenViewModel(get())
+    }
+
    /* viewModel {
         ThemeViewModel(get(), get())
     }*/

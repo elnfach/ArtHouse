@@ -69,17 +69,19 @@ fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            text = newsArticle.title.toString(),
+            text = newsArticle.title,
             maxLines = 3,
             overflow = TextOverflow.Ellipsis,
             style = typography.titleLarge,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        newsArticle.createdAt?.let {
-            Text(
-                text = "${of(it.monthNumber)} ${it.dayOfMonth}.",
-                style = typography.bodySmall
-            )
+        newsArticle.createdAt.let {
+            if (it != null) {
+                Text(
+                    text = "${of(it.monthNumber)} ${it.dayOfMonth}.",
+                    style = typography.bodySmall
+                )
+            }
         }
     }
 }
