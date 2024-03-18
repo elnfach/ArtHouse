@@ -1,5 +1,6 @@
 package com.elnfach.arthouse.presentation.foryou.components
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,7 @@ fun of(month: Int) : String {
     return monthNames[month];
 }
 
+@SuppressLint("SimpleDateFormat")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
@@ -75,13 +77,11 @@ fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
             style = typography.titleLarge,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        newsArticle.createdAt.let {
-            if (it != null) {
-                Text(
-                    text = "${of(it.monthNumber)} ${it.dayOfMonth}.",
-                    style = typography.bodySmall
-                )
-            }
-        }
+        val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
+        val formattedDate = sdf.format(Date(newsArticle.createdAt.seconds * 1000))
+        Text(
+            text = "$formattedDate.",
+            style = typography.bodySmall
+        )
     }
 }

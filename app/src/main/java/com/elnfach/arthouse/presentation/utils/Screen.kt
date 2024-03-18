@@ -20,4 +20,5 @@ sealed class Screen(
     object Menu: Screen("menu", R.drawable.baseline_menu_24, R.drawable.baseline_menu_24, R.string.menu)
     object Settings: Screen("settings", -1, -1, R.string.settings)
     object NewsArticle: Screen("news_article_page", -1, -1, -1)
+    object Report: Screen("report_page", -1, -1, R.string.report_a_problem)
 }

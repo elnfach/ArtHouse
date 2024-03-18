@@ -37,4 +37,5 @@
     <string name="load_image">Загрузить изображение</string>
     <string name="enter_article_title">Введите заголовок статьи</string>
     <string name="enter_article_content">Введите содержимое статьи</string>
+    <string name="report_a_problem">Сообщить о проблеме</string>
 </resources>

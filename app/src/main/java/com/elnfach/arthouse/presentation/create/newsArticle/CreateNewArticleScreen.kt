@@ -1,7 +1,8 @@
 package com.elnfach.arthouse.presentation.create.newsArticle
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.widget.Toast
+import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,13 +34,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.LocalDate
 import com.elnfach.arthouse.model.NewsArticle
+import com.elnfach.arthouse.presentation.MainActivity
 import com.elnfach.arthouse.presentation.utils.navigation.Router
+import com.google.firebase.Timestamp
 import org.koin.androidx.compose.koinViewModel
 
+
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun CreateNewArticle(
@@ -73,13 +79,14 @@ fun CreateNewArticle(
                               {
                                   viewModel.addNewsArticles(
                                       NewsArticle(
-                                          image = "https://media.krasota.ru/filer_public/1b/e7/1be7f83b-b6c1-4ec2-a9d1-8dcdebb80e32/1.jpg",
+                                          image = "",
                                           title = title,
-                                          createdAt = LocalDate(),
+                                          createdAt = Timestamp.now(),
                                           content = content,
                                           id = "TestID"
                                       )
                                   )
+                                  navController.popBackStack()
                               }
                           }) {
                               Text(text = stringResource(id = R.string.publish))
@@ -109,7 +116,9 @@ fun CreateNewArticle(
             LazyColumn(modifier = Modifier
                 .fillMaxWidth()) {
                 item {
-                    TextButton(onClick = { Toast.makeText(context, "Ваша статья опубликована!", Toast.LENGTH_LONG).show() }) {
+                    TextButton(onClick = {
+
+                    }) {
                         Text(text = stringResource(id = R.string.load_image))
                     }
                 }

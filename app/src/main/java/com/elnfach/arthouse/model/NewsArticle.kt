@@ -1,12 +1,13 @@
 package com.elnfach.arthouse.model
 
-import android.os.Build
-import androidx.annotation.RequiresApi
+import com.google.firebase.Timestamp
 
-data class NewsArticle (
+
+data class NewsArticle(
     val image: String = "",
     val title: String = "",
-    val createdAt: LocalDate? = null,
+    val createdAt: Timestamp = Timestamp.now(),
     val content: String = "",
+    val authors: List<String> = listOf(),
     var id: String = "",
 )

@@ -3,18 +3,15 @@ package com.elnfach.arthouse.datastore.repository
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.elnfach.arthouse.data.repository.NewsRepository
-import com.elnfach.arthouse.model.LocalDate
 import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.utils.Resource
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.time.delay
-import org.koin.core.component.getScopeId
 import java.time.Duration
 
 class NewsRepositoryImpl : NewsRepository {
@@ -26,9 +23,10 @@ class NewsRepositoryImpl : NewsRepository {
         var isSuccess: Boolean = false
         var isFailed: Boolean = false
 
+        newsArticle.id = dbRef.document().id
         return flow {
             emit(Resource.Loading())
-            dbRef.add(newsArticle).addOnSuccessListener {
+            dbRef.document(newsArticle.id).set(newsArticle).addOnSuccessListener {
                 isSuccess = true
             }.addOnFailureListener {
                 isFailed = true
@@ -46,13 +44,13 @@ class NewsRepositoryImpl : NewsRepository {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getNewsArticles(): Flow<Resource<List<NewsArticle?>>> {
-        val newsList: MutableList<NewsArticle?> = mutableListOf()
+        val newsList: MutableList<NewsArticle?> = mutableListOf(null)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val dbRef: CollectionReference = db.collection("newsArticles")
         return flow {
             emit(Resource.Loading())
             try {
-                dbRef.get().addOnSuccessListener { queryDocumentSnapshots ->
+                dbRef.orderBy("createdAt", Query.Direction.DESCENDING).get().addOnSuccessListener { queryDocumentSnapshots ->
                         if (!queryDocumentSnapshots.isEmpty) {
                             queryDocumentSnapshots.documents.forEach{
                                 val c = it.toObject(NewsArticle::class.java)
@@ -70,15 +68,18 @@ class NewsRepositoryImpl : NewsRepository {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getNewsArticleById(id: String): Flow<Resource<NewsArticle?>> {
-        var temp: NewsArticle? = NewsArticle()
+        var temp: NewsArticle? = null
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val dbRef = db.collection("newsArticles").document(id)
         return flow {
             emit(Resource.Loading())
             try {
                 dbRef.get().addOnSuccessListener { queryDocumentSnapshots ->
-                    val newsArticle = queryDocumentSnapshots.toObject(NewsArticle::class.java)
-                    temp = newsArticle
+                    if(queryDocumentSnapshots.data != null)
+                    {
+                        val newsArticle = queryDocumentSnapshots.toObject(NewsArticle::class.java)
+                        temp = newsArticle
+                    }
                 }
             } catch (e: FirebaseFirestoreException) {
                 emit(Resource.Error(e.message.toString()))

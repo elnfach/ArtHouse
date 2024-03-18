@@ -1,9 +1,8 @@
-package com.elnfach.arthouse.presentation.foryou
+package com.elnfach.arthouse.presentation.foryou.newsArticlePage
 
+import android.annotation.SuppressLint
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,11 +13,12 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,30 +33,30 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.NewsArticle
-import com.elnfach.arthouse.presentation.foryou.components.NewsArticleCardTop
+import com.elnfach.arthouse.presentation.foryou.ForYouScreenViewModel
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
-import java.time.Month
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
+@SuppressLint("SimpleDateFormat")
 @OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewsArticlePageScreen(
-    router: Router?,
+    externalRouter: Router,
     navController: NavHostController,
     lifecycleOwner: LifecycleOwner,
     documentId: String,
@@ -65,6 +65,8 @@ fun NewsArticlePageScreen(
     val typography = MaterialTheme.typography
     val state = viewModel.newsArticlePageState.value
     var isReturned by remember { mutableStateOf(false) }
+
+    var expanded by remember { mutableStateOf(false) }
 
     LaunchedEffect(documentId) {
         viewModel.loadNewsArticleById(documentId)
@@ -83,9 +85,21 @@ fun NewsArticlePageScreen(
                     }
                 },
                 actions = {
-                          IconButton(onClick = { /*TODO*/ }) {
-                              Icon(painter = painterResource(id = R.drawable.baseline_more_vert_24), contentDescription = null)
-                          }
+                    IconButton(onClick = { expanded = !expanded }) {
+                        Icon(painter = painterResource(id = R.drawable.baseline_more_vert_24), contentDescription = null)
+                    }
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(id = R.string.report_a_problem)) },
+                            onClick = {
+                                expanded = false
+                                externalRouter.routeTo("${Screen.Report.route}/${documentId}")
+                            }
+                        )
+                    }
                 },
                 navigationIcon = {
                     IconButton(onClick = { if(!isReturned){
@@ -102,16 +116,21 @@ fun NewsArticlePageScreen(
             )
         }
     ) {
-        Box(modifier = Modifier.fillMaxSize().padding(it))
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(it))
         {
-            if(state.newsArticle?.createdAt != null)
+            if(state.newsArticle != null)
             {
                 LazyColumn {
                     item {
                         Column(modifier = Modifier
                             .fillMaxSize()
                             .padding(16.dp)) {
-                            Text(text = "${state.newsArticle.createdAt.dayOfMonth} ${Month.of(state.newsArticle.createdAt.monthNumber)} ${state.newsArticle.createdAt.hour}:${state.newsArticle.createdAt.minute}",
+                            val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
+                            val formattedDate = sdf.format(Date(state.newsArticle.createdAt.seconds * 1000))
+                            Text(
+                                text = formattedDate,
                                 style = typography.titleSmall,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier
@@ -141,6 +160,7 @@ fun NewsArticlePageScreen(
                     }
                 }
             }
+            
             if(state.error.isNotBlank()) {
                 Text(
                     text = state.error,

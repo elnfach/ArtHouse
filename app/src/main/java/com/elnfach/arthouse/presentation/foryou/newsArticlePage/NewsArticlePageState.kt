@@ -1,9 +1,9 @@
-package com.elnfach.arthouse.presentation.foryou
+package com.elnfach.arthouse.presentation.foryou.newsArticlePage
 
 import com.elnfach.arthouse.model.NewsArticle
 
 data class NewsArticlePageState(
     val isLoading: Boolean = false,
-    val newsArticle: NewsArticle? = NewsArticle(),
+    val newsArticle: NewsArticle? = null,
     val error: String = ""
 )
