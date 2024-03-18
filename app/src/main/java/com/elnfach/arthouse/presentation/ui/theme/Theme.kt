@@ -16,7 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.elnfach.arthouse.presentation.profile.sign_in.SignInViewModel
+import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.SignInViewModel
 import com.elnfach.arthouse.presentation.settings.SettingsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 

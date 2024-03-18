@@ -93,7 +93,7 @@ fun NewsArticlePageScreen(
                         onDismissRequest = { expanded = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text(stringResource(id = R.string.report_a_problem)) },
+                            text = { Text(stringResource(id = R.string.report_problem)) },
                             onClick = {
                                 expanded = false
                                 externalRouter.routeTo("${Screen.Report.route}/${documentId}")

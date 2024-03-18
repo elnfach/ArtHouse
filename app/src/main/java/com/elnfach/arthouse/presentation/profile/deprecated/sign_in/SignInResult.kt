@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.profile.sign_in
+package com.elnfach.arthouse.presentation.profile.deprecated.sign_in
 
 data class SignInResult(
     val data: UserData?,

@@ -37,5 +37,16 @@
     <string name="load_image">Загрузить изображение</string>
     <string name="enter_article_title">Введите заголовок статьи</string>
     <string name="enter_article_content">Введите содержимое статьи</string>
-    <string name="report_a_problem">Сообщить о проблеме</string>
+    <string name="report_problem">Сообщить о проблеме</string>
+    <string name="login">Авторизуйтесь</string>
+    <string name="login_desc">Ваши данные не синхронизированы</string>
+    <string name="activate_your_subscription">Активируйте подписку</string>
+    <string name="activate_your_subscription_desc">Чтобы активировать подписку требуется войти в вашу учетную запись</string>
+    <string name="favorite">Избранное</string>
+    <string name="appearance">Внешний вид</string>
+    <string name="notifications">Уведомления</string>
+    <string name="information">Информация</string>
+    <string name="share_app">Поделиться приложением</string>
+    <string name="promotional_code">Ввести промокод</string>
+    <string name="feedback">Обратная связь</string>
 </resources>

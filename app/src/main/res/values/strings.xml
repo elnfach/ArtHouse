@@ -37,5 +37,16 @@
     <string name="load_image">Load image</string>
     <string name="enter_article_title">Enter article title</string>
     <string name="enter_article_content">Enter content</string>
-    <string name="report_a_problem">Report a problem</string>
+    <string name="report_problem">Report a problem</string>
+    <string name="login">Log in</string>
+    <string name="login_desc">Your data is not synced</string>
+    <string name="activate_your_subscription">Activate your subscription</string>
+    <string name="activate_your_subscription_desc">To activate your subscription you must be logged into your account.</string>
+    <string name="favorite">Favorite</string>
+    <string name="appearance">Appearance</string>
+    <string name="notifications">Notifications</string>
+    <string name="information">Information</string>
+    <string name="share_app">Share app</string>
+    <string name="promotional_code">Enter promotional code</string>
+    <string name="feedback">Feedback</string>
 </resources>

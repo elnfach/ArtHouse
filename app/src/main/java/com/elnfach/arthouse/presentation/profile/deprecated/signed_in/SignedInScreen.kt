@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.profile.signed_in
+package com.elnfach.arthouse.presentation.profile.components.signed_in
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.presentation.profile.sign_in.UserData
+import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.UserData
 
 @Composable
 fun SignedInScreen(
