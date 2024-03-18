@@ -20,7 +20,7 @@
     <string name="open_github">Открыть GitHub</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="terms_of_use">Условия использования</string>
-    <string name="choose_theme">Выбор темы</string>
+    <string name="choose_theme">Тема оформления</string>
     <string name="light_theme">Светлая</string>
     <string name="dark_theme">Темная</string>
     <string name="system_default">По умолчанию</string>
@@ -49,4 +49,10 @@
     <string name="share_app">Поделиться приложением</string>
     <string name="promotional_code">Ввести промокод</string>
     <string name="feedback">Обратная связь</string>
+    <string name="notifications_off">Выключить</string>
+    <string name="notifications_only_important">Только важные</string>
+    <string name="notifications_all">Включить</string>
+    <string name="empty_favorite">Сейчас здесь пусто!</string>
+    <string name="empty_favorite_desc">Сохраняйте статьи, которые хотите прочитать позже</string>
+    <string name="unavailable_feature">Это функция пока недоступна!</string>
 </resources>

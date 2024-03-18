@@ -1,6 +1,7 @@
 package com.elnfach.arthouse.presentation.profile.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -20,5 +21,5 @@ data class ProfileItem(
     val subTitle: String = "",
     val imageId: Int = 0,
     val contentDescriptionImage: String? = null,
-    val onClick: () -> Unit,
+    val onClick: @Composable () -> Unit,
 )

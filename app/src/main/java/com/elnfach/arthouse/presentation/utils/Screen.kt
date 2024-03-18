@@ -21,4 +21,5 @@ sealed class Screen(
     object Settings: Screen("settings", -1, -1, R.string.settings)
     object NewsArticle: Screen("news_article_page", -1, -1, -1)
     object Report: Screen("report_page", -1, -1, R.string.report_problem)
+    object ProfileDetail: Screen("profile_detail", -1, -1, -1)
 }

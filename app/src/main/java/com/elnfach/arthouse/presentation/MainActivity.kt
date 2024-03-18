@@ -1,7 +1,6 @@
 package com.elnfach.arthouse.presentation
 
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,6 +25,8 @@ import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.report.ReportPageScreen
 import com.elnfach.arthouse.presentation.main.MainScreen
+import com.elnfach.arthouse.presentation.profile.components.ProfileDetail
+import com.elnfach.arthouse.presentation.profile.detailsPage.DetailsPageScreen
 import com.elnfach.arthouse.presentation.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
@@ -135,6 +135,25 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate(screen, params) },
                                     navController = navController,
                                     documentId = entry.arguments?.getString("documentId").toString())
+                            }
+                        }
+
+                        composable("${Screen.ProfileDetail.route}/{profileDetail}", arguments = listOf(
+                            navArgument(name = "profileDetail") {
+                                type = NavType.StringType
+                                defaultValue = "null"
+                                nullable = false
+                            }
+                        ))
+                        {entry->
+                            PresentModal {
+                                DetailsPageScreen(
+                                    externalRouter = createExternalRouter { screen, params ->
+                                        navController.navigate(screen, params) },
+                                    context = this@MainActivity,
+                                    navController = navController,
+                                    profileDetail = entry.arguments?.getString("profileDetail").toString()
+                                )
                             }
                         }
                     }

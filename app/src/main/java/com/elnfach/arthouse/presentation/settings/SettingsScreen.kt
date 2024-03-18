@@ -1,7 +1,6 @@
 package com.elnfach.arthouse.presentation.settings
 
 import android.content.Intent
-import android.graphics.fonts.Font
 import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,49 +15,40 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
+import com.elnfach.arthouse.presentation.profile.detailsPage.AppearanceRadioButtonItem
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
-import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
 
-data class RadioButtonItem (
-    val title: String,
-    val theme: Theme
-)
+
 
 data class SettingItem(
     val title: Int,
@@ -77,9 +67,9 @@ fun SettingsScreen(
     val ctx = LocalContext.current
 
     val radioOptions = listOf(
-        RadioButtonItem(stringResource(id = R.string.light_theme), Theme.LIGHT),
-        RadioButtonItem(stringResource(id = R.string.dark_theme), Theme.DARK),
-        RadioButtonItem(stringResource(id = R.string.system_default), Theme.DEFAULT))
+        AppearanceRadioButtonItem(stringResource(id = R.string.light_theme), Theme.LIGHT),
+        AppearanceRadioButtonItem(stringResource(id = R.string.dark_theme), Theme.DARK),
+        AppearanceRadioButtonItem(stringResource(id = R.string.system_default), Theme.DEFAULT))
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[2]) }
 
     val settingsList = listOf(
@@ -131,7 +121,7 @@ fun SettingsScreen(
         // SettingItem(title = R.string.whats_new)
     )
 
-    var isClicked by remember { mutableStateOf(0) }
+    var isClicked by remember { mutableIntStateOf(0) }
     var isReturned by remember { mutableStateOf(false) }
 
     Scaffold(

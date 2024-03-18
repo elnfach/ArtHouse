@@ -21,9 +21,14 @@ import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,8 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleCoroutineScope
 import com.elnfach.arthouse.R
+import com.elnfach.arthouse.presentation.profile.components.ProfileDetail
 import com.elnfach.arthouse.presentation.profile.components.ProfileItem
 import com.elnfach.arthouse.presentation.profile.components.ProfileItemType
+import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
 
@@ -46,6 +53,9 @@ fun ProfileScreen(
     viewModel: ProfileScreenViewModel = koinViewModel()
 ) {
     val typography = MaterialTheme.typography
+
+    val linkToGithub = "https://github.com/elnfach/ArtHouse"
+    val ctx = LocalContext.current
 
     val profileItems = listOf(
         ProfileItem(
@@ -71,7 +81,7 @@ fun ProfileScreen(
             title = stringResource(id = R.string.favorite),
             imageId = R.drawable.outline_bookmarks_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.FAVORITE}")
             }
         ),
         ProfileItem(
@@ -86,15 +96,15 @@ fun ProfileScreen(
             title = stringResource(id = R.string.appearance),
             imageId = R.drawable.outline_auto_awesome_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.APPEARANCE}")
             }
         ),
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.notifications),
-            imageId = R.drawable.outline_edit_notifications_24,
+            imageId = R.drawable.baseline_notifications_none_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.NOTIFICATIONS}")
             }
         ),
         ProfileItem(
@@ -107,9 +117,9 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.share_app),
-            imageId = R.drawable.outline_auto_awesome_24,
+            imageId = R.drawable.outline_ios_share_24,
             onClick = {
-
+                //externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
             }
         ),
         ProfileItem(
@@ -117,7 +127,7 @@ fun ProfileScreen(
             title = stringResource(id = R.string.promotional_code),
             imageId = R.drawable.outline_card_giftcard_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.PROMOTIONAL_CODE}")
             }
         ),
         ProfileItem(
@@ -125,7 +135,7 @@ fun ProfileScreen(
             title = stringResource(id = R.string.feedback),
             imageId = R.drawable.outline_email_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.FEEDBACK}")
             }
         ),
         ProfileItem(
@@ -133,7 +143,7 @@ fun ProfileScreen(
             title = stringResource(id = R.string.about_app),
             imageId = R.drawable.baseline_help_outline_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ABOUT_APP}")
             }
         ),
     )
@@ -159,7 +169,7 @@ fun ProfileScreen(
                     {
                         ProfileItemType.NONE            -> TODO()
                         ProfileItemType.LARGE_BUTTON    -> LargeButton  (profileItem = item)
-                        ProfileItemType.BUTTON          -> Button       (profileItem = item)
+                        ProfileItemType.BUTTON          -> NormalButton (profileItem = item)
                         ProfileItemType.TITLE_CATEGORY  -> TitleCategory(profileItem = item)
                     }
                 }
@@ -169,17 +179,23 @@ fun ProfileScreen(
 }
 
 @Composable
-fun Button(profileItem: ProfileItem)
+fun NormalButton(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
+    var isClicked by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding()
             .clickable {
-                profileItem.onClick
+                isClicked = true
             }
     ) {
+        if(isClicked)
+        {
+            isClicked = false
+            profileItem.onClick()
+        }
         Row(
             modifier = Modifier
                 .padding(horizontal = 24.dp)
@@ -203,7 +219,6 @@ fun TitleCategory(profileItem: ProfileItem)
 fun LargeButton(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
-
     Box(
         modifier = Modifier
             .padding(horizontal = 24.dp)
@@ -211,7 +226,7 @@ fun LargeButton(profileItem: ProfileItem)
             .clip(RoundedCornerShape(12.dp))
             .fillMaxSize()
             .background(
-            color = MaterialTheme.colorScheme.onSecondary
+                color = MaterialTheme.colorScheme.onSecondary
             )
             .clickable {
                 profileItem.onClick

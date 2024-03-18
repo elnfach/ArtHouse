@@ -20,7 +20,7 @@
     <string name="open_github">Open GitHub</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_use">Terms of Use</string>
-    <string name="choose_theme">Choose theme</string>
+    <string name="choose_theme">Theme design</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="system_default">System default</string>
@@ -49,4 +49,10 @@
     <string name="share_app">Share app</string>
     <string name="promotional_code">Enter promotional code</string>
     <string name="feedback">Feedback</string>
+    <string name="notifications_off">Switch off</string>
+    <string name="notifications_only_important">Only important</string>
+    <string name="notifications_all">Switch on</string>
+    <string name="empty_favorite">It\'s empty here now!</string>
+    <string name="empty_favorite_desc">Save articles you want to read later</string>
+    <string name="unavailable_feature">This feature is not yet available!</string>
 </resources>
