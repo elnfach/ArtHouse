@@ -90,8 +90,40 @@ fun DetailsPageScreen(
     when(enum)
     {
         ProfileDetail.NONE -> TODO()
-        ProfileDetail.LOGIN -> Toast.makeText(context, stringResource(id = R.string.unavailable_feature), Toast.LENGTH_LONG).show()
-        ProfileDetail.ACTIVATE_SUBSCRIPTION -> Toast.makeText(context, stringResource(id = R.string.unavailable_feature), Toast.LENGTH_LONG).show()
+        ProfileDetail.LOGIN -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.login),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
+                        modifier = Modifier.scale(2.1F))
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                }
+            }
+        )
+        ProfileDetail.ACTIVATE_SUBSCRIPTION -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.activate_your_subscription),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
+                        modifier = Modifier.scale(2.1F))
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                }
+            }
+        )
         ProfileDetail.FAVORITE -> DetailsPageScreenTemplate(
             title = stringResource(id = R.string.favorite),
             navController = navController,
@@ -157,9 +189,57 @@ fun DetailsPageScreen(
                 }
             }
         )
-        ProfileDetail.SHARE_APP -> Toast.makeText(context, stringResource(id = R.string.unavailable_feature), Toast.LENGTH_LONG).show()
-        ProfileDetail.PROMOTIONAL_CODE -> Toast.makeText(context, stringResource(id = R.string.unavailable_feature), Toast.LENGTH_LONG).show()
-        ProfileDetail.FEEDBACK -> Toast.makeText(context, stringResource(id = R.string.unavailable_feature), Toast.LENGTH_LONG).show()
+        ProfileDetail.SHARE_APP -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.share_app),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
+                        modifier = Modifier.scale(2.1F))
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                }
+            }
+        )
+        ProfileDetail.PROMOTIONAL_CODE -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.promotional_code),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
+                        modifier = Modifier.scale(2.1F))
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                }
+            }
+        )
+        ProfileDetail.FEEDBACK -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.feedback),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
+                        modifier = Modifier.scale(2.1F))
+                    Spacer(modifier = Modifier.padding(12.dp))
+                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                }
+            }
+        )
         ProfileDetail.ABOUT_APP -> DetailsPageScreenTemplate(
             title = stringResource(id = R.string.about_app),
             navController = navController,
