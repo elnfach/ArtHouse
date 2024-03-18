@@ -49,180 +49,92 @@ fun ProfileScreen(
 
     val profileItems = listOf(
         ProfileItem(
-            boxModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding()
-                .clip(RoundedCornerShape(12.dp))
-                .fillMaxSize()
-                .background(
-                    color = MaterialTheme.colorScheme.onSecondary
-                )
-                .clickable {
-                    // TODO:
-                },
-            columnModifier = Modifier.padding(4.dp),
-            rowModifier = Modifier.padding(12.dp),
-            innerColumnModifier = Modifier.padding(start = 12.dp),
-
-            rowVerticalAlignment = Alignment.CenterVertically,
-
             type = ProfileItemType.LARGE_BUTTON,
             title = stringResource(id = R.string.login),
             subTitle = stringResource(id = R.string.login_desc),
-            imageId = R.drawable.baseline_person_24
+            imageId = R.drawable.baseline_person_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding()
-                .clip(RoundedCornerShape(12.dp))
-                .fillMaxSize()
-                .background(
-                    color = MaterialTheme.colorScheme.onSecondary
-                )
-                .clickable {
-                    // TODO:
-                },
-            columnModifier = Modifier.padding(4.dp),
-            rowModifier = Modifier.padding(12.dp),
-            innerColumnModifier = Modifier.padding(start = 12.dp),
-
-            rowVerticalAlignment = Alignment.CenterVertically,
-
             type = ProfileItemType.LARGE_BUTTON,
             title = stringResource(id = R.string.activate_your_subscription),
             subTitle = stringResource(id = R.string.activate_your_subscription_desc),
-            imageId = R.drawable.baseline_coffee_24
+            imageId = R.drawable.baseline_coffee_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.favorite),
-            imageId = R.drawable.outline_bookmarks_24
+            imageId = R.drawable.outline_bookmarks_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            textModifier = Modifier.padding(start = 24.dp, bottom = 12.dp),
-
             type = ProfileItemType.TITLE_CATEGORY,
-            title = stringResource(id = R.string.settings)
+            title = stringResource(id = R.string.settings),
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.appearance),
-            imageId = R.drawable.outline_auto_awesome_24
+            imageId = R.drawable.outline_auto_awesome_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.notifications),
-            imageId = R.drawable.outline_edit_notifications_24
+            imageId = R.drawable.outline_edit_notifications_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            textModifier = Modifier.padding(start = 24.dp, bottom = 12.dp),
             type = ProfileItemType.TITLE_CATEGORY,
-            title = stringResource(id = R.string.information)
+            title = stringResource(id = R.string.information),
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.share_app),
-            imageId = R.drawable.outline_auto_awesome_24
+            imageId = R.drawable.outline_auto_awesome_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.promotional_code),
-            imageId = R.drawable.outline_card_giftcard_24
+            imageId = R.drawable.outline_card_giftcard_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.feedback),
-            imageId = R.drawable.outline_email_24
+            imageId = R.drawable.outline_email_24,
+            onClick = {
+
+            }
         ),
         ProfileItem(
-            boxModifier = Modifier
-                .fillMaxWidth()
-                .padding()
-                .clickable {
-                    // TODO:
-                },
-            rowModifier = Modifier
-                .padding(horizontal = 24.dp)
-                .padding(top = 12.dp, bottom = 12.dp),
-
-            spacerModifier = Modifier.padding(horizontal = 6.dp),
-
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.about_app),
-            imageId = R.drawable.baseline_help_outline_24
+            imageId = R.drawable.baseline_help_outline_24,
+            onClick = {
+
+            }
         ),
     )
 
@@ -260,14 +172,21 @@ fun ProfileScreen(
 fun Button(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
-    Box(modifier = profileItem.boxModifier) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding()
+            .clickable {
+                profileItem.onClick
+            }
+    ) {
         Row(
-            modifier = profileItem.rowModifier,
-            horizontalArrangement = profileItem.rowHorizontalArrangement,
-            verticalAlignment = profileItem.rowVerticalAlignment
+            modifier = Modifier
+                .padding(horizontal = 24.dp)
+                .padding(top = 12.dp, bottom = 12.dp)
         ) {
             Icon(painter = painterResource(id = profileItem.imageId), contentDescription = profileItem.contentDescriptionImage)
-            Spacer(modifier = profileItem.columnModifier)
+            Spacer(modifier = Modifier.padding(horizontal = 6.dp))
             Text(text = profileItem.title)
         }
     }
@@ -277,7 +196,7 @@ fun Button(profileItem: ProfileItem)
 fun TitleCategory(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
-    Text(modifier = profileItem.textModifier, text = profileItem.title, style = typography.titleLarge, fontWeight = FontWeight.Bold )
+    Text(modifier = Modifier.padding(start = 24.dp, top = 12.dp, bottom = 12.dp), text = profileItem.title, style = typography.titleLarge, fontWeight = FontWeight.Bold )
 }
 
 @Composable
@@ -285,19 +204,27 @@ fun LargeButton(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
 
-    Box(modifier = profileItem.boxModifier)
+    Box(
+        modifier = Modifier
+            .padding(horizontal = 24.dp)
+            .padding(top = 6.dp, bottom = 6.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .fillMaxSize()
+            .background(
+            color = MaterialTheme.colorScheme.onSecondary
+            )
+            .clickable {
+                profileItem.onClick
+            }
+    )
     {
-        Column(
-            modifier = profileItem.columnModifier,
-            verticalArrangement = profileItem.columnVerticalArrangement,
-            horizontalAlignment = profileItem.columnHorizontalAlignment) {
+        Column(modifier = Modifier.padding(4.dp)) {
             Row(
-                modifier = profileItem.rowModifier,
-                horizontalArrangement = profileItem.rowHorizontalArrangement,
-                verticalAlignment = profileItem.rowVerticalAlignment
+                modifier = Modifier.padding(12.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(painter = painterResource(id = profileItem.imageId), contentDescription = profileItem.contentDescriptionImage)
-                Column(modifier = profileItem.innerColumnModifier) {
+                Column(modifier = Modifier.padding(start = 12.dp)) {
                     Text(text = profileItem.title, style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
                     Text(text = profileItem.subTitle, style = typography.bodySmall)
                 }
