@@ -119,7 +119,7 @@ fun ProfileScreen(
             title = stringResource(id = R.string.share_app),
             imageId = R.drawable.outline_ios_share_24,
             onClick = {
-                //externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
             }
         ),
         ProfileItem(
