@@ -64,7 +64,7 @@ fun ProfileScreen(
             subTitle = stringResource(id = R.string.login_desc),
             imageId = R.drawable.baseline_person_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.LOGIN}")
             }
         ),
         ProfileItem(
@@ -73,7 +73,7 @@ fun ProfileScreen(
             subTitle = stringResource(id = R.string.activate_your_subscription_desc),
             imageId = R.drawable.baseline_coffee_24,
             onClick = {
-
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ACTIVATE_SUBSCRIPTION}")
             }
         ),
         ProfileItem(
@@ -219,6 +219,7 @@ fun TitleCategory(profileItem: ProfileItem)
 fun LargeButton(profileItem: ProfileItem)
 {
     val typography = MaterialTheme.typography
+    var isClicked by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .padding(horizontal = 24.dp)
@@ -229,10 +230,15 @@ fun LargeButton(profileItem: ProfileItem)
                 color = MaterialTheme.colorScheme.onSecondary
             )
             .clickable {
-                profileItem.onClick
+                isClicked = true
             }
     )
     {
+        if(isClicked)
+        {
+            isClicked = false
+            profileItem.onClick()
+        }
         Column(modifier = Modifier.padding(4.dp)) {
             Row(
                 modifier = Modifier.padding(12.dp),
