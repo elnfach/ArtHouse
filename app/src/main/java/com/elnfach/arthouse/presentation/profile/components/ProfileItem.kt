@@ -15,6 +15,7 @@ enum class ProfileItemType
 }
 
 data class ProfileItem(
+    val type: ProfileItemType = ProfileItemType.NONE,
     val title: String = "",
     val subTitle: String = "",
     val imageId: Int = 0,
