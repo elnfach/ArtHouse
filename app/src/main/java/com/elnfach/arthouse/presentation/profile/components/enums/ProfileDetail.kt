@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.profile.components
+package com.elnfach.arthouse.presentation.profile.components.enums
 
 enum class ProfileDetail {
     NONE,

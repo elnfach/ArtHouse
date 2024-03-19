@@ -55,4 +55,5 @@
     <string name="empty_favorite">Сейчас здесь пусто!</string>
     <string name="empty_favorite_desc">Сохраняйте статьи, которые хотите прочитать позже</string>
     <string name="unavailable_feature">Это функция пока недоступна!</string>
+    <string name="news">Новости</string>
 </resources>

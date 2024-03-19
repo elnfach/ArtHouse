@@ -11,14 +11,8 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.SignInViewModel
-import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreenViewModel
-import org.koin.androidx.compose.koinViewModel
 
 
 private val LightColors = lightColorScheme(

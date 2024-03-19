@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.presentation.profile.detailsPage.AppearanceRadioButtonItem
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.AppearanceRadioButtonItem
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.navigation.Router

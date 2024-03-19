@@ -97,7 +97,6 @@ fun MainScreen(
                 {
                     ScheduleScreen(externalRouter = router, context = context, lifecycleOwner = lifecycleOwner)
                 }
-                //navigation(startDestination = Screen.SignIn.route, route = Screen.Profile.route)
                 composable(Screen.Profile.route)
                 {
                     ProfileScreen(externalRouter = router, context = context, lifecycleScope = lifecycleScope)

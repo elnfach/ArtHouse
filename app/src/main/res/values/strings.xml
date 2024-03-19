@@ -55,4 +55,5 @@
     <string name="empty_favorite">It\'s empty here now!</string>
     <string name="empty_favorite_desc">Save articles you want to read later</string>
     <string name="unavailable_feature">This feature is not yet available!</string>
+    <string name="news">News</string>
 </resources>

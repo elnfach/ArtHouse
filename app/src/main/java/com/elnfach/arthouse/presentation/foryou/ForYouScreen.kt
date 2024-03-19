@@ -18,10 +18,13 @@ import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
 import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,21 +37,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.foryou.components.NewsArticleCardTop
+import com.elnfach.arthouse.presentation.foryou.components.PostListDivider
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
 
 
-@OptIn(ExperimentalMaterialApi::class)
-@RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ForYouScreen(
     externalRouter: Router,
@@ -72,6 +78,19 @@ fun ForYouScreen(
     // ^^^ FAB ^^^
 
     Scaffold(
+        topBar = { MediumTopAppBar(
+            title = {
+                Text(text = stringResource(id = R.string.news),
+                    fontSize = 30.sp,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis)
+            },
+            actions = {
+                IconButton(onClick = {  }) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_help_outline_24), contentDescription = null)
+                }
+            })
+        },
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 onClick = { externalRouter.routeTo(Screen.CreateNewArticle.route) },
@@ -119,12 +138,4 @@ fun ForYouScreen(
             PullRefreshIndicator(isRefreshing, stateRefresh, Modifier.align(Alignment.TopCenter))
         }
     }
-}
-
-@Composable
-private fun PostListDivider() {
-    HorizontalDivider(
-        modifier = Modifier.padding(horizontal = 14.dp),
-        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.08f)
-    )
 }

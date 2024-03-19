@@ -2,23 +2,13 @@ package com.elnfach.arthouse.presentation.profile
 
 import android.app.Application
 import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
 import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
-import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.GoogleAuthUiClient
-import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.SignInViewModel
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
-import com.elnfach.arthouse.presentation.utils.Screen
-import com.google.android.gms.auth.api.identity.Identity
-import org.koin.androidx.compose.koinViewModel
 
 class ProfileScreenViewModel(
     application: Application,
@@ -42,12 +32,5 @@ class ProfileScreenViewModel(
         ThemeManager.artHouseTheme = theme
         saveThemeSettingUseCase.invoke(theme)
         Log.i("THEME | _theme after change", _theme.value!!)
-    }
-
-    val googleAuthUiClient by lazy {
-        GoogleAuthUiClient(
-            context = application.applicationContext,
-            oneTapClient = Identity.getSignInClient(application.applicationContext)
-        )
     }
 }

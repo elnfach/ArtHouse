@@ -50,7 +50,6 @@ fun of(month: Int) : String {
 }
 
 @SuppressLint("SimpleDateFormat")
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
 {

@@ -1,31 +1,21 @@
 package com.elnfach.arthouse.presentation.profile.detailsPage
 
-import android.app.Notification
 import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.selection.selectable
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -34,29 +24,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
-import com.elnfach.arthouse.presentation.profile.components.ProfileDetail
+import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.AppearanceRadioButtonItem
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.DetailsPageScreenTemplate
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Notifications
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.NotificationsRadioButtonItem
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
-
-data class AppearanceRadioButtonItem (
-    val title: String,
-    val theme: Theme
-)
-
-data class NotificationsRadioButtonItem (
-    val title: String,
-    val notifications: Notifications
-)
-
-enum class Notifications {
-    OFF, ONLY_IMPORTANT, ALL
-}
 
 @Composable
 fun DetailsPageScreen(
@@ -256,41 +235,5 @@ fun DetailsPageScreen(
                 }
             }
         )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DetailsPageScreenTemplate(
-    title: String,
-    navController: NavController,
-    content: @Composable () -> Unit
-) {
-    var isReturned by remember { mutableStateOf(false) }
-
-    Scaffold(
-        topBar = { CenterAlignedTopAppBar(
-            title = { Text(text = title) },
-            navigationIcon = {
-                IconButton(onClick = {
-                    if (!isReturned) {
-                        isReturned = true
-                        navController.popBackStack()
-                    }
-                }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_arrow_back_ios_24),
-                        contentDescription = stringResource(id = R.string.return_back)
-                    )
-                }
-            },
-        ) },
-    ) {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(it))
-        {
-            content()
-        }
     }
 }

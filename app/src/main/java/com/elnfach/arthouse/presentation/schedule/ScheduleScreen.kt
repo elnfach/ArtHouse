@@ -106,6 +106,11 @@ fun ScheduleScreen(
         }
     )
 
+    // Refresh
+    val isRefreshing by remember { mutableStateOf(false) }
+    val stateRefresh= rememberPullRefreshState(isRefreshing, {viewModel.pullToRefresh()})
+    // ^^^ Refresh ^^^
+
     val ctx = LocalContext.current
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     var clickedItemId by remember { mutableStateOf("") }
@@ -124,85 +129,85 @@ fun ScheduleScreen(
                 IconButton(onClick = { calendarState.show() }) {
                     Icon(painter = painterResource(id = R.drawable.baseline_calendar_month_24), contentDescription = null)
                 }
-                IconButton(onClick = {viewModel.pullToRefresh()}) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_refresh_24), contentDescription = null)
-                }
             }
         )
         }
     ) {
-        LazyColumn(Modifier.padding(it))
+        Box(modifier = Modifier.padding(it))
         {
-            itemsIndexed(state.schedule)
+            LazyColumn(Modifier
+                .fillMaxSize()
+                .pullRefresh(stateRefresh))
             {
-                    _, item ->
-                Text(text = item.grade.toString() + " " + stringResource(id = R.string.grade),
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.secondary,
-                    modifier = Modifier.padding(horizontal = 32.dp))
+                itemsIndexed(state.schedule)
+                {
+                        _, item ->
+                    Text(text = item.grade.toString() + " " + stringResource(id = R.string.grade),
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.secondary,
+                        modifier = Modifier.padding(horizontal = 32.dp))
 
-                Box(modifier = Modifier
-                    .padding(horizontal = 24.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .fillMaxSize()
-                    .background(
-                        color = MaterialTheme.colorScheme.onSecondary
-                    )
-                    .clickable {
-                        clickedItemId = item.id
-                    }) {
-                    if(clickedItemId == item.id)
-                    {
-                        ModalBottomSheet(
-                            schoolSchedule = item,
-                            onClickId = {
-                                clipboardManager.setText(AnnotatedString((item.task.id)))
-                                toastIdCopied.show()
-                            },
-                            onClickAC = {
-                                clipboardManager.setText(AnnotatedString((item.task.accessCode)))
-                                toastACCopied.show()
-                            },
-                            onClickAction = {
-                                val urlIntent = Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse(item.task.link)
-                                )
-                                ctx.startActivity(urlIntent)
-                            }
-                        ) {
-                            clickedItemId = ""
-                        }
-                    }
-                    Column(modifier = Modifier.padding(4.dp)) {
-                        Row(
-                            modifier = Modifier.padding(12.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally
+                    Box(modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .fillMaxSize()
+                        .background(
+                            color = MaterialTheme.colorScheme.onSecondary
+                        )
+                        .clickable {
+                            clickedItemId = item.id
+                        }) {
+                        if(clickedItemId == item.id)
+                        {
+                            ModalBottomSheet(
+                                schoolSchedule = item,
+                                onClickId = {
+                                    clipboardManager.setText(AnnotatedString((item.task.id)))
+                                    toastIdCopied.show()
+                                },
+                                onClickAC = {
+                                    clipboardManager.setText(AnnotatedString((item.task.accessCode)))
+                                    toastACCopied.show()
+                                },
+                                onClickAction = {
+                                    val urlIntent = Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse(item.task.link)
+                                    )
+                                    ctx.startActivity(urlIntent)
+                                }
                             ) {
-                                Text(text = item.start,
-                                    textAlign = TextAlign.Center,
-                                    fontWeight = FontWeight.Bold)
-                                Text(text = item.end,
-                                    textAlign = TextAlign.Center,
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.secondary)
+                                clickedItemId = ""
                             }
-                            Spacer(modifier = Modifier.width(24.dp))
-                            Column {
-                                Text(text = item.lesson, fontWeight = FontWeight.Bold)
-                                Text(text = stringResource(id = R.string.teacher) +  " " + item.teacher,
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.secondary)
+                        }
+                        Column(modifier = Modifier.padding(4.dp)) {
+                            Row(
+                                modifier = Modifier.padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(text = item.start,
+                                        textAlign = TextAlign.Center,
+                                        fontWeight = FontWeight.Bold)
+                                    Text(text = item.end,
+                                        textAlign = TextAlign.Center,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.secondary)
+                                }
+                                Spacer(modifier = Modifier.width(24.dp))
+                                Column {
+                                    Text(text = item.lesson, fontWeight = FontWeight.Bold)
+                                    Text(text = stringResource(id = R.string.teacher) +  " " + item.teacher,
+                                        fontSize = 12.sp,
+                                        color = MaterialTheme.colorScheme.secondary)
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        Box(modifier = Modifier.fillMaxSize()) {
             if(state.error.isNotBlank()) {
                 Text(
                     text = state.error,
@@ -217,6 +222,7 @@ fun ScheduleScreen(
             if(state.isLoading) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
+            PullRefreshIndicator(isRefreshing, stateRefresh, Modifier.align(Alignment.TopCenter))
         }
     }
 }
