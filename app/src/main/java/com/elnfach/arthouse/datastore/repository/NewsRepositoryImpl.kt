@@ -15,18 +15,17 @@ import kotlinx.coroutines.time.delay
 import java.time.Duration
 
 class NewsRepositoryImpl : NewsRepository {
+    private val _dataBase: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val _dbRef: CollectionReference = _dataBase.collection("newsArticles")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun addNewsArticles(newsArticle: NewsArticle) : Flow<Resource<Boolean>> {
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        val dbRef: CollectionReference = db.collection("newsArticles")
-
         var isSuccess: Boolean = false
         var isFailed: Boolean = false
 
-        newsArticle.id = dbRef.document().id
+        newsArticle.id = _dbRef.document().id
         return flow {
             emit(Resource.Loading())
-            dbRef.document(newsArticle.id).set(newsArticle).addOnSuccessListener {
+            _dbRef.document(newsArticle.id).set(newsArticle).addOnSuccessListener {
                 isSuccess = true
             }.addOnFailureListener {
                 isFailed = true
@@ -45,12 +44,10 @@ class NewsRepositoryImpl : NewsRepository {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getNewsArticles(): Flow<Resource<List<NewsArticle?>>> {
         val newsList: MutableList<NewsArticle?> = mutableListOf(null)
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        val dbRef: CollectionReference = db.collection("newsArticles")
         return flow {
             emit(Resource.Loading())
             try {
-                dbRef.orderBy("createdAt", Query.Direction.DESCENDING).get().addOnSuccessListener { queryDocumentSnapshots ->
+                _dbRef.orderBy("createdAt", Query.Direction.DESCENDING).get().addOnSuccessListener { queryDocumentSnapshots ->
                         if (!queryDocumentSnapshots.isEmpty) {
                             queryDocumentSnapshots.documents.forEach{
                                 val c = it.toObject(NewsArticle::class.java)
@@ -69,8 +66,7 @@ class NewsRepositoryImpl : NewsRepository {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun getNewsArticleById(id: String): Flow<Resource<NewsArticle?>> {
         var temp: NewsArticle? = null
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-        val dbRef = db.collection("newsArticles").document(id)
+        val dbRef = _dbRef.document(id)
         return flow {
             emit(Resource.Loading())
             try {

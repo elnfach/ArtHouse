@@ -67,7 +67,6 @@ import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import org.koin.androidx.compose.koinViewModel
 import java.time.LocalDate
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ScheduleScreen(
@@ -77,10 +76,10 @@ fun ScheduleScreen(
     viewModel: ScheduleScreenViewModel = koinViewModel()
 ) {
     val state = viewModel.state.value
-    val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now()) }
+    //val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now()) }
     viewModel.selectedDate.observe(lifecycleOwner) {
         if (it != null) {
-            selectedDate.value = LocalDate.of(it.year, it.monthNumber, it.dayOfMonth)
+            //selectedDate.value = LocalDate.of(it.year, it.monthNumber, it.dayOfMonth)
         }
     }
     val calendarState = rememberUseCaseState()
@@ -93,13 +92,13 @@ fun ScheduleScreen(
             style = CalendarStyle.MONTH
         ),
         selection = CalendarSelection.Date(
-            selectedDate = selectedDate.value
+            //selectedDate = selectedDate.value
         ) { newDate ->
             viewModel.saveDate(
                 com.elnfach.arthouse.model.LocalDate(
-                    newDate.year,
-                    newDate.monthValue,
-                    newDate.dayOfMonth
+                    //newDate.year,
+                    //newDate.monthValue,
+                    //newDate.dayOfMonth
                 )
             )
             viewModel.loadSchedule()

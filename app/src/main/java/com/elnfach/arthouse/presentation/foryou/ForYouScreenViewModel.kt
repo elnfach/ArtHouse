@@ -48,7 +48,6 @@ class ForYouScreenViewModel(
         }.launchIn(viewModelScope)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun loadNewsArticleById(id:String)
     {
         getNewsArticleByIdUseCase(id).onEach {result->

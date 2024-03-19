@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.elnfach.arthouse.domain.usecase.CreateUserWithEmailAndPasswordUseCase
 import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
 import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
 import com.elnfach.arthouse.presentation.ui.theme.Theme
@@ -12,14 +13,18 @@ import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 
 class ProfileScreenViewModel(
     application: Application,
+    private val createUserWithEmailAndPasswordUseCase: CreateUserWithEmailAndPasswordUseCase,
     private val saveThemeSettingUseCase: SaveThemeSettingUseCase,
     private val getThemeSettingUseCase: GetThemeSettingUseCase
 ) : ViewModel() {
-    private val _state = MutableLiveData<ProfileState>()
-    val state = _state
 
     private val _theme = MutableLiveData(getThemeSettingUseCase.invoke().theme)
     val theme: LiveData<String> = _theme
+
+    fun createUser(email: String, password: String)
+    {
+        createUserWithEmailAndPasswordUseCase.invoke(email, password)
+    }
 
     fun onThemeChanged(theme: Theme) {
         Log.i("THEME | theme", theme.name)

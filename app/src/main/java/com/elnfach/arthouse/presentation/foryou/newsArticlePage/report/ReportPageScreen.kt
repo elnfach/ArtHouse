@@ -1,7 +1,5 @@
 package com.elnfach.arthouse.presentation.foryou.newsArticlePage.report
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,7 +36,6 @@ import com.elnfach.arthouse.presentation.foryou.ForYouScreenViewModel
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReportPageScreen(

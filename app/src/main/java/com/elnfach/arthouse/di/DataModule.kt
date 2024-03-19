@@ -1,9 +1,11 @@
 package com.elnfach.arthouse.di
 
+import com.elnfach.arthouse.data.repository.FirebaseRepository
 import com.elnfach.arthouse.data.repository.NewsRepository
 import com.elnfach.arthouse.data.repository.ScheduleRepository
 import com.elnfach.arthouse.data.repository.ScheduleStateRepository
 import com.elnfach.arthouse.data.repository.ThemeSettingRepository
+import com.elnfach.arthouse.data.repository.impl.FirebaseRepositoryImpl
 import com.elnfach.arthouse.data.repository.impl.ScheduleStateRepositoryImpl
 import com.elnfach.arthouse.data.repository.impl.ThemeSettingRepositoryImpl
 import com.elnfach.arthouse.data.repository.storage.ThemeSettingStorage
@@ -17,6 +19,10 @@ import org.koin.dsl.module
 val dataModule = module {
     single<NewsRepository> {
         NewsRepositoryImpl()
+    }
+
+    single<FirebaseRepository> {
+        FirebaseRepositoryImpl()
     }
 
     single<ThemeSettingRepository> {

@@ -2,16 +2,16 @@ package com.elnfach.arthouse.presentation
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.annotation.RequiresApi
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
 import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
+import com.elnfach.arthouse.domain.usecase.IsAuthedUserUseCase
 import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.report.ReportPageScreen
@@ -35,16 +36,16 @@ import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.PresentModal
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
-
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
     private fun isOnline(context: Context): Boolean {
-        val cm = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
+        val cm = context.getSystemService(ComponentActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = cm.activeNetworkInfo
         return netInfo != null && netInfo.isConnectedOrConnecting
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val sharedPreferences =
@@ -158,6 +159,18 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val auth = Firebase.auth
+        val currentUser = auth.currentUser
+
+        if (currentUser != null)
+        {
+            Log.e("MAINACTIVITY_USER", "User is signed")
         }
     }
 }

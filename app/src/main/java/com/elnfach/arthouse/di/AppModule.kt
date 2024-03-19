@@ -15,7 +15,7 @@ val appModule = module {
     }
 
     viewModel {
-        ProfileScreenViewModel(get(), get(), get())
+        ProfileScreenViewModel(get(), get(), get(), get())
     }
 
     viewModel {

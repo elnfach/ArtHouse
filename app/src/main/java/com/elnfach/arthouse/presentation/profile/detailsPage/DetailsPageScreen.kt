@@ -9,13 +9,17 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -50,7 +54,6 @@ fun DetailsPageScreen(
     val enum =  enumValueOf<ProfileDetail>(profileDetail)
 
     val theme = viewModel.theme.value
-    val state = viewModel.state.value
 
     val appearanceOptions = listOf(
         AppearanceRadioButtonItem(stringResource(id = R.string.system_default), Theme.DEFAULT),
@@ -66,6 +69,9 @@ fun DetailsPageScreen(
     )
     val (selectedNotificationsOption, onNotificationsOptionSelected) = remember { mutableStateOf(notificationsOptions[2]) }
 
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
     when(enum)
     {
         ProfileDetail.NONE -> TODO()
@@ -76,16 +82,19 @@ fun DetailsPageScreen(
                 Column(modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center) {
-                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
-                        modifier = Modifier.scale(2.1F))
-                    Spacer(modifier = Modifier.padding(12.dp))
-                    Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                    horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Войдите в систему", style = typography.titleLarge, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
+                    TextField(value = email, onValueChange = { email = it })
+                    TextField(value = password, onValueChange = { password = it })
+                    Button(onClick = {
+                        viewModel.createUser(email, password)
+                    }) {
+                        Text(text = "Login")
+                    }
                 }
             }
         )
+        ProfileDetail.PROFILE-> {}
         ProfileDetail.ACTIVATE_SUBSCRIPTION -> DetailsPageScreenTemplate(
             title = stringResource(id = R.string.activate_your_subscription),
             navController = navController,

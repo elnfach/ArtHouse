@@ -1,9 +1,11 @@
-package com.elnfach.arthouse.presentation.profile.deprecated.sign_in
+package com.elnfach.arthouse.presentation.deprecated.sign_in
 
 import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import com.elnfach.arthouse.R
+import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.SignInResult
+import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.UserData
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.GoogleAuthProvider
@@ -81,7 +83,7 @@ class GoogleAuthUiClient(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
-                    .setServerClientId(context.getString(R.string.default_web_client_id))
+                    .setServerClientId(context.getString(R.string.id))
                     .build()
             )
             .setAutoSelectEnabled(true)
