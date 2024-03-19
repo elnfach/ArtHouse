@@ -53,6 +53,7 @@ data class SettingItem(
     val onClick: @Composable () -> Unit
 )
 
+@Deprecated("Not used")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
@@ -65,9 +66,9 @@ fun SettingsScreen(
     val ctx = LocalContext.current
 
     val radioOptions = listOf(
-        AppearanceRadioButtonItem(stringResource(id = R.string.light_theme), Theme.LIGHT),
-        AppearanceRadioButtonItem(stringResource(id = R.string.dark_theme), Theme.DARK),
-        AppearanceRadioButtonItem(stringResource(id = R.string.system_default), Theme.DEFAULT))
+        AppearanceRadioButtonItem(id = R.string.light_theme, Theme.LIGHT),
+        AppearanceRadioButtonItem(R.string.dark_theme, Theme.DARK),
+        AppearanceRadioButtonItem(R.string.system_default, Theme.DEFAULT))
     val (selectedOption, onOptionSelected) = remember { mutableStateOf(radioOptions[2]) }
 
     val settingsList = listOf(
@@ -94,7 +95,7 @@ fun SettingsScreen(
                             onOptionSelected(items)
                         })
                     Text(
-                        text = items.title,
+                        text = stringResource(id = items.id),
                         modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }

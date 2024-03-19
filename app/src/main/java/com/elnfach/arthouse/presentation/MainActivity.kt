@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
@@ -159,18 +160,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val auth = Firebase.auth
-        val currentUser = auth.currentUser
-
-        if (currentUser != null)
-        {
-            Log.e("MAINACTIVITY_USER", "User is signed")
         }
     }
 }

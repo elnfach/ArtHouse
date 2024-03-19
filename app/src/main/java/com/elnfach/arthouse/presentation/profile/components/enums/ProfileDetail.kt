@@ -7,6 +7,7 @@ enum class ProfileDetail {
     ACTIVATE_SUBSCRIPTION,
     FAVORITE,
     APPEARANCE,
+    LANGUAGE,
     NOTIFICATIONS,
     SHARE_APP,
     PROMOTIONAL_CODE,

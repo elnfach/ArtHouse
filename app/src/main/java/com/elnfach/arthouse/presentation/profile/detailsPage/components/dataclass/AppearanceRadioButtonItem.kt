@@ -3,6 +3,6 @@ package com.elnfach.arthouse.presentation.profile.detailsPage.components.datacla
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 
 data class AppearanceRadioButtonItem (
-    val title: String,
+    val id: Int,
     val theme: Theme
 )

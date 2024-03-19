@@ -40,8 +40,8 @@
     <string name="report_problem">Report a problem</string>
     <string name="login">Log in</string>
     <string name="login_desc">Your data is not synced</string>
-    <string name="activate_your_subscription">Activate your subscription</string>
-    <string name="activate_your_subscription_desc">To activate your subscription you must be logged into your account.</string>
+    <string name="activate_subscription">Activate your subscription</string>
+    <string name="activate_subscription_desc">To activate your subscription you must be logged into your account.</string>
     <string name="favorite">Favorite</string>
     <string name="appearance">Appearance</string>
     <string name="notifications">Notifications</string>
@@ -56,4 +56,15 @@
     <string name="empty_favorite_desc">Save articles you want to read later</string>
     <string name="unavailable_feature">This feature is not yet available!</string>
     <string name="news">News</string>
+    <string name="language">Language</string>
+    <string name="change_language">Change language</string>
+    <string name="russian_language">Russian</string>
+    <string name="english_language">English</string>
+    <string name="sign_in">Войти</string>
+    <string name="signup">Sign up</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="agreement">I agree to the processing of personal data</string>
+    <string name="forgot_password">Forgot your password?</string>
 </resources>

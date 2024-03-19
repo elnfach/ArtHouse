@@ -32,11 +32,7 @@ import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
 import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
-import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.AppearanceRadioButtonItem
 import com.elnfach.arthouse.presentation.profile.detailsPage.components.DetailsPageScreenTemplate
-import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Notifications
-import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.NotificationsRadioButtonItem
-import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
@@ -53,21 +49,9 @@ fun DetailsPageScreen(
 
     val enum =  enumValueOf<ProfileDetail>(profileDetail)
 
-    val theme = viewModel.theme.value
-
-    val appearanceOptions = listOf(
-        AppearanceRadioButtonItem(stringResource(id = R.string.system_default), Theme.DEFAULT),
-        AppearanceRadioButtonItem(stringResource(id = R.string.light_theme), Theme.LIGHT),
-        AppearanceRadioButtonItem(stringResource(id = R.string.dark_theme), Theme.DARK)
-    )
-    val (selectedThemeDesignOptionsOption, onThemeDesignOptionSelected) = remember { mutableStateOf(appearanceOptions[2]) }
-
-    val notificationsOptions = listOf(
-        NotificationsRadioButtonItem(stringResource(id = R.string.notifications_off), Notifications.OFF),
-        NotificationsRadioButtonItem(stringResource(id = R.string.notifications_only_important), Notifications.ONLY_IMPORTANT),
-        NotificationsRadioButtonItem(stringResource(id = R.string.notifications_all), Notifications.ALL)
-    )
-    val (selectedNotificationsOption, onNotificationsOptionSelected) = remember { mutableStateOf(notificationsOptions[2]) }
+    val (selectedThemeDesignOptionsOption, onThemeDesignOptionSelected) = remember { mutableStateOf(viewModel.appearanceOptions[2]) }
+    val (selectedNotificationsOption, onNotificationsOptionSelected) = remember { mutableStateOf(viewModel.notificationsOptions[2]) }
+    val (selectedLanguageOptions, onLanguageOptionsSelected) = remember { mutableStateOf(viewModel.languageOptions[2]) }
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -96,7 +80,7 @@ fun DetailsPageScreen(
         )
         ProfileDetail.PROFILE-> {}
         ProfileDetail.ACTIVATE_SUBSCRIPTION -> DetailsPageScreenTemplate(
-            title = stringResource(id = R.string.activate_your_subscription),
+            title = stringResource(id = R.string.activate_subscription),
             navController = navController,
             content = {
                 Column(modifier = Modifier
@@ -137,12 +121,12 @@ fun DetailsPageScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)) {
                     Text(modifier = Modifier.padding(bottom = 16.dp), text = stringResource(id = R.string.choose_theme), style = typography.titleLarge, fontWeight = FontWeight.Bold)
-                    appearanceOptions.forEach { items -> Row(Modifier
+                    viewModel.appearanceOptions.forEach { items -> Row(Modifier
                         .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = items.title, modifier = Modifier.padding(horizontal = 8.dp))
+                        Text(text = stringResource(id = items.id), modifier = Modifier.padding(horizontal = 8.dp))
                         RadioButton(selected = items.theme.name == viewModel.theme.value, onClick = {
                             ThemeManager.artHouseTheme = items.theme
                             viewModel.onThemeChanged(items.theme)
@@ -160,17 +144,41 @@ fun DetailsPageScreen(
                 Column(modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)) {
-                    notificationsOptions.forEach { items -> Row(Modifier
+                    viewModel.notificationsOptions.forEach { items -> Row(Modifier
                         .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = items.title, modifier = Modifier.padding(horizontal = 8.dp))
+                        Text(text = stringResource(id = items.id), modifier = Modifier.padding(horizontal = 8.dp))
                         RadioButton(selected = items.notifications.name == viewModel.theme.value, onClick = {
                             // TODO: Reminder
 //                            ThemeManager.artHouseTheme = items.notifications
 //                            viewModel.onThemeChanged(items.notifications)
                             onNotificationsOptionSelected(items)
+                        })
+                    }
+                    }
+                }
+            }
+        )
+        ProfileDetail.LANGUAGE -> DetailsPageScreenTemplate(
+            title = stringResource(id = R.string.change_language),
+            navController = navController,
+            content = {
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)) {
+                    viewModel.languageOptions.forEach { items -> Row(Modifier
+                        .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(text = stringResource(id = items.id), modifier = Modifier.padding(horizontal = 8.dp))
+                        RadioButton(selected = items.language.name == viewModel.theme.value, onClick = {
+                            // TODO: Reminder
+//                            ThemeManager.artHouseTheme = items.notifications
+//                            viewModel.onThemeChanged(items.notifications)
+                            onLanguageOptionsSelected(items)
                         })
                     }
                     }

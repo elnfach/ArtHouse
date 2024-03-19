@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -53,7 +54,8 @@ fun LargeButton(profileItem: ProfileItem)
                 modifier = Modifier.padding(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(painter = painterResource(id = profileItem.imageId), contentDescription = profileItem.contentDescriptionImage)
+                if(profileItem.image != null)
+                    Icon(painter = profileItem.image, contentDescription = profileItem.contentDescriptionImage)
                 Column(modifier = Modifier.padding(start = 12.dp)) {
                     Text(text = profileItem.title, style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
                     Text(text = profileItem.subTitle, style = typography.bodySmall)

@@ -15,7 +15,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.elnfach.arthouse.presentation.profile.components.dataclass.ProfileItem
 
@@ -42,7 +41,8 @@ fun CategoryButton(profileItem: ProfileItem)
                 .padding(horizontal = 24.dp)
                 .padding(top = 12.dp, bottom = 12.dp)
         ) {
-            Icon(painter = painterResource(id = profileItem.imageId), contentDescription = profileItem.contentDescriptionImage)
+            if(profileItem.image != null)
+                Icon(painter = profileItem.image, contentDescription = profileItem.contentDescriptionImage)
             Spacer(modifier = Modifier.padding(horizontal = 6.dp))
             Text(text = profileItem.title)
         }

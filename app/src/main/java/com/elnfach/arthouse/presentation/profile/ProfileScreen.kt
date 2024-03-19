@@ -1,31 +1,21 @@
 package com.elnfach.arthouse.presentation.profile
 
 import android.content.Context
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleCoroutineScope
 import com.elnfach.arthouse.R
@@ -57,16 +47,16 @@ fun ProfileScreen(
             type = ProfileItemType.LARGE_BUTTON,
             title = stringResource(id = R.string.login),
             subTitle = stringResource(id = R.string.login_desc),
-            imageId = R.drawable.baseline_person_24,
+            image = painterResource(id = R.drawable.baseline_person_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.LOGIN}")
             }
         ),
         ProfileItem(
             type = ProfileItemType.LARGE_BUTTON,
-            title = stringResource(id = R.string.activate_your_subscription),
-            subTitle = stringResource(id = R.string.activate_your_subscription_desc),
-            imageId = R.drawable.baseline_coffee_24,
+            title = stringResource(id = R.string.activate_subscription),
+            subTitle = stringResource(id = R.string.activate_subscription_desc),
+            image = painterResource(id = R.drawable.baseline_coffee_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ACTIVATE_SUBSCRIPTION}")
             }
@@ -74,7 +64,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.favorite),
-            imageId = R.drawable.outline_bookmarks_24,
+            image = painterResource(id = R.drawable.outline_bookmarks_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.FAVORITE}")
             }
@@ -89,7 +79,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.appearance),
-            imageId = R.drawable.outline_auto_awesome_24,
+            image = painterResource(id = R.drawable.outline_auto_awesome_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.APPEARANCE}")
             }
@@ -97,9 +87,17 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.notifications),
-            imageId = R.drawable.baseline_notifications_none_24,
+            image = painterResource(id = R.drawable.baseline_notifications_none_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.NOTIFICATIONS}")
+            }
+        ),
+        ProfileItem(
+            type = ProfileItemType.BUTTON,
+            title = stringResource(id = R.string.language),
+            image = painterResource(id = R.drawable.outline_language_24),
+            onClick = {
+                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.LANGUAGE}")
             }
         ),
         ProfileItem(
@@ -112,7 +110,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.share_app),
-            imageId = R.drawable.outline_ios_share_24,
+            image = painterResource(id = R.drawable.outline_ios_share_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
             }
@@ -120,7 +118,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.promotional_code),
-            imageId = R.drawable.outline_card_giftcard_24,
+            image = painterResource(id = R.drawable.outline_card_giftcard_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.PROMOTIONAL_CODE}")
             }
@@ -128,7 +126,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.feedback),
-            imageId = R.drawable.outline_email_24,
+            image = painterResource(id = R.drawable.outline_email_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.FEEDBACK}")
             }
@@ -136,7 +134,7 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.about_app),
-            imageId = R.drawable.baseline_help_outline_24,
+            image = painterResource(id = R.drawable.baseline_help_outline_24),
             onClick = {
                 externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ABOUT_APP}")
             }
