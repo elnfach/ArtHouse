@@ -12,8 +12,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
 import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
-import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.GoogleAuthUiClient
-import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.SignInViewModel
+import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.GoogleAuthUiClient
+import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.SignInViewModel
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.Screen

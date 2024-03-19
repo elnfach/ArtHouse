@@ -27,7 +27,7 @@ import com.elnfach.arthouse.presentation.foryou.newsArticlePage.report.ReportPag
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.profile.components.ProfileDetail
 import com.elnfach.arthouse.presentation.profile.detailsPage.DetailsPageScreen
-import com.elnfach.arthouse.presentation.settings.SettingsScreen
+import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.ui.theme.Theme

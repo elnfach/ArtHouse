@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.settings
+package com.elnfach.arthouse.presentation.deprecated.settings
 
 import android.content.Intent
 import android.net.Uri
@@ -47,8 +47,6 @@ import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
-
-
 
 data class SettingItem(
     val title: Int,

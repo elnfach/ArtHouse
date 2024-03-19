@@ -2,7 +2,7 @@ package com.elnfach.arthouse.presentation.main
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.elnfach.arthouse.presentation.profile.deprecated.sign_in.GoogleAuthUiClient
+import com.elnfach.arthouse.presentation.deprecated.settings.sign_in.GoogleAuthUiClient
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.google.android.gms.auth.api.identity.Identity
 

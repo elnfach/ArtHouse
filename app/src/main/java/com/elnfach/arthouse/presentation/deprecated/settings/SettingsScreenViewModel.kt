@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.presentation.settings
+package com.elnfach.arthouse.presentation.deprecated.settings
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
