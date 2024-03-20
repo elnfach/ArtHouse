@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -38,7 +39,7 @@ fun SplashScreen(navController: NavController, route: String)
 
     Box(contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()) {
-        Image(painter = painterResource(id = R.mipmap.ic_launcher_foreground),
+        Icon(painter = painterResource(id = R.mipmap.ic_launcher_foreground),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value * 3))
     }

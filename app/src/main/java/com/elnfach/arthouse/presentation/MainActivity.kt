@@ -3,7 +3,6 @@ package com.elnfach.arthouse.presentation
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,8 +10,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
@@ -22,23 +19,21 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
 import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
-import com.elnfach.arthouse.domain.usecase.IsAuthedUserUseCase
 import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
+import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.report.ReportPageScreen
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.profile.detailsPage.DetailsPageScreen
-import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.PresentModal
+import com.elnfach.arthouse.presentation.utils.navigation.PresentNested
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
     private fun isOnline(context: Context): Boolean {
@@ -94,7 +89,7 @@ class MainActivity : ComponentActivity() {
                             }
                         ))
                         {entry->
-                            PresentModal {
+                            PresentNested {
                                 NewsArticlePageScreen(
                                     documentId = entry.arguments?.getString("documentId").toString(),
                                     externalRouter = createExternalRouter { screen, params ->
@@ -105,7 +100,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Screen.CreateNewArticle.route)
                         {
-                            PresentModal {
+                            PresentNested {
                                 CreateNewArticle(
                                     router = createExternalRouter { screen, params ->
                                         navController.navigate(screen, params) },
@@ -130,7 +125,7 @@ class MainActivity : ComponentActivity() {
                             }
                         ))
                         {entry->
-                            PresentModal {
+                            PresentNested {
                                 ReportPageScreen(
                                     externalRouter = createExternalRouter { screen, params ->
                                         navController.navigate(screen, params) },
@@ -147,7 +142,7 @@ class MainActivity : ComponentActivity() {
                             }
                         ))
                         {entry->
-                            PresentModal {
+                            PresentNested {
                                 DetailsPageScreen(
                                     externalRouter = createExternalRouter { screen, params ->
                                         navController.navigate(screen, params) },

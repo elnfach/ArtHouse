@@ -2,6 +2,7 @@ package com.elnfach.arthouse.presentation.ui.theme
 
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
@@ -89,6 +90,7 @@ object ThemeManager {
 }
 
 // TODO Fix: Text becomes unreadable in system dark mode and app light theme
+
 @Composable
 fun ArtHouseTheme(
     theme: Theme = ThemeManager.artHouseTheme,
@@ -107,6 +109,7 @@ fun ArtHouseTheme(
             if(isSystemInDarkTheme()) DarkColors
             else LightColors
         }
+
         else -> {
             if (theme == Theme.LIGHT)
             {

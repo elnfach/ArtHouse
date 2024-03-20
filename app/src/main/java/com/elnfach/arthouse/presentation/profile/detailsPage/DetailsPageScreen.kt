@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,8 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.elnfach.arthouse.BuildConfig
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
 import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
@@ -37,6 +41,8 @@ import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import org.koin.androidx.compose.koinViewModel
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsPageScreen(
     externalRouter: Router,
@@ -55,6 +61,8 @@ fun DetailsPageScreen(
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var emailIsBlank by remember { mutableStateOf(false) }
+    var passwordIsBlank by remember { mutableStateOf(false) }
 
     when(enum)
     {
@@ -63,17 +71,51 @@ fun DetailsPageScreen(
             title = stringResource(id = R.string.login),
             navController = navController,
             content = {
-                Column(modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Войдите в систему", style = typography.titleLarge, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
-                    TextField(value = email, onValueChange = { email = it })
-                    TextField(value = password, onValueChange = { password = it })
-                    Button(onClick = {
-                        viewModel.createUser(email, password)
-                    }) {
-                        Text(text = "Login")
+                Column {
+                    Image(painter = painterResource(id = R.drawable.background), contentDescription = null)
+                    Column(modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 56.dp), horizontalAlignment = Alignment.CenterHorizontally)
+                    {
+                        Spacer(modifier = Modifier.padding(6.dp))
+                        Text(modifier = Modifier.padding(top = 6.dp, bottom = 6.dp),text = stringResource(id = R.string.log_in), style = typography.titleLarge, fontWeight = FontWeight.SemiBold, textAlign = TextAlign.Center)
+                        Spacer(modifier = Modifier.padding(6.dp))
+                        TextField(modifier = Modifier.fillMaxWidth(), isError = emailIsBlank, singleLine = true, label = { Text(text = stringResource(id = R.string.email)) },
+                            supportingText = { if(emailIsBlank) Text(text = stringResource(id = R.string.field_not_be_empty)) }, value = email, onValueChange = { email = it })
+                        Spacer(modifier = Modifier.padding(6.dp))
+                        TextField(modifier = Modifier.fillMaxWidth(), isError = passwordIsBlank, singleLine = true, label = { Text(text = stringResource(id = R.string.password)) },
+                            supportingText = { if(passwordIsBlank) Text(text = stringResource(id = R.string.field_not_be_empty)) }, value = password, onValueChange = { password = it })
+                        Spacer(modifier = Modifier.padding(6.dp))
+                        FilledTonalButton(
+                            modifier = Modifier.fillMaxWidth(),
+                            onClick = {
+                                if(email.isNotBlank() && password.isNotBlank())
+                                {
+                                    emailIsBlank = false
+                                    passwordIsBlank = false
+                                    viewModel.createUser(email, password)
+                                }
+                                else if(email.isNotBlank())
+                                {
+                                    emailIsBlank = false
+                                    passwordIsBlank = true
+                                }
+                                else if(password.isNotBlank())
+                                {
+                                    passwordIsBlank = false
+                                    emailIsBlank = true
+                                }
+                                else
+                                {
+                                    emailIsBlank = true
+                                    passwordIsBlank = true
+                                }
+                        }) {
+                            Text(text = stringResource(id = R.string.sign_in))
+                        }
+                        TextButton(onClick = { /*TODO*/ }) {
+                            Text(text = stringResource(id = R.string.forgot_password), textDecoration = TextDecoration.Underline,color = MaterialTheme.colorScheme.secondary)
+                        }
                     }
                 }
             }
@@ -92,7 +134,7 @@ fun DetailsPageScreen(
                         modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                    Text(text = stringResource(id = R.string.empty_page_desc), style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
                 }
             }
         )
@@ -193,12 +235,12 @@ fun DetailsPageScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center) {
-                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
-                        modifier = Modifier.scale(2.1F))
+                    verticalArrangement = Arrangement.Center)
+                {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null, modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                    Text(text = stringResource(id = R.string.empty_page_desc), style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
                 }
             }
         )
@@ -210,12 +252,12 @@ fun DetailsPageScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center) {
-                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
-                        modifier = Modifier.scale(2.1F))
+                    verticalArrangement = Arrangement.Center)
+                {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null, modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                    Text(text = stringResource(id = R.string.empty_page_desc), style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
                 }
             }
         )
@@ -227,12 +269,12 @@ fun DetailsPageScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center) {
-                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null,
-                        modifier = Modifier.scale(2.1F))
+                    verticalArrangement = Arrangement.Center)
+                {
+                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null, modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Но уже планируем добавить экран для входа", style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
+                    Text(text = stringResource(id = R.string.empty_page_desc), style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)
                 }
             }
         )
@@ -242,13 +284,13 @@ fun DetailsPageScreen(
             content = {
                 Column(modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(painter = painterResource(id = R.mipmap.ic_launcher_foreground), contentDescription = "Logo",
-                        modifier = Modifier.scale(2.1F))
+                    .padding(horizontal = 16.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally)
+                {
+                    Icon(painter = painterResource(id = R.mipmap.ic_launcher_foreground), contentDescription = "Logo", modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.app_name), style = typography.titleLarge, fontWeight = FontWeight.Bold)
-                    Text(text = "Версия 1.0 (0)", style = typography.titleMedium, fontWeight = FontWeight.SemiBold)
-                    Text(text = "Обновлено 18.03.2024", style = typography.bodyMedium, fontWeight = FontWeight.Normal)
+                    Text(text = "${stringResource(id = R.string.version)} ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})", style = typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(text = "${stringResource(id = R.string.updated)} 20.03.2024", style = typography.bodyMedium, fontWeight = FontWeight.Normal)
                 }
             }
         )

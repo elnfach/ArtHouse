@@ -12,6 +12,22 @@ import androidx.compose.runtime.Composable
 
 @ExperimentalAnimationApi
 @Composable
+fun HorizontalAnimatedVisibility(content: @Composable () -> Unit)
+{
+    AnimatedVisibility(visible = true) {
+        content()
+    }
+    /*AnimatedVisibility(
+        visible = true,
+        enter = slideInHorizontally(initialOffsetX = { 50 }) + fadeIn(initialAlpha = 0.3f),
+        exit = slideOutHorizontally (targetOffsetX = { 0 }) + fadeOut(targetAlpha = 0.3f),
+        content = content,
+        initiallyVisible = false
+    )*/
+}
+
+@ExperimentalAnimationApi
+@Composable
 fun PresentModal(content: @Composable () -> Unit) {
     AnimatedVisibility(
         visible = true,

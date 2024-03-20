@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -23,6 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -71,46 +71,45 @@ fun NewsArticlePageScreen(
     }
 
     Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    if(state.newsArticle != null)
-                    {
-                        Text(text = state.newsArticle.title,
-                            maxLines = 1,
-                            style = typography.titleMedium,
-                            overflow = TextOverflow.Ellipsis)
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { expanded = !expanded }) {
-                        Icon(painter = painterResource(id = R.drawable.baseline_more_vert_24), contentDescription = null)
-                    }
-                    DropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false }
-                    ) {
-                        DropdownMenuItem(
-                            text = { Text(stringResource(id = R.string.report_problem)) },
-                            onClick = {
-                                expanded = false
-                                externalRouter.routeTo("${Screen.Report.route}/${documentId}")
-                            }
-                        )
-                    }
-                },
-                navigationIcon = {
-                    IconButton(onClick = { if(!isReturned){
-                        isReturned = true
-                        navController.popBackStack()
-                    }
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = stringResource(id = R.string.return_back)
-                        )
-                    }
-                },
+        topBar = { CenterAlignedTopAppBar(
+            title = {
+                if(state.newsArticle != null)
+                {
+                    Text(text = state.newsArticle.title,
+                        maxLines = 1,
+                        style = typography.titleMedium,
+                        overflow = TextOverflow.Ellipsis)
+                }
+            },
+            actions = {
+                IconButton(onClick = { expanded = !expanded }) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_more_vert_24), contentDescription = null)
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(id = R.string.report_problem)) },
+                        onClick = {
+                            expanded = false
+                            externalRouter.routeTo("${Screen.Report.route}/${documentId}")
+                        }
+                    )
+                }
+            },
+            navigationIcon = {
+                IconButton(onClick = { if(!isReturned){
+                    isReturned = true
+                    navController.popBackStack()
+                }
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(id = R.string.return_back)
+                    )
+                }
+            },
             )
         }
     ) {
@@ -158,7 +157,7 @@ fun NewsArticlePageScreen(
                     }
                 }
             }
-            
+
             if(state.error.isNotBlank()) {
                 Text(
                     text = state.error,

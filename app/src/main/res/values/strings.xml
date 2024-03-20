@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Art House</string>
     <string name="about_app_desc">Mobile application developed with Android Studio in Kotlin language for art school</string>
+    <string name="version">Version</string>
     <string name="for_you">For you</string>
     <string name="schedule">Schedule</string>
     <string name="menu">Menu</string>
@@ -53,6 +54,7 @@
     <string name="notifications_only_important">Only important</string>
     <string name="notifications_all">Switch on</string>
     <string name="empty_favorite">It\'s empty here now!</string>
+    <string name="empty_page_desc">But soon this page will be filled with magic</string>
     <string name="empty_favorite_desc">Save articles you want to read later</string>
     <string name="unavailable_feature">This feature is not yet available!</string>
     <string name="news">News</string>
@@ -60,11 +62,14 @@
     <string name="change_language">Change language</string>
     <string name="russian_language">Russian</string>
     <string name="english_language">English</string>
-    <string name="sign_in">Войти</string>
+    <string name="sign_in">Sign in</string>
+    <string name="log_in">Login</string>
     <string name="signup">Sign up</string>
     <string name="email">E-mail</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
     <string name="agreement">I agree to the processing of personal data</string>
     <string name="forgot_password">Forgot your password?</string>
+    <string name="updated">Updated</string>
+    <string name="field_not_be_empty">This field must not be empty</string>
 </resources>
