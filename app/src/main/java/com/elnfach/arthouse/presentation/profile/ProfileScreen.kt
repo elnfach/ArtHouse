@@ -1,6 +1,7 @@
 package com.elnfach.arthouse.presentation.profile
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,8 +23,8 @@ import com.elnfach.arthouse.R
 import com.elnfach.arthouse.presentation.profile.components.CategoryButton
 import com.elnfach.arthouse.presentation.profile.components.LargeButton
 import com.elnfach.arthouse.presentation.profile.components.TitleCategory
-import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
 import com.elnfach.arthouse.presentation.profile.components.dataclass.ProfileItem
+import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
 import com.elnfach.arthouse.presentation.profile.components.enums.ProfileItemType
 import com.elnfach.arthouse.presentation.utils.Screen
 import com.elnfach.arthouse.presentation.utils.navigation.Router
@@ -58,7 +59,14 @@ fun ProfileScreen(
             subTitle = stringResource(id = R.string.activate_subscription_desc),
             image = painterResource(id = R.drawable.baseline_coffee_24),
             onClick = {
-                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ACTIVATE_SUBSCRIPTION}")
+                Log.e("PROFILE", viewModel.isAuthedUser().toString())
+                if(viewModel.isAuthedUser())
+                {
+                    externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ACTIVATE_SUBSCRIPTION}")
+                }
+                else {
+                    externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.LOGIN}")
+                }
             }
         ),
         ProfileItem(

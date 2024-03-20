@@ -10,11 +10,24 @@ class FirebaseRepositoryImpl : FirebaseRepository {
     private val auth: FirebaseAuth = Firebase.auth
     override fun createUserWithEmailAndPassword(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnSuccessListener { task ->
-                if (task != null) {
-                    Log.e("FIREBASE CREATE", task.user?.displayName.toString())
-                } else {
-                    Log.e("FIREBASE CREATE", "Failed")
+            .addOnCompleteListener { task->
+                if(task.isSuccessful)
+                {
+                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { sendEmailVerificationTask->
+                        if(sendEmailVerificationTask.isSuccessful) {
+                            Log.e("FIREBASE CREATE", "Send email verification")
+                        } else {
+                        }
+                    }
+                    Log.e("FIREBASE CREATE", task.result.user?.email.toString())
+                }
+                if(task.isComplete)
+                {
+                    Log.e("FIREBASE CREATE", "Is complete")
+                }
+                if(task.isCanceled)
+                {
+                    Log.e("FIREBASE CREATE", "Is canceled")
                 }
             }
     }

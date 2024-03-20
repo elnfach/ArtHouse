@@ -1,10 +1,8 @@
-package com.elnfach.arthouse.data.storage
+package com.elnfach.arthouse.data.storage.impl
 
 import android.content.Context
-import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
+import com.elnfach.arthouse.data.storage.ScheduleStateStorage
 import com.elnfach.arthouse.model.LocalDate
-import com.elnfach.arthouse.model.ThemeSetting
-import com.elnfach.arthouse.presentation.ui.theme.Theme
 
 const val SHARED_PREFS_SCHEDULE_STATE = "shared_prefs_schedule_state"
 const val KEY_SCHEDULE_STATE_YEAR = "schedule_state_year"

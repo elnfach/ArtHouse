@@ -1,8 +1,5 @@
 package com.elnfach.arthouse.presentation.foryou.newsArticlePage
 
-import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,8 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
@@ -105,7 +100,7 @@ fun NewsArticlePageScreen(
                 }
                 }) {
                     Icon(
-                        imageVector = Icons.Filled.ArrowBack,
+                        painter = painterResource(id = R.drawable.baseline_arrow_back_ios_24),
                         contentDescription = stringResource(id = R.string.return_back)
                     )
                 }

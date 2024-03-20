@@ -10,6 +10,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavType
@@ -19,12 +22,16 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
 import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
+import com.elnfach.arthouse.data.storage.impl.KEY_LANGUAGE_SETTING
+import com.elnfach.arthouse.data.storage.impl.SHARED_PREFS_LANGUAGE_SETTING
 import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.report.ReportPageScreen
 import com.elnfach.arthouse.presentation.main.MainScreen
 import com.elnfach.arthouse.presentation.profile.detailsPage.DetailsPageScreen
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Language
+import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Notifications
 import com.elnfach.arthouse.presentation.splash.SplashScreen
 import com.elnfach.arthouse.presentation.ui.theme.ArtHouseTheme
 import com.elnfach.arthouse.presentation.ui.theme.Theme
@@ -35,6 +42,14 @@ import com.elnfach.arthouse.presentation.utils.navigation.PresentNested
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
 
+object LanguageManager {
+    var language by mutableStateOf(Language.DEFAULT)
+}
+
+object NotificationsManager {
+    var notifications by mutableStateOf(Notifications.ALL)
+}
+
 class MainActivity : ComponentActivity() {
     private fun isOnline(context: Context): Boolean {
         val cm = context.getSystemService(ComponentActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -44,15 +59,27 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreferences =
+        val themeSharedPreferences =
             this.getSharedPreferences(SHARED_PREFS_THEME_SETTING, Context.MODE_PRIVATE)
-        val theme = sharedPreferences.getString(KEY_THEME_SETTING, "")
+        val theme = themeSharedPreferences.getString(KEY_THEME_SETTING, "")
         ThemeManager.artHouseTheme = when(theme)
         {
             Theme.LIGHT.name -> Theme.LIGHT
             Theme.DARK.name -> Theme.DARK
             else -> Theme.DEFAULT
         }
+
+        val languageSharedPreferences =
+            this.getSharedPreferences(SHARED_PREFS_LANGUAGE_SETTING, Context.MODE_PRIVATE)
+        val language = languageSharedPreferences.getString(KEY_LANGUAGE_SETTING, "")
+        LanguageManager.language = when(language)
+        {
+            Language.DEFAULT.name -> Language.DEFAULT
+            Language.ENGLISH.name -> Language.ENGLISH
+            Language.RUSSIAN.name -> Language.RUSSIAN
+            else -> Language.DEFAULT
+        }
+
         super.onCreate(savedInstanceState)
 
         setContent {

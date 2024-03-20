@@ -2,12 +2,16 @@ package com.elnfach.arthouse.di
 
 import com.elnfach.arthouse.domain.usecase.AddNewsArticleUseCase
 import com.elnfach.arthouse.domain.usecase.CreateUserWithEmailAndPasswordUseCase
+import com.elnfach.arthouse.domain.usecase.GetLanguageSettingUseCase
 import com.elnfach.arthouse.domain.usecase.GetNewsArticleByIdUseCase
 import com.elnfach.arthouse.domain.usecase.GetNewsArticlesUseCase
+import com.elnfach.arthouse.domain.usecase.GetNotificationsSettingUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
 import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
 import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
 import com.elnfach.arthouse.domain.usecase.IsAuthedUserUseCase
+import com.elnfach.arthouse.domain.usecase.SaveLanguageSettingUseCase
+import com.elnfach.arthouse.domain.usecase.SaveNotificationsSettingUseCase
 import com.elnfach.arthouse.domain.usecase.SaveScheduleStateUseCase
 import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
 import com.elnfach.arthouse.domain.usecase.SignInUserWithEmailAndPasswordUseCase
@@ -60,5 +64,21 @@ val domainModule = module {
 
     factory {
         SignOutUserUseCase(get())
+    }
+
+    factory {
+        GetLanguageSettingUseCase(get())
+    }
+
+    factory {
+        GetNotificationsSettingUseCase(get())
+    }
+
+    factory {
+        SaveLanguageSettingUseCase(get())
+    }
+
+    factory {
+        SaveNotificationsSettingUseCase(get())
     }
 }

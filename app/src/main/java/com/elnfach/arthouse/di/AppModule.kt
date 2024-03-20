@@ -1,11 +1,11 @@
 package com.elnfach.arthouse.di
 
 import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewsArticleScreenViewModel
+import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreenViewModel
 import com.elnfach.arthouse.presentation.foryou.ForYouScreenViewModel
 import com.elnfach.arthouse.presentation.main.MainScreenViewModel
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
 import com.elnfach.arthouse.presentation.schedule.ScheduleScreenViewModel
-import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -15,7 +15,7 @@ val appModule = module {
     }
 
     viewModel {
-        ProfileScreenViewModel(get(), get(), get(), get())
+        ProfileScreenViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
 
     viewModel {

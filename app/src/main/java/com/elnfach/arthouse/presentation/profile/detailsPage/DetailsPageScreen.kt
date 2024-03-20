@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.BuildConfig
 import com.elnfach.arthouse.R
+import com.elnfach.arthouse.presentation.LanguageManager
+import com.elnfach.arthouse.presentation.NotificationsManager
 import com.elnfach.arthouse.presentation.profile.ProfileScreenViewModel
 import com.elnfach.arthouse.presentation.profile.components.enums.ProfileDetail
 import com.elnfach.arthouse.presentation.profile.detailsPage.components.DetailsPageScreenTemplate
@@ -113,7 +115,9 @@ fun DetailsPageScreen(
                         }) {
                             Text(text = stringResource(id = R.string.sign_in))
                         }
-                        TextButton(onClick = { /*TODO*/ }) {
+                        TextButton(onClick = {
+                            viewModel.signOutUser()
+                        }) {
                             Text(text = stringResource(id = R.string.forgot_password), textDecoration = TextDecoration.Underline,color = MaterialTheme.colorScheme.secondary)
                         }
                     }
@@ -192,10 +196,9 @@ fun DetailsPageScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(text = stringResource(id = items.id), modifier = Modifier.padding(horizontal = 8.dp))
-                        RadioButton(selected = items.notifications.name == viewModel.theme.value, onClick = {
-                            // TODO: Reminder
-//                            ThemeManager.artHouseTheme = items.notifications
-//                            viewModel.onThemeChanged(items.notifications)
+                        RadioButton(selected = items.notifications.name == viewModel.notifications.value, onClick = {
+                            NotificationsManager.notifications = items.notifications
+                            viewModel.onNotificationsSettingChanged(items.notifications)
                             onNotificationsOptionSelected(items)
                         })
                     }
@@ -216,10 +219,9 @@ fun DetailsPageScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(text = stringResource(id = items.id), modifier = Modifier.padding(horizontal = 8.dp))
-                        RadioButton(selected = items.language.name == viewModel.theme.value, onClick = {
-                            // TODO: Reminder
-//                            ThemeManager.artHouseTheme = items.notifications
-//                            viewModel.onThemeChanged(items.notifications)
+                        RadioButton(selected = items.language.name == viewModel.language.value, onClick = {
+                            LanguageManager.language = items.language
+                            viewModel.onLanguageChanged(items.language)
                             onLanguageOptionsSelected(items)
                         })
                     }
