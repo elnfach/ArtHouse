@@ -1,8 +1,6 @@
 package com.elnfach.arthouse.presentation.foryou
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +18,6 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +43,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.foryou.components.NewsArticleCardTop
 import com.elnfach.arthouse.presentation.foryou.components.PostListDivider
 import com.elnfach.arthouse.presentation.utils.Screen
@@ -80,7 +76,7 @@ fun ForYouScreen(
     Scaffold(
         topBar = { MediumTopAppBar(
             title = {
-                Text(text = stringResource(id = R.string.news),
+                Text(text = stringResource(id = R.string.home),
                     fontSize = 30.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis)

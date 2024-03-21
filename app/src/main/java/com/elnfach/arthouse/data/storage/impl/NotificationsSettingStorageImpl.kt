@@ -16,6 +16,6 @@ class NotificationsSettingStorageImpl(context: Context) : NotificationsSettingSt
     }
 
     override fun get(): NotificationsSetting {
-        return NotificationsSetting(sharedPreferences.getString(KEY_NOTIFICATIONS_SETTING, "") ?: Notifications.ALL.name)
+        return NotificationsSetting(sharedPreferences.getString(KEY_NOTIFICATIONS_SETTING, Notifications.ALL.name) ?: Notifications.ALL.name)
     }
 }

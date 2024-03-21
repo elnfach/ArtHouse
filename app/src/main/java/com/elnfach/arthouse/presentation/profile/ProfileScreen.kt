@@ -1,6 +1,8 @@
 package com.elnfach.arthouse.presentation.profile
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -118,9 +120,14 @@ fun ProfileScreen(
         ProfileItem(
             type = ProfileItemType.BUTTON,
             title = stringResource(id = R.string.share_app),
-            image = painterResource(id = R.drawable.outline_ios_share_24),
+            image = painterResource(id = R.drawable.baseline_share_24),
             onClick = {
-                externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
+                //externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.SHARE_APP}")
+                val urlIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://ya.ru/")
+                )
+                ctx.startActivity(urlIntent)
             }
         ),
         ProfileItem(

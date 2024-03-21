@@ -1,59 +1,51 @@
 package com.elnfach.arthouse.presentation.foryou.components
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.elnfach.arthouse.model.LocalDate
+import com.elnfach.arthouse.R
 import com.elnfach.arthouse.model.NewsArticle
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.Month
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun of(month: Int) : String {
-    val monthNames = arrayOf(
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь"
-    )
-    return monthNames[month];
-}
-
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("SimpleDateFormat")
 @Composable
 fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
 {
     val typography = MaterialTheme.typography
+
+    val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
+    val formattedDate = sdf.format(Date(newsArticle.createdAt.seconds * 1000))
+
+    var isClicked by remember { mutableStateOf(false) }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -76,11 +68,31 @@ fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
             style = typography.titleLarge,
             modifier = Modifier.padding(bottom = 8.dp)
         )
-        val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
-        val formattedDate = sdf.format(Date(newsArticle.createdAt.seconds * 1000))
-        Text(
-            text = "$formattedDate.",
-            style = typography.bodySmall
-        )
+        Row {
+            Text(
+                text = "$formattedDate.",
+                style = typography.bodySmall
+            )
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                IconButton(onClick = {
+                    isClicked = true
+                }) {
+                    Icon(painter = painterResource(id = R.drawable.baseline_more_vert_24), contentDescription = null)
+                }
+            }
+        }
+    }
+    if(isClicked)
+    {
+        ModalBottomSheet(onDismissRequest = {
+            isClicked = false
+        }) {
+            Box(modifier = Modifier.fillMaxSize())
+            {
+                Column {
+
+                }
+            }
+        }
     }
 }

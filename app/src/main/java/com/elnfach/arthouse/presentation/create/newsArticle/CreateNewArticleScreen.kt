@@ -2,7 +2,10 @@ package com.elnfach.arthouse.presentation.create.newsArticle
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,18 +33,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.model.NewsArticle
-import com.elnfach.arthouse.presentation.MainActivity
 import com.elnfach.arthouse.presentation.utils.navigation.Router
 import com.google.firebase.Timestamp
+import com.google.firebase.storage.FirebaseStorage
 import org.koin.androidx.compose.koinViewModel
 
 
@@ -65,6 +68,17 @@ fun CreateNewArticle(
 
     var isReturned by remember { mutableStateOf(false) }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
+    var selectedImageUri by remember {
+        mutableStateOf<Uri?>(null)
+    }
+    val photoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia()) {
+        selectedImageUri = it
+    }
+
+    var storageRef = FirebaseStorage.getInstance().reference.storage
+
     Scaffold(modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             MediumTopAppBar(
@@ -79,7 +93,7 @@ fun CreateNewArticle(
                               {
                                   viewModel.addNewsArticles(
                                       NewsArticle(
-                                          image = "",
+                                          image = selectedImageUri.toString(),
                                           title = title,
                                           createdAt = Timestamp.now(),
                                           content = content,
@@ -116,8 +130,13 @@ fun CreateNewArticle(
             LazyColumn(modifier = Modifier
                 .fillMaxWidth()) {
                 item {
+                    AsyncImage(model = selectedImageUri, contentDescription = null, contentScale = ContentScale.Crop)
+                }
+                item {
                     TextButton(onClick = {
-
+                        photoPickerLauncher.launch(
+                            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                        )
                     }) {
                         Text(text = stringResource(id = R.string.load_image))
                     }

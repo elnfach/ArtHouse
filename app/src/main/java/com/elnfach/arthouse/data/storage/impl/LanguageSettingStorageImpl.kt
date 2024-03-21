@@ -16,6 +16,6 @@ class LanguageSettingStorageImpl(context: Context) : LanguageSettingStorage {
     }
 
     override fun get(): LanguageSetting {
-        return LanguageSetting(sharedPreferences.getString(KEY_LANGUAGE_SETTING, "") ?: Language.DEFAULT.name)
+        return LanguageSetting(sharedPreferences.getString(KEY_LANGUAGE_SETTING, Language.DEFAULT.name) ?: Language.DEFAULT.name)
     }
 }

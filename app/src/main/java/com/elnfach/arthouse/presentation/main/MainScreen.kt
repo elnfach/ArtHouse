@@ -1,7 +1,6 @@
 package com.elnfach.arthouse.presentation.main
 
 import android.content.Context
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
@@ -23,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.elnfach.arthouse.presentation.foryou.ForYouScreen
+import com.elnfach.arthouse.presentation.messages.MessagesScreen
 import com.elnfach.arthouse.presentation.profile.ProfileScreen
 import com.elnfach.arthouse.presentation.schedule.ScheduleScreen
 import com.elnfach.arthouse.presentation.utils.Screen
@@ -74,6 +74,9 @@ fun MainScreen(
                         }
                     )
                 }
+                /*FloatingActionButton(onClick = { *//*TODO*//* }) {
+                    Icon(Icons.Filled.Add, stringResource(id = R.string.write_a_article))
+                }*/
             }
         }
     ) {
@@ -88,6 +91,10 @@ fun MainScreen(
                 composable(Screen.Schedule.route)
                 {
                     ScheduleScreen(externalRouter = router, context = context, lifecycleOwner = lifecycleOwner)
+                }
+                composable(Screen.Messages.route)
+                {
+                    MessagesScreen(externalRouter = router, navController = navController, lifecycleOwner = lifecycleOwner)
                 }
                 composable(Screen.Profile.route)
                 {

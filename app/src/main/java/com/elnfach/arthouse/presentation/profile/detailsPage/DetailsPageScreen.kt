@@ -65,6 +65,7 @@ fun DetailsPageScreen(
     var password by remember { mutableStateOf("") }
     var emailIsBlank by remember { mutableStateOf(false) }
     var passwordIsBlank by remember { mutableStateOf(false) }
+    var isChanged by remember { mutableStateOf(false) }
 
     when(enum)
     {
@@ -166,7 +167,7 @@ fun DetailsPageScreen(
                 Column(modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)) {
-                    Text(modifier = Modifier.padding(bottom = 16.dp), text = stringResource(id = R.string.choose_theme), style = typography.titleLarge, fontWeight = FontWeight.Bold)
+                    // Text(modifier = Modifier.padding(bottom = 16.dp), text = stringResource(id = R.string.choose_theme), style = typography.titleLarge, fontWeight = FontWeight.Bold)
                     viewModel.appearanceOptions.forEach { items -> Row(Modifier
                         .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -223,9 +224,12 @@ fun DetailsPageScreen(
                             LanguageManager.language = items.language
                             viewModel.onLanguageChanged(items.language)
                             onLanguageOptionsSelected(items)
+                            isChanged = true
                         })
                     }
                     }
+                    if(isChanged)
+                        Text(text = stringResource(id = R.string.language_changed_hint), style = typography.bodySmall)
                 }
             }
         )
@@ -239,7 +243,7 @@ fun DetailsPageScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center)
                 {
-                    Icon(painter = painterResource(id = R.drawable.outline_auto_awesome_24), contentDescription = null, modifier = Modifier.scale(2.1F))
+                    Icon(painter = painterResource(id = R.drawable.baseline_share_24), contentDescription = null, modifier = Modifier.scale(2.1F))
                     Spacer(modifier = Modifier.padding(12.dp))
                     Text(text = stringResource(id = R.string.empty_favorite), style = typography.titleLarge, fontWeight = FontWeight.SemiBold)
                     Text(text = stringResource(id = R.string.empty_page_desc), style = typography.bodyMedium, fontWeight = FontWeight.Normal, textAlign = TextAlign.Center)

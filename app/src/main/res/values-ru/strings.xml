@@ -72,4 +72,7 @@
     <string name="forgot_password">Забыли пароль?</string>
     <string name="updated">Обновлено</string>
     <string name="field_not_be_empty">Это поле не должно быть пустым</string>
+    <string name="home">Главная</string>
+    <string name="chat">Чат</string>
+    <string name="language_changed_hint">Чтобы изменения вступили в силу требуется перезагрузка</string>
 </resources>

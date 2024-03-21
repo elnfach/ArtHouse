@@ -15,6 +15,6 @@ class ThemeSettingStorageImpl(context: Context) : ThemeSettingStorage {
     }
 
     override fun get(): ThemeSetting {
-        return ThemeSetting(sharedPreferences.getString(KEY_THEME_SETTING, "") ?: Theme.DEFAULT.name)
+        return ThemeSetting(sharedPreferences.getString(KEY_THEME_SETTING, Theme.DEFAULT.name) ?: Theme.DEFAULT.name)
     }
 }

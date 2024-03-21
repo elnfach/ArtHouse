@@ -72,4 +72,7 @@
     <string name="forgot_password">Forgot your password?</string>
     <string name="updated">Updated</string>
     <string name="field_not_be_empty">This field must not be empty</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="language_changed_hint">A reboot is required for the changes to take effect.</string>
 </resources>

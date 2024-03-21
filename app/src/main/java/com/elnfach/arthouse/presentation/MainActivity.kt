@@ -41,6 +41,7 @@ import com.elnfach.arthouse.presentation.utils.navigation.PresentModal
 import com.elnfach.arthouse.presentation.utils.navigation.PresentNested
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
+import java.util.Locale
 
 object LanguageManager {
     var language by mutableStateOf(Language.DEFAULT)
@@ -61,7 +62,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val themeSharedPreferences =
             this.getSharedPreferences(SHARED_PREFS_THEME_SETTING, Context.MODE_PRIVATE)
-        val theme = themeSharedPreferences.getString(KEY_THEME_SETTING, "")
+        val theme = themeSharedPreferences.getString(KEY_THEME_SETTING, Theme.DEFAULT.name)
         ThemeManager.artHouseTheme = when(theme)
         {
             Theme.LIGHT.name -> Theme.LIGHT
@@ -71,14 +72,25 @@ class MainActivity : ComponentActivity() {
 
         val languageSharedPreferences =
             this.getSharedPreferences(SHARED_PREFS_LANGUAGE_SETTING, Context.MODE_PRIVATE)
-        val language = languageSharedPreferences.getString(KEY_LANGUAGE_SETTING, "")
+        val language = languageSharedPreferences.getString(KEY_LANGUAGE_SETTING, Language.DEFAULT.name)
         LanguageManager.language = when(language)
         {
-            Language.DEFAULT.name -> Language.DEFAULT
+            Language.DEFAULT.name -> Language.ENGLISH
             Language.ENGLISH.name -> Language.ENGLISH
             Language.RUSSIAN.name -> Language.RUSSIAN
             else -> Language.DEFAULT
         }
+
+        val locale = Locale(when(language)
+        {
+            Language.ENGLISH.name -> "en"
+            Language.RUSSIAN.name -> "ru"
+            else -> Locale.getDefault().language
+        })
+        val resources = this.resources
+        val configuration = resources.configuration
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
 
         super.onCreate(savedInstanceState)
 
