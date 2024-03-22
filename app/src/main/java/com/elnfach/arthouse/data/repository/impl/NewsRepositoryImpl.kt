@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.datastore.repository
+package com.elnfach.arthouse.data.repository.impl
 
 import com.elnfach.arthouse.data.repository.NewsRepository
 import com.elnfach.arthouse.model.NewsArticle

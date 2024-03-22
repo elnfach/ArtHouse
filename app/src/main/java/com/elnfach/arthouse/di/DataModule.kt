@@ -16,8 +16,8 @@ import com.elnfach.arthouse.data.storage.ScheduleStateStorage
 import com.elnfach.arthouse.data.storage.impl.LanguageSettingStorageImpl
 import com.elnfach.arthouse.data.storage.impl.NotificationsSettingStorageImpl
 import com.elnfach.arthouse.data.storage.impl.ScheduleStateStorageImpl
-import com.elnfach.arthouse.datastore.repository.NewsRepositoryImpl
-import com.elnfach.arthouse.datastore.repository.ScheduleRepositoryImpl
+import com.elnfach.arthouse.data.repository.impl.NewsRepositoryImpl
+import com.elnfach.arthouse.data.repository.impl.ScheduleRepositoryImpl
 import org.koin.dsl.module
 
 val dataModule = module {

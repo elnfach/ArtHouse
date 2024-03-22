@@ -1,4 +1,4 @@
-package com.elnfach.arthouse.datastore.repository
+package com.elnfach.arthouse.data.repository.impl
 
 import android.os.Build
 import androidx.annotation.RequiresApi

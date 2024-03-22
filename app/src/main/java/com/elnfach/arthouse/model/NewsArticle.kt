@@ -2,7 +2,6 @@ package com.elnfach.arthouse.model
 
 import com.google.firebase.Timestamp
 
-
 data class NewsArticle(
     val image: String = "",
     val title: String = "",
