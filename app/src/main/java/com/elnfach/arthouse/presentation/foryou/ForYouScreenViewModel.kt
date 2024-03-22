@@ -22,7 +22,7 @@ class ForYouScreenViewModel(
 
     init {
         Log.e("TESTING | VIEWMODEL", state.value.isLoading.toString())
-        //loadNewsArticles()
+        loadNewsArticles()
         Log.e("TESTING | VIEWMODEL", state.value.isLoading.toString())
     }
 
