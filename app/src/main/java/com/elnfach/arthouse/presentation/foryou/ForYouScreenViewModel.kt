@@ -1,6 +1,5 @@
 package com.elnfach.arthouse.presentation.foryou
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -21,9 +20,7 @@ class ForYouScreenViewModel(
     val newsArticlePageState: State<NewsArticlePageState> = _newsArticlePageState
 
     init {
-        Log.e("TESTING | VIEWMODEL", state.value.isLoading.toString())
         loadNewsArticles()
-        Log.e("TESTING | VIEWMODEL", state.value.isLoading.toString())
     }
 
     private fun loadNewsArticles() {

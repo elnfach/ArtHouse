@@ -4,6 +4,7 @@ import android.util.Log
 import com.elnfach.domain.repository.firebase.NewsRepository
 import com.elnfach.model.NewsArticle
 import com.elnfach.model.Resource
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -14,7 +15,16 @@ class NewsRepositoryImpl : NewsRepository {
 
     override fun addNewsArticles(newsArticle: NewsArticle, callback: (Resource<Boolean>) -> Unit) {
         newsArticle.id = _databaseReference.document().id
-        _databaseReference.document(newsArticle.id).set(newsArticle).addOnCompleteListener {
+        val article = com.elnfach.firebase.model.NewsArticle(
+            image = newsArticle.image,
+            title = newsArticle.title,
+            createdAt = Timestamp.now(),
+            content = newsArticle.content,
+            authors = newsArticle.authors,
+            gallery = newsArticle.gallery,
+            id = newsArticle.id
+        )
+        _databaseReference.document(article.id).set(article).addOnCompleteListener {
             callback(Resource.Push(data = true))
         }.addOnFailureListener {
             callback(Resource.Error(it.message.toString()))
@@ -28,17 +38,17 @@ class NewsRepositoryImpl : NewsRepository {
             Log.e("EEE", "2")
             if (!task.isEmpty) {
                 task.documents.forEach{
-                    val c = it.toObject(com.elnfach.firebase.model.NewsArticle::class.java)
-                    if (c != null) {
+                    val newsArticle = it.toObject(com.elnfach.firebase.model.NewsArticle::class.java)
+                    if (newsArticle != null) {
                         Log.e("EEE", "3")
                         list.add(NewsArticle(
-                            image = c.image,
-                            title = c.title,
-                            createdAt = c.createdAt.seconds,
-                            content = c.content,
-                            authors = c.authors,
-                            gallery = c.gallery,
-                            id = c.id
+                            image = newsArticle.image,
+                            title = newsArticle.title,
+                            createdAt = newsArticle.createdAt.seconds,
+                            content = newsArticle.content,
+                            authors = newsArticle.authors,
+                            gallery = newsArticle.gallery,
+                            id = newsArticle.id
                         ))
                     }
                 }
@@ -57,8 +67,18 @@ class NewsRepositoryImpl : NewsRepository {
         dbRef.get().addOnSuccessListener { task ->
             if(task.data != null)
             {
-                val newsArticle = task.toObject(NewsArticle::class.java)
-                article = newsArticle
+                val newsArticle = task.toObject(com.elnfach.firebase.model.NewsArticle::class.java)
+                if (newsArticle != null) {
+                    article = NewsArticle(
+                        image = newsArticle.image,
+                        title = newsArticle.title,
+                        createdAt = newsArticle.createdAt.seconds,
+                        content = newsArticle.content,
+                        authors = newsArticle.authors,
+                        gallery = newsArticle.gallery,
+                        id = newsArticle.id
+                    )
+                }
             }
         }.addOnCompleteListener {
             callback(Resource.Push(article))
