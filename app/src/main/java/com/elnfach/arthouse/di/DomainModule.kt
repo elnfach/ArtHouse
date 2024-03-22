@@ -1,84 +1,84 @@
 package com.elnfach.arthouse.di
 
-import com.elnfach.arthouse.domain.usecase.AddNewsArticleUseCase
-import com.elnfach.arthouse.domain.usecase.CreateUserWithEmailAndPasswordUseCase
-import com.elnfach.arthouse.domain.usecase.GetLanguageSettingUseCase
-import com.elnfach.arthouse.domain.usecase.GetNewsArticleByIdUseCase
-import com.elnfach.arthouse.domain.usecase.GetNewsArticlesUseCase
-import com.elnfach.arthouse.domain.usecase.GetNotificationsSettingUseCase
-import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
-import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
-import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
-import com.elnfach.arthouse.domain.usecase.IsAuthedUserUseCase
-import com.elnfach.arthouse.domain.usecase.SaveLanguageSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SaveNotificationsSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SaveScheduleStateUseCase
-import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SignInUserWithEmailAndPasswordUseCase
-import com.elnfach.arthouse.domain.usecase.SignOutUserUseCase
+import com.elnfach.domain.usecase.AddNewsArticleUseCase
+import com.elnfach.domain.usecase.CreateUserWithEmailAndPasswordUseCase
+import com.elnfach.domain.usecase.GetLanguageSettingUseCase
+import com.elnfach.domain.usecase.GetNewsArticleByIdUseCase
+import com.elnfach.domain.usecase.GetNewsArticlesUseCase
+import com.elnfach.domain.usecase.GetNotificationsSettingUseCase
+import com.elnfach.domain.usecase.GetScheduleStateUseCase
+import com.elnfach.domain.usecase.GetScheduleUseCase
+import com.elnfach.domain.usecase.GetThemeSettingUseCase
+import com.elnfach.domain.usecase.IsAuthedUserUseCase
+import com.elnfach.domain.usecase.SaveLanguageSettingUseCase
+import com.elnfach.domain.usecase.SaveNotificationsSettingUseCase
+import com.elnfach.domain.usecase.SaveScheduleStateUseCase
+import com.elnfach.domain.usecase.SaveThemeSettingUseCase
+import com.elnfach.domain.usecase.SignInUserWithEmailAndPasswordUseCase
+import com.elnfach.domain.usecase.SignOutUserUseCase
 import org.koin.dsl.module
 
 val domainModule = module {
     factory {
-        AddNewsArticleUseCase(get())
+        com.elnfach.domain.usecase.AddNewsArticleUseCase(get())
     }
 
     factory {
-        GetNewsArticlesUseCase(get())
+        com.elnfach.domain.usecase.GetNewsArticlesUseCase(get())
     }
 
     factory {
-        GetThemeSettingUseCase(get())
+        com.elnfach.domain.usecase.GetThemeSettingUseCase(get())
     }
 
     factory {
-        SaveThemeSettingUseCase(get())
+        com.elnfach.domain.usecase.SaveThemeSettingUseCase(get())
     }
 
     factory {
-        GetScheduleUseCase(get())
+        com.elnfach.domain.usecase.GetScheduleUseCase(get())
     }
 
     factory {
-        GetScheduleStateUseCase(get())
+        com.elnfach.domain.usecase.GetScheduleStateUseCase(get())
     }
 
     factory {
-        SaveScheduleStateUseCase(get())
+        com.elnfach.domain.usecase.SaveScheduleStateUseCase(get())
     }
     factory {
-        GetNewsArticleByIdUseCase(get())
-    }
-
-    factory {
-        CreateUserWithEmailAndPasswordUseCase(get())
+        com.elnfach.domain.usecase.GetNewsArticleByIdUseCase(get())
     }
 
     factory {
-        IsAuthedUserUseCase(get())
+        com.elnfach.domain.usecase.CreateUserWithEmailAndPasswordUseCase(get())
     }
 
     factory {
-        SignInUserWithEmailAndPasswordUseCase(get())
+        com.elnfach.domain.usecase.IsAuthedUserUseCase(get())
     }
 
     factory {
-        SignOutUserUseCase(get())
+        com.elnfach.domain.usecase.SignInUserWithEmailAndPasswordUseCase(get())
     }
 
     factory {
-        GetLanguageSettingUseCase(get())
+        com.elnfach.domain.usecase.SignOutUserUseCase(get())
     }
 
     factory {
-        GetNotificationsSettingUseCase(get())
+        com.elnfach.domain.usecase.GetLanguageSettingUseCase(get())
     }
 
     factory {
-        SaveLanguageSettingUseCase(get())
+        com.elnfach.domain.usecase.GetNotificationsSettingUseCase(get())
     }
 
     factory {
-        SaveNotificationsSettingUseCase(get())
+        com.elnfach.domain.usecase.SaveLanguageSettingUseCase(get())
+    }
+
+    factory {
+        com.elnfach.domain.usecase.SaveNotificationsSettingUseCase(get())
     }
 }

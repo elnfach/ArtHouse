@@ -19,10 +19,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.elnfach.arthouse.data.repository.storage.KEY_THEME_SETTING
-import com.elnfach.arthouse.data.repository.storage.SHARED_PREFS_THEME_SETTING
-import com.elnfach.arthouse.data.storage.impl.KEY_LANGUAGE_SETTING
-import com.elnfach.arthouse.data.storage.impl.SHARED_PREFS_LANGUAGE_SETTING
 import com.elnfach.arthouse.presentation.create.newsArticle.CreateNewArticle
 import com.elnfach.arthouse.presentation.deprecated.settings.SettingsScreen
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageScreen
@@ -40,6 +36,10 @@ import com.elnfach.arthouse.presentation.utils.navigation.PresentModal
 import com.elnfach.arthouse.presentation.utils.navigation.PresentNested
 import com.elnfach.arthouse.presentation.utils.navigation.createExternalRouter
 import com.elnfach.arthouse.presentation.utils.navigation.navigate
+import com.elnfach.storage.KEY_LANGUAGE_SETTING
+import com.elnfach.storage.KEY_THEME_SETTING
+import com.elnfach.storage.SHARED_PREFS_LANGUAGE_SETTING
+import com.elnfach.storage.SHARED_PREFS_THEME_SETTING
 import java.util.Locale
 
 object LanguageManager {

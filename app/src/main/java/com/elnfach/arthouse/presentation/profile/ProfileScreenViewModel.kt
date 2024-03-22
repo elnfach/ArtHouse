@@ -8,15 +8,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.domain.usecase.CreateUserWithEmailAndPasswordUseCase
-import com.elnfach.arthouse.domain.usecase.GetLanguageSettingUseCase
-import com.elnfach.arthouse.domain.usecase.GetNotificationsSettingUseCase
-import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
-import com.elnfach.arthouse.domain.usecase.IsAuthedUserUseCase
-import com.elnfach.arthouse.domain.usecase.SaveLanguageSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SaveNotificationsSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SignOutUserUseCase
 import com.elnfach.arthouse.presentation.LanguageManager
 import com.elnfach.arthouse.presentation.NotificationsManager
 import com.elnfach.arthouse.presentation.profile.detailsPage.components.dataclass.AppearanceRadioButtonItem
@@ -26,7 +17,19 @@ import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.La
 import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Notifications
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
-import com.elnfach.arthouse.presentation.utils.Resource
+import com.elnfach.domain.usecase.CreateUserWithEmailAndPasswordUseCase
+import com.elnfach.domain.usecase.GetLanguageSettingUseCase
+import com.elnfach.domain.usecase.GetNotificationsSettingUseCase
+import com.elnfach.domain.usecase.GetThemeSettingUseCase
+import com.elnfach.domain.usecase.IsAuthedUserUseCase
+import com.elnfach.domain.usecase.SaveLanguageSettingUseCase
+import com.elnfach.domain.usecase.SaveNotificationsSettingUseCase
+import com.elnfach.domain.usecase.SaveThemeSettingUseCase
+import com.elnfach.domain.usecase.SignOutUserUseCase
+import com.elnfach.model.LanguageSetting
+import com.elnfach.model.NotificationsSetting
+import com.elnfach.model.Resource
+import com.elnfach.model.ThemeSetting
 
 class ProfileScreenViewModel(
     application: Application,
@@ -46,7 +49,7 @@ class ProfileScreenViewModel(
     private val _theme = MutableLiveData(getThemeSettingUseCase.invoke().theme)
     val theme: LiveData<String> = _theme
 
-    private val _notifications = MutableLiveData(getNotificationsSettingUseCase.invoke().notifications)
+    private val _notifications = MutableLiveData(getNotificationsSettingUseCase.invoke().value)
     val notifications: LiveData<String> = _notifications
 
     private val _language = MutableLiveData(getLanguageSettingUseCase.invoke().language)
@@ -95,7 +98,6 @@ class ProfileScreenViewModel(
                     _user.value = ProfileState(error = result.message ?: "An unexpected error occurred")
                 }
             }
-
         })
     }
 
@@ -108,7 +110,7 @@ class ProfileScreenViewModel(
             Language.RUSSIAN -> _language.value = Language.RUSSIAN.name
         }
         LanguageManager.language = language
-        saveLanguageSettingUseCase.invoke(language)
+        saveLanguageSettingUseCase.invoke(LanguageSetting(language.name))
     }
 
     fun onNotificationsSettingChanged(notifications: Notifications)
@@ -120,7 +122,7 @@ class ProfileScreenViewModel(
             Notifications.OFF               -> _notifications.value = Notifications.OFF.name
         }
         NotificationsManager.notifications = notifications
-        saveNotificationsSettingUseCase.invoke(notifications)
+        saveNotificationsSettingUseCase.invoke(NotificationsSetting(notifications.name))
     }
 
     fun onThemeChanged(theme: Theme) {
@@ -132,7 +134,7 @@ class ProfileScreenViewModel(
             Theme.DARK -> _theme.value = Theme.DARK.name
         }
         ThemeManager.artHouseTheme = theme
-        saveThemeSettingUseCase.invoke(theme)
+        saveThemeSettingUseCase.invoke(ThemeSetting(theme.name))
         Log.i("THEME | _theme after change", _theme.value!!)
     }
 }

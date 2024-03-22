@@ -1,9 +1,9 @@
 package com.elnfach.arthouse.presentation.foryou
 
-import com.elnfach.arthouse.model.NewsArticle
+import com.elnfach.model.NewsArticle
 
 data class ForYouState(
     val isLoading: Boolean = false,
-    val newsArticles: List<NewsArticle> = emptyList(),
+    val newsArticles: List<com.elnfach.model.NewsArticle> = emptyList(),
     val error: String = ""
 )

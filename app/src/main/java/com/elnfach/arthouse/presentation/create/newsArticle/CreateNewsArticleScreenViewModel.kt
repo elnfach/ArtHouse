@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.elnfach.arthouse.domain.usecase.AddNewsArticleUseCase
-import com.elnfach.arthouse.model.NewsArticle
-import com.elnfach.arthouse.presentation.utils.Resource
+import com.elnfach.domain.usecase.AddNewsArticleUseCase
+import com.elnfach.model.NewsArticle
+import com.elnfach.model.Resource
 
 class CreateNewsArticleScreenViewModel(
     private val addNewsArticleUseCase: AddNewsArticleUseCase

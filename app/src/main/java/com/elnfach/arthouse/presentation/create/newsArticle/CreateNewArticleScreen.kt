@@ -52,10 +52,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.utils.navigation.Router
-import com.google.firebase.Timestamp
-import com.google.firebase.storage.FirebaseStorage
+import com.elnfach.model.NewsArticle
 import org.koin.androidx.compose.koinViewModel
 
 fun TextFieldValue.ofMaxLength(maxLength: Int): TextFieldValue {
@@ -117,8 +115,6 @@ fun CreateNewArticle(
         selectedImageUris = it
     }
 
-    var storageRef = FirebaseStorage.getInstance().reference.storage
-
     val maxTitleLength = 255
     val maxContentLength = 2048
 
@@ -138,7 +134,7 @@ fun CreateNewArticle(
                                       NewsArticle(
                                           image = selectedImageUri.toString(),
                                           title = title.text,
-                                          createdAt = Timestamp.now(),
+                                          createdAt = 0,
                                           content = content.text,
                                           id = "TestID"
                                       )

@@ -1,23 +1,21 @@
 package com.elnfach.arthouse.di
 
-import com.elnfach.arthouse.data.repository.FirebaseRepository
-import com.elnfach.arthouse.data.repository.NewsRepository
-import com.elnfach.arthouse.data.repository.ScheduleRepository
-import com.elnfach.arthouse.data.repository.ScheduleStateRepository
-import com.elnfach.arthouse.data.repository.ThemeSettingRepository
-import com.elnfach.arthouse.data.repository.impl.FirebaseRepositoryImpl
-import com.elnfach.arthouse.data.repository.impl.ScheduleStateRepositoryImpl
-import com.elnfach.arthouse.data.repository.impl.ThemeSettingRepositoryImpl
-import com.elnfach.arthouse.data.repository.storage.ThemeSettingStorage
-import com.elnfach.arthouse.data.repository.storage.ThemeSettingStorageImpl
-import com.elnfach.arthouse.data.storage.LanguageSettingStorage
-import com.elnfach.arthouse.data.storage.NotificationsSettingStorage
-import com.elnfach.arthouse.data.storage.ScheduleStateStorage
-import com.elnfach.arthouse.data.storage.impl.LanguageSettingStorageImpl
-import com.elnfach.arthouse.data.storage.impl.NotificationsSettingStorageImpl
-import com.elnfach.arthouse.data.storage.impl.ScheduleStateStorageImpl
-import com.elnfach.arthouse.data.repository.impl.NewsRepositoryImpl
-import com.elnfach.arthouse.data.repository.impl.ScheduleRepositoryImpl
+import com.elnfach.data.implementations.ScheduleStateRepositoryImpl
+import com.elnfach.data.implementations.ThemeSettingRepositoryImpl
+import com.elnfach.firebase.FirebaseRepositoryImpl
+import com.elnfach.firebase.NewsRepositoryImpl
+import com.elnfach.firebase.ScheduleRepositoryImpl
+import com.elnfach.firebase.repository.NewsRepository
+import com.elnfach.storage.LanguageSettingStorageImpl
+import com.elnfach.storage.NotificationsSettingStorageImpl
+import com.elnfach.storage.ScheduleStateStorageImpl
+import com.elnfach.storage.ThemeSettingStorageImpl
+import com.elnfach.storage.repository.LanguageSettingStorage
+import com.elnfach.storage.repository.NotificationsSettingStorage
+import com.elnfach.storage.repository.ScheduleStateRepository
+import com.elnfach.storage.repository.ScheduleStateStorage
+import com.elnfach.storage.repository.ThemeSettingRepository
+import com.elnfach.storage.repository.ThemeSettingStorage
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -26,8 +24,8 @@ val dataModule = module {
         NewsRepositoryImpl()
     }
 
-    single<FirebaseRepository> {
-        FirebaseRepositoryImpl(get())
+    single<com.elnfach.firebase.repository.FirebaseRepository> {
+        FirebaseRepositoryImpl()
     }
 
     single<ThemeSettingRepository> {
@@ -38,7 +36,7 @@ val dataModule = module {
         ThemeSettingStorageImpl(get())
     }
 
-    single<ScheduleRepository> {
+    single<com.elnfach.firebase.repository.ScheduleRepository> {
         ScheduleRepositoryImpl()
     }
 

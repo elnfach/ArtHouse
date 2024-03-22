@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.NewsArticle
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -38,12 +37,12 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun NewsArticleCardTop(newsArticle: NewsArticle, modifier: Modifier)
+fun NewsArticleCardTop(newsArticle: com.elnfach.model.NewsArticle, modifier: Modifier)
 {
     val typography = MaterialTheme.typography
 
     val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
-    val formattedDate = sdf.format(Date(newsArticle.createdAt.seconds * 1000))
+    val formattedDate = sdf.format(Date(newsArticle.createdAt * 1000))
 
     var isClicked by remember { mutableStateOf(false) }
     Column(

@@ -62,7 +62,7 @@ fun ProfileScreen(
             image = painterResource(id = R.drawable.baseline_coffee_24),
             onClick = {
                 Log.e("PROFILE", viewModel.isAuthedUser().toString())
-                if(viewModel.isAuthedUser())
+                if(viewModel.user.value.isSignedIn)
                 {
                     externalRouter.routeTo("${Screen.ProfileDetail.route}/${ProfileDetail.ACTIVATE_SUBSCRIPTION}")
                 }

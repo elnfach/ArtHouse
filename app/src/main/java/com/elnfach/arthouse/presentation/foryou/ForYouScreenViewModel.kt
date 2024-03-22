@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.elnfach.arthouse.domain.usecase.GetNewsArticleByIdUseCase
-import com.elnfach.arthouse.domain.usecase.GetNewsArticlesUseCase
-import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageState
-import com.elnfach.arthouse.presentation.utils.Resource
+import com.elnfach.domain.usecase.GetNewsArticleByIdUseCase
+import com.elnfach.domain.usecase.GetNewsArticlesUseCase
+import com.elnfach.model.NewsArticle
+import com.elnfach.model.Resource
 
 class ForYouScreenViewModel(
     private val getNewsArticlesUseCase: GetNewsArticlesUseCase,

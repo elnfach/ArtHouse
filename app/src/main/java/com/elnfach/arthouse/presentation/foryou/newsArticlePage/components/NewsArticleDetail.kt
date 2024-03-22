@@ -15,23 +15,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.elnfach.arthouse.model.NewsArticle
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 @Composable
-fun NewsArticleDetail(newsArticle: NewsArticle)
+fun NewsArticleDetail(newsArticle: com.elnfach.model.NewsArticle)
 {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)) {
         val sdf = SimpleDateFormat("dd.MM HH:mm", Locale.getDefault())
-        val formattedDate = sdf.format(Date(newsArticle.createdAt.seconds * 1000))
+        val formattedDate = sdf.format(Date(newsArticle.createdAt * 1000))
         Text(
             text = formattedDate,
             style = MaterialTheme.typography.titleSmall,
@@ -63,8 +61,17 @@ fun NewsArticleDetail(newsArticle: NewsArticle)
             LazyRow(Modifier.fillMaxSize()) {
                 items(newsArticle.gallery)
                 {image ->
-                    AsyncImage(modifier = Modifier.fillMaxSize(), model = image, contentDescription = null, contentScale = ContentScale.Crop)
-                    Spacer(modifier = Modifier.padding(24.dp))
+                    AsyncImage(
+                        modifier = androidx.compose.ui.Modifier.fillMaxSize(),
+                        model = image,
+                        contentDescription = null,
+                        contentScale = androidx.compose.ui.layout.ContentScale.Crop
+                    )
+                    Spacer(
+                        modifier = androidx.compose.ui.Modifier.padding(
+                            24.dp
+                        )
+                    )
                 }
             }
         }

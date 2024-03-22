@@ -1,19 +1,16 @@
 package com.elnfach.arthouse.presentation.deprecated.settings
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.elnfach.arthouse.domain.usecase.GetThemeSettingUseCase
-import com.elnfach.arthouse.domain.usecase.SaveThemeSettingUseCase
-import com.elnfach.arthouse.model.ThemeSetting
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
+import com.elnfach.model.ThemeSetting
 
 class SettingsScreenViewModel(
-    private val saveThemeSettingUseCase: SaveThemeSettingUseCase,
-    private val getThemeSettingUseCase: GetThemeSettingUseCase
+    private val saveThemeSettingUseCase: com.elnfach.domain.usecase.SaveThemeSettingUseCase,
+    private val getThemeSettingUseCase: com.elnfach.domain.usecase.GetThemeSettingUseCase
 ) : ViewModel() {
     private val _theme = MutableLiveData(getThemeSettingUseCase.invoke().theme)
     val theme: LiveData<String> = _theme
@@ -27,7 +24,7 @@ class SettingsScreenViewModel(
             Theme.DARK -> _theme.value = Theme.DARK.name
         }
         ThemeManager.artHouseTheme = theme
-        saveThemeSettingUseCase.invoke(theme)
+        saveThemeSettingUseCase.invoke(ThemeSetting(theme.name))
         Log.i("THEME | _theme after change", _theme.value!!)
     }
 }

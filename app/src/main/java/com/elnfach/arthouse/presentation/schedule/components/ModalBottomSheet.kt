@@ -23,12 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.elnfach.arthouse.R
-import com.elnfach.arthouse.model.Schedule
+import com.elnfach.model.Schedule
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ModalBottomSheet(
-    schoolSchedule: Schedule,
+    schoolSchedule: com.elnfach.model.Schedule,
     onClickId: () -> Unit,
     onClickAC: () -> Unit,
     onClickAction: () -> Unit,

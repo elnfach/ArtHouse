@@ -5,15 +5,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.elnfach.arthouse.domain.usecase.GetScheduleStateUseCase
-import com.elnfach.arthouse.domain.usecase.GetScheduleUseCase
-import com.elnfach.arthouse.domain.usecase.SaveScheduleStateUseCase
-import com.elnfach.arthouse.model.LocalDate
-import com.elnfach.arthouse.model.Schedule
-import com.elnfach.arthouse.presentation.utils.Resource
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.elnfach.domain.usecase.GetScheduleStateUseCase
+import com.elnfach.domain.usecase.GetScheduleUseCase
+import com.elnfach.domain.usecase.SaveScheduleStateUseCase
+import com.elnfach.model.LocalDate
+import com.elnfach.model.Resource
+import com.elnfach.model.Schedule
 
 class ScheduleScreenViewModel(
     private val saveScheduleStateUseCase: SaveScheduleStateUseCase,
@@ -31,7 +28,7 @@ class ScheduleScreenViewModel(
 
     fun loadSchedule()
     {
-        getSchoolScheduleUseCase().onEach { result ->
+        getSchoolScheduleUseCase(callback = { result ->
             when(result){
                 is Resource.Push -> {
                     _state.value = ScheduleState(schedule = result.data ?: emptyList())
@@ -53,7 +50,7 @@ class ScheduleScreenViewModel(
                     _state.value = ScheduleState(error = result.message ?: "An unexpected error occurred")
                 }
             }
-        }.launchIn(viewModelScope)
+        })
     }
 
     fun saveDate(date: LocalDate)
@@ -65,9 +62,6 @@ class ScheduleScreenViewModel(
     fun loadDate() : MutableLiveData<LocalDate?>
     {
         return selectedDate
-    }
-    override fun onCleared() {
-        super.onCleared()
     }
 
     fun pullToRefresh()
