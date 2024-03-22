@@ -1,6 +1,5 @@
 package com.elnfach.arthouse.presentation.profile.components.dataclass
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.painter.Painter
 import com.elnfach.arthouse.presentation.profile.components.enums.ProfileItemType
 

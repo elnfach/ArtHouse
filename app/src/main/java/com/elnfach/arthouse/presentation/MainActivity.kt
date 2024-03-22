@@ -3,7 +3,6 @@ package com.elnfach.arthouse.presentation
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -101,10 +100,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    if ( !isOnline(context = this) ){
+                    /*if ( !isOnline(context = this) ){
                         Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
                         this.finish()
-                    }
+                    }*/
                     NavHost(navController = navController, startDestination = Screen.Splash.route) {
                         composable(Screen.Splash.route)
                         {

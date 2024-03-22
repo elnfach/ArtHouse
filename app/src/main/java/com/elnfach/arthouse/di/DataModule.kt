@@ -27,7 +27,7 @@ val dataModule = module {
     }
 
     single<FirebaseRepository> {
-        FirebaseRepositoryImpl()
+        FirebaseRepositoryImpl(get())
     }
 
     single<ThemeSettingRepository> {

@@ -33,7 +33,7 @@ class ScheduleScreenViewModel(
     {
         getSchoolScheduleUseCase().onEach { result ->
             when(result){
-                is Resource.Success -> {
+                is Resource.Push -> {
                     _state.value = ScheduleState(schedule = result.data ?: emptyList())
                     val buffer = mutableListOf<Schedule>()
                     for (item in _state.value.schedule)
@@ -48,9 +48,6 @@ class ScheduleScreenViewModel(
                         }
                     }
                     _state.value.schedule = buffer
-                }
-                is Resource.Loading -> {
-                    _state.value = ScheduleState(isLoading = true)
                 }
                 is Resource.Error -> {
                     _state.value = ScheduleState(error = result.message ?: "An unexpected error occurred")

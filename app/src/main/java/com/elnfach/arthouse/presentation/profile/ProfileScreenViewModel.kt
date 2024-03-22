@@ -2,6 +2,8 @@ package com.elnfach.arthouse.presentation.profile
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,6 +26,7 @@ import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.La
 import com.elnfach.arthouse.presentation.profile.detailsPage.components.enums.Notifications
 import com.elnfach.arthouse.presentation.ui.theme.Theme
 import com.elnfach.arthouse.presentation.ui.theme.ThemeManager
+import com.elnfach.arthouse.presentation.utils.Resource
 
 class ProfileScreenViewModel(
     application: Application,
@@ -37,6 +40,8 @@ class ProfileScreenViewModel(
     private val saveNotificationsSettingUseCase: SaveNotificationsSettingUseCase,
     private val getNotificationsSettingUseCase: GetNotificationsSettingUseCase
 ) : ViewModel() {
+    private val _user = mutableStateOf(ProfileState())
+    val user: State<ProfileState> = _user
 
     private val _theme = MutableLiveData(getThemeSettingUseCase.invoke().theme)
     val theme: LiveData<String> = _theme
@@ -78,9 +83,20 @@ class ProfileScreenViewModel(
         signOutUserUseCase.invoke()
     }
 
-    fun isAuthedUser() : Boolean
+    fun isAuthedUser()
     {
-        return isAuthedUserUseCase.invoke()
+        isAuthedUserUseCase.invoke(callback = {result ->
+            when(result){
+                is Resource.Push -> {
+                    _user.value = ProfileState(isSignedIn = result.data ?: false)
+                    Log.e("PROFILE AUTH", _user.value.isSignedIn.toString())
+                }
+                is Resource.Error -> {
+                    _user.value = ProfileState(error = result.message ?: "An unexpected error occurred")
+                }
+            }
+
+        })
     }
 
     fun onLanguageChanged(language: Language)

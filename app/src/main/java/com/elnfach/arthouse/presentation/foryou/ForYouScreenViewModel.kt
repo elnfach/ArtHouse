@@ -1,19 +1,14 @@
 package com.elnfach.arthouse.presentation.foryou
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.elnfach.arthouse.domain.usecase.GetNewsArticleByIdUseCase
 import com.elnfach.arthouse.domain.usecase.GetNewsArticlesUseCase
 import com.elnfach.arthouse.model.NewsArticle
 import com.elnfach.arthouse.presentation.foryou.newsArticlePage.NewsArticlePageState
 import com.elnfach.arthouse.presentation.utils.Resource
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class ForYouScreenViewModel(
     private val getNewsArticlesUseCase: GetNewsArticlesUseCase,
@@ -32,38 +27,30 @@ class ForYouScreenViewModel(
     }
 
     private fun loadNewsArticles() {
-        getNewsArticlesUseCase().onEach { result ->
+        getNewsArticlesUseCase(callback = { result ->
             when(result){
-                is Resource.Success -> {
+                is Resource.Push -> {
                     _state.value = ForYouState(newsArticles = result.data ?: emptyList())
-                }
-                is Resource.Loading -> {
-                    _state.value = ForYouState(isLoading = true)
-                    Log.e("TESTING | LOADING", _state.value.isLoading.toString())
                 }
                 is Resource.Error -> {
                     _state.value = ForYouState(error = result.message ?: "An unexpected error occurred")
                 }
             }
-        }.launchIn(viewModelScope)
+        })
     }
 
     fun loadNewsArticleById(id:String)
     {
-        getNewsArticleByIdUseCase(id).onEach {result->
+        getNewsArticleByIdUseCase(id, callback = { result->
             when(result){
-                is Resource.Success -> {
+                is Resource.Push -> {
                     _newsArticlePageState.value = NewsArticlePageState(newsArticle = result.data ?: NewsArticle())
-                }
-                is Resource.Loading -> {
-                    _newsArticlePageState.value = NewsArticlePageState(isLoading = true)
-                    Log.e("TESTING | LOADING", _state.value.isLoading.toString())
                 }
                 is Resource.Error -> {
                     _newsArticlePageState.value = NewsArticlePageState(error = result.message ?: "An unexpected error occurred")
                 }
             }
-        }.launchIn(viewModelScope)
+        })
     }
 
     fun pullToRefresh()

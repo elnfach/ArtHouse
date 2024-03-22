@@ -1,46 +1,42 @@
 package com.elnfach.arthouse.data.repository.impl
 
+import android.content.Context
 import android.util.Log
 import com.elnfach.arthouse.data.repository.FirebaseRepository
+import com.elnfach.arthouse.presentation.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
-class FirebaseRepositoryImpl : FirebaseRepository {
+class FirebaseRepositoryImpl(
+    private val  context: Context
+) : FirebaseRepository {
     private val auth: FirebaseAuth = Firebase.auth
     override fun createUserWithEmailAndPassword(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task->
-                if(task.isSuccessful)
-                {
-                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { sendEmailVerificationTask->
-                        if(sendEmailVerificationTask.isSuccessful) {
-                            Log.e("FIREBASE CREATE", "Send email verification")
-                        } else {
-                        }
+            .addOnSuccessListener { task->
+                auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { sendEmailVerificationTask->
+                    if(sendEmailVerificationTask.isSuccessful) {
+                        Log.e("FIREBASE CREATE", "Send email verification")
                     }
-                    Log.e("FIREBASE CREATE", task.result.user?.email.toString())
                 }
-                if(task.isComplete)
-                {
-                    Log.e("FIREBASE CREATE", "Is complete")
-                }
-                if(task.isCanceled)
-                {
-                    Log.e("FIREBASE CREATE", "Is canceled")
-                }
+                Log.e("FIREBASE CREATE", task.user?.email.toString())
+            }.addOnCompleteListener {
+                Log.e("FIREBASE CREATE", "Is complete")
+            }.addOnFailureListener {
+                Log.e("FIREBASE CREATE", "Is canceled")
             }
     }
 
     override fun signInUserWithEmailAndPassword(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
+            .addOnSuccessListener { task ->
+                if (task != null) {
+                    val user = task.user
                     Log.e("FIREBASE SIGN IN", user?.displayName.toString())
-                } else {
-                    Log.e("FIREBASE SIGN IN", "Failed")
                 }
+            }.addOnFailureListener {
+                Log.e("FIREBASE SIGN IN", "Failed")
             }
     }
 

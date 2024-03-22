@@ -3,7 +3,6 @@ package com.elnfach.arthouse.datastore.repository
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.elnfach.arthouse.data.repository.ScheduleRepository
-import com.elnfach.arthouse.model.LocalDate
 import com.elnfach.arthouse.model.Schedule
 import com.elnfach.arthouse.presentation.utils.Resource
 import com.google.firebase.firestore.CollectionReference
@@ -27,7 +26,6 @@ class ScheduleRepositoryImpl : ScheduleRepository {
         var temp: List<Schedule>
 
         return flow {
-            emit(Resource.Loading())
             try {
                 _dbRef.get()
                     .addOnSuccessListener { queryDocumentSnapshots ->
@@ -43,7 +41,7 @@ class ScheduleRepositoryImpl : ScheduleRepository {
             }
             delay(Duration.ofMillis(1500))
             temp = scheduleList
-            emit(Resource.Success(temp))
+            emit(Resource.Push(temp))
         }
     }
 }

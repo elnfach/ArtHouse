@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Art House</string>
+    <string name="app_name">Дом искусств</string>
     <string name="about_app_desc">Мобильное приложение, разработанное с помощью Android Studio на языке Kotlin для художественной школы</string>
     <string name="version">Версия</string>
     <string name="for_you">Для вас</string>

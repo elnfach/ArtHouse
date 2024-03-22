@@ -106,7 +106,8 @@ fun ForYouScreen(
                 state = listState
             ) {
                 items(state.newsArticles) { item ->
-                    if (item != null) {
+                    if (state.newsArticles.isNotEmpty())
+                    {
                         NewsArticleCardTop(
                             newsArticle = item,
                             modifier = Modifier.clickable(onClick = {
@@ -128,7 +129,7 @@ fun ForYouScreen(
                         .align(Alignment.Center)
                 )
             }
-            if(state.isLoading) {
+            if(state.newsArticles.isEmpty() && state.error.isBlank()) {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
             }
             PullRefreshIndicator(isRefreshing, stateRefresh, Modifier.align(Alignment.TopCenter))
