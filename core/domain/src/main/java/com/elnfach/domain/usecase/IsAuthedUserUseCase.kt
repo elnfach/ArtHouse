@@ -1,6 +1,6 @@
 package com.elnfach.domain.usecase
 
-import com.elnfach.firebase.repository.FirebaseRepository
+import com.elnfach.domain.repository.firebase.FirebaseRepository
 import com.elnfach.model.Resource
 
 class IsAuthedUserUseCase(

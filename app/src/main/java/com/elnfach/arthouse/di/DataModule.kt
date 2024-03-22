@@ -2,10 +2,12 @@ package com.elnfach.arthouse.di
 
 import com.elnfach.data.implementations.ScheduleStateRepositoryImpl
 import com.elnfach.data.implementations.ThemeSettingRepositoryImpl
+import com.elnfach.domain.repository.firebase.FirebaseRepository
+import com.elnfach.domain.repository.firebase.ScheduleRepository
 import com.elnfach.firebase.FirebaseRepositoryImpl
 import com.elnfach.firebase.NewsRepositoryImpl
 import com.elnfach.firebase.ScheduleRepositoryImpl
-import com.elnfach.firebase.repository.NewsRepository
+import com.elnfach.domain.repository.firebase.NewsRepository
 import com.elnfach.storage.LanguageSettingStorageImpl
 import com.elnfach.storage.NotificationsSettingStorageImpl
 import com.elnfach.storage.ScheduleStateStorageImpl
@@ -24,7 +26,7 @@ val dataModule = module {
         NewsRepositoryImpl()
     }
 
-    single<com.elnfach.firebase.repository.FirebaseRepository> {
+    single<FirebaseRepository> {
         FirebaseRepositoryImpl()
     }
 
@@ -36,7 +38,7 @@ val dataModule = module {
         ThemeSettingStorageImpl(get())
     }
 
-    single<com.elnfach.firebase.repository.ScheduleRepository> {
+    single<ScheduleRepository> {
         ScheduleRepositoryImpl()
     }
 

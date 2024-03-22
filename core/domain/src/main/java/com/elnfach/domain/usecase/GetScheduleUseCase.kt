@@ -1,6 +1,6 @@
 package com.elnfach.domain.usecase
 
-import com.elnfach.firebase.repository.ScheduleRepository
+import com.elnfach.domain.repository.firebase.ScheduleRepository
 import com.elnfach.model.Resource
 import com.elnfach.model.Schedule
 

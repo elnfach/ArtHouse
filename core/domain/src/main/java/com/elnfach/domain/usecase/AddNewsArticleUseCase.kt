@@ -1,6 +1,6 @@
 package com.elnfach.domain.usecase
 
-import com.elnfach.firebase.repository.NewsRepository
+import com.elnfach.domain.repository.firebase.NewsRepository
 import com.elnfach.model.NewsArticle
 import com.elnfach.model.Resource
 

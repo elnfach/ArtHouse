@@ -1,4 +1,4 @@
-package com.elnfach.firebase.repository
+package com.elnfach.domain.repository.firebase
 
 import com.elnfach.model.Resource
 import com.elnfach.model.Schedule

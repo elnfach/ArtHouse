@@ -1,7 +1,7 @@
 package com.elnfach.firebase
 
 import android.util.Log
-import com.elnfach.firebase.repository.FirebaseRepository
+import com.elnfach.domain.repository.firebase.FirebaseRepository
 import com.elnfach.model.Resource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
