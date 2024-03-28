@@ -1,6 +1,12 @@
 pluginManagement {
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -12,11 +18,10 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
 rootProject.name = "Art House"
 include(":app")
 include(":core")
-include(":core:data")
-include(":core:database")
-include(":core:common")
+include(":core:model")
+include(":core:firebase")
+include(":core:storage")
 include(":core:domain")
