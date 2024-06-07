@@ -137,8 +137,7 @@ class MainActivity : ComponentActivity() {
                                     documentId = entry.arguments?.getString("documentId").toString(),
                                     externalRouter = createExternalRouter { screen, params ->
                                         navController.navigate(screen, params) },
-                                    navController = navController,
-                                    lifecycleOwner = this@MainActivity)
+                                    navController = navController)
                             }
                         }
                         composable(Screen.CreateNewArticle.route)

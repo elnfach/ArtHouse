@@ -82,7 +82,7 @@ fun MainScreen(
             {
                 composable(Screen.ForYou.route)
                 {
-                    HomeScreen(externalRouter = router, navController = navController, lifecycleOwner = lifecycleOwner)
+                    HomeScreen(externalRouter = router)
                 }
                 composable(Screen.Schedule.route)
                 {

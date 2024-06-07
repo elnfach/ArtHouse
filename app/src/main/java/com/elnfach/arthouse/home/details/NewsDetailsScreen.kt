@@ -28,7 +28,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.home.HomeScreenViewModel
@@ -43,7 +42,6 @@ import com.elnfach.arthouse.utils.navigation.Router
 fun NewsArticlePageScreen(
     externalRouter: Router,
     navController: NavHostController,
-    lifecycleOwner: LifecycleOwner,
     documentId: String,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {

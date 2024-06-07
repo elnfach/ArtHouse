@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,6 +70,7 @@ fun DetailsPageScreen(
     val typography = MaterialTheme.typography
 
     val state = viewModel.user.value
+    val scope = rememberCoroutineScope()
 
 
     val favorites = viewModel.favorites.value

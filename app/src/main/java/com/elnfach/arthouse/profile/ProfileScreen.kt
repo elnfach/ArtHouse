@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -33,6 +34,7 @@ import com.elnfach.arthouse.profile.components.enums.ProfileItemType
 import com.elnfach.arthouse.profile.details.components.profilePreset
 import com.elnfach.arthouse.utils.managers.UserManager
 import com.elnfach.arthouse.utils.navigation.Router
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +51,7 @@ fun ProfileScreen(
     val ctx = LocalContext.current
 
     val state = viewModel.user.value
+    val scope = rememberCoroutineScope()
 
     var title by remember { mutableStateOf("") }
 
@@ -65,7 +68,9 @@ fun ProfileScreen(
                 title = stringResource(id = R.string.sign_out),
                 image = null)
             {
-                viewModel.signOutUser()
+                scope.launch {
+                    viewModel.signOutUser()
+                }
             }
         )
     )

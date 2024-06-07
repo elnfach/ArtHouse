@@ -25,25 +25,19 @@ import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.ClipboardManager
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.NavController
 import com.elnfach.arthouse.R
 import com.elnfach.arthouse.home.components.NewsArticleCardTop
 import com.elnfach.arthouse.home.components.PostListDivider
@@ -58,14 +52,9 @@ import com.elnfach.arthouse.utils.shimmerEffect
 @Composable
 fun HomeScreen(
     externalRouter: Router,
-    navController: NavController,
-    lifecycleOwner: LifecycleOwner,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
-    val ctx = LocalContext.current
-    val clipboardManager: ClipboardManager = LocalClipboardManager.current
-
-    val state = viewModel.state.value
+    val homeState = viewModel.homeState.value
 
     // Refresh
     val isRefreshing by remember { mutableStateOf(false) }
@@ -77,8 +66,6 @@ fun HomeScreen(
     val isExpanded by remember { derivedStateOf { listState.firstVisibleItemScrollOffset == 0 } }
     // ^^^ FAB ^^^
 
-    var isClicked by remember { mutableStateOf(false) }
-
     Scaffold(
         topBar = { MediumTopAppBar(
             title = {
@@ -86,11 +73,6 @@ fun HomeScreen(
                     fontSize = 30.sp,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis)
-            },
-            actions = {
-                /*IconButton(onClick = {  }) {
-                    Icon(painter = painterResource(id = R.drawable.baseline_help_outline_24), contentDescription = null)
-                }*/
             })
         },
         floatingActionButton = {
@@ -108,7 +90,7 @@ fun HomeScreen(
             modifier = Modifier.padding(it)
         ){
             SkeletonScreen(
-                isLoading = state.loading,
+                isLoading = homeState.loading,
                 skeleton = {
                     LazyColumn(
                         modifier = Modifier
@@ -145,7 +127,7 @@ fun HomeScreen(
                         .pullRefresh(stateRefresh),
                     state = listState
                 ) {
-                    items(state.value) { item ->
+                    items(homeState.value) { item ->
                         NewsArticleCardTop(
                             newsItem = item,
                             modifier = Modifier.clickable(onClick = {
@@ -184,16 +166,18 @@ fun HomeScreen(
                     }
                 }
             }
-            if(state.error.isNotBlank()) {
-                Text(
-                    text = state.error,
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 20.dp)
-                        .align(Alignment.Center)
-                )
+            if(homeState.error.isNotBlank()) {
+                LaunchedEffect(Unit) {
+                    /*Text(
+                        text = state.error,
+                        color = MaterialTheme.colorScheme.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .align(Alignment.Center)
+                    )*/
+                }
             }
             PullRefreshIndicator(isRefreshing, stateRefresh, Modifier.align(Alignment.TopCenter))
         }

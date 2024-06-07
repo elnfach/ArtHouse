@@ -20,8 +20,8 @@ class HomeScreenViewModel @Inject constructor(
     private val getIsAuthedUserUseCase: IsAuthedUserUseCase,
     private val addNewsItemToFavoritesUseCase: AddNewsItemToFavoritesUseCase
 ) : ViewModel() {
-    private val _state = mutableStateOf(HomeState())
-    val state: State<HomeState> = _state
+    private val _homeStateMutable = mutableStateOf(HomeState())
+    val homeState: State<HomeState> = _homeStateMutable
 
     private val _newsDetailsState = mutableStateOf(NewsDetailsState())
     val newsDetailsState: State<NewsDetailsState> = _newsDetailsState
@@ -37,13 +37,13 @@ class HomeScreenViewModel @Inject constructor(
         getNewsByOrderUseCase(order, callback = { result ->
             when(result){
                 is Resource.Success -> {
-                    _state.value = HomeState(value = result.data ?: emptyList())
+                    _homeStateMutable.value = HomeState(value = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _state.value = HomeState(error = result.message ?: "An unexpected error occurred")
+                    _homeStateMutable.value = HomeState(error = result.message ?: "An unexpected error occurred")
                 }
                 is Resource.Loading -> {
-                    _state.value = HomeState(loading = true)
+                    _homeStateMutable.value = HomeState(loading = true)
                 }
             }
         })
